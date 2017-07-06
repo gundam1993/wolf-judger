@@ -23,18 +23,24 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
   module: {
-    loaders: [{
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader'},
+          { loader: 'css-loader',
+            options:{
+              module: true
+            }
+          }
+        ]
+      }
+    ]
   }
 };

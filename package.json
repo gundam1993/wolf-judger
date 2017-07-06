@@ -11,7 +11,9 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
+    "css-loader": "^0.28.4",
     "html-webpack-plugin": "^2.29.0",
+    "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-hot-middleware": "^2.18.1"
