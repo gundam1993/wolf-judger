@@ -1,11 +1,13 @@
 const path = require('path')
 const express = require('express')
+const app = express()
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const config = require('./webpack.config')
+const server = require('http').Server(app)
+const gameServer = require('./lib/game_server')
 
-const app = express()
 const isDev = process.env.NODE_ENV !== 'production'
 const DEFAULT_PORT = 3000
 const compiler = webpack(config)
@@ -39,4 +41,8 @@ if (isDev) {
   app.get('/', (req, res) => res.sendFile(HTML_FILE))
 }
 
-app.listen(app.get('port'))
+gameServer.listen(server)
+server.listen(app.get('port'), function () {
+  console.log('Server listening on port 3000')
+})
+

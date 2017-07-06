@@ -29,6 +29,7 @@ html body #app {
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 10;
 }
 
 #username-block h1 {
