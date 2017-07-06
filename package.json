@@ -1,0 +1,23 @@
+{
+  "name": "wolf-judger",
+  "version": "0.0.1",
+  "description": "a website to act as the role of judger in The Werewolves of Miller's Hollow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js"
+  },
+  "author": "gundam1993",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "html-webpack-plugin": "^2.29.0",
+    "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.1"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
+  }
+}
