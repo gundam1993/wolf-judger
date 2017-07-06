@@ -1,5 +1,5 @@
 var style = require('./main.css')
-// var Game = require('./Game')
+var socket = require('socket.io') 
 import { Game } from './Game'
 
 let startButtom  = document.getElementById('submit-username')
