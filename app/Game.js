@@ -1,3 +1,6 @@
+/**
+ * 游戏主模块，保存游戏信息
+ */
 import SocketEventListener from './SocketEventListener'
 
 const Game = function(socket, username) {
