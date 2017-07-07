@@ -17,6 +17,11 @@ Game.prototype.bindEvent = function() {
   EE.on('joinSuccess', (res) => {
     this.roomInfo = res.roomInfo
   })
+  EE.on('newJoin', (res) => {
+    this.roomInfo.players[res.socketId] = res.joiner
+    this.roomInfo.playerNumber ++
+    console.log(this.roomInfo)
+  })
 }
 
 Game.prototype.addInGame = function() {

@@ -1,0 +1,6 @@
+#gameBoard {
+  background-color: #000;
+  height: 85%;
+  display: flex;
+}
+
