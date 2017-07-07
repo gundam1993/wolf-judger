@@ -9,6 +9,8 @@ const UiUploader = function () {
 
 UiUploader.prototype.init = function() {
   EE.on('joinFail', this.showHint)
+  EE.on('joinSuccess', this.showHint)
+
 }
 
 UiUploader.prototype.showHint = function(message) {

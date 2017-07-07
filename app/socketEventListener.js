@@ -12,8 +12,12 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('joinFail', (res) => {
     EE.emit('joinFail', res)
   })
-  // this.socket.on('joinSuccess', UiUploader.showHint)
-  // this.socket.on('newJoin', UiUploader.showHint)
+  this.socket.on('joinSuccess', (res) => {
+    EE.emit('joinSuccess', res)
+  })
+  this.socket.on('newJoin', (res) => {
+    EE.emit('newJoin', res)
+  })
 }
 
 export default SocketEventListener
