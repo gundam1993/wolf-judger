@@ -1,34 +1,34 @@
-var style = require('./main.css')
 var gameBoardStyle = require('./gameboard.css')
 var controllerStyle = require('./controller.css')
-
 var io = require('socket.io-client') 
-import Game from './Game'
-import UiUploader from './ui'
-const socket = io('http://localhost:3000')
-let startButtom  = document.getElementById('submit-username')
-let usernameInputer = document.getElementById('username')
-var newGame
+import EE from './lib/eventEmitter'
+import SocketEventListener from './lib/SocketEventListener'
+// let startButtom  = document.getElementById('submit-username')
+// let usernameInputer = document.getElementById('username')
 
 // startButtom.addEventListener('click', (ev) => {
 //   console.log(usernameInputer.value)
 //   newGame = new Game(socket, usernameInputer.value)
 // })
 
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+import ReactDOM from 'react-dom'
+import Join from './components/join'
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-    };
+      socket: io('http://localhost:3000'),
+      socketEventListener: {}
+    }
+  }
+  componentWillMount () {
+    this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
   }
   render() {
     return (
       <div>
-        <h1>Hello, World!</h1>
+        <Join socket={this.state.socket}/>
       </div>
     );
   }

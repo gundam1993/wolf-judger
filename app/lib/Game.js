@@ -15,6 +15,7 @@ const Game = function(socket, username) {
 
 Game.prototype.bindEvent = function() {
   EE.on('joinSuccess', (res) => {
+    console.log(res)
     this.roomInfo = res.roomInfo
   })
   EE.on('newJoin', (res) => {
