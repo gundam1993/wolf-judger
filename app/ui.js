@@ -24,7 +24,7 @@ UiUploader.prototype.buildGameUI = (res) => {
   console.log(Object.keys(res.roomInfo.players))
   let inner = '<div id="gameBoard">'
   for (var i = 0; i < res.roomInfo.playerLimit; i++) {
-    inner += `<div class="playerBlock" id="${}"></div>`
+    inner += `<div class="playerBlock" id=""></div>`
   }
   inner += '</div><div id="playerBlock"></div>'
   app.innerHTML = inner
