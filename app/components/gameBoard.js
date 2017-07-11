@@ -12,18 +12,18 @@ class GameBoard extends React.Component {
     }
   }
   render() {
-    // let players = this.props.roomInfo.players || new Array(8)
-    let players = []
+    let playerBlocks = []
     let num = this.props.roomInfo.playerLimit || 0
+    let players = this.props.roomInfo.players || []
     for (let i = 0; i < num; i++) {
-      players.push(
-        <PlayerBlock />
+      playerBlocks.push(
+        <PlayerBlock player={players[i]}/>
       )
     }
     console.log(this.props.roomInfo)
     return (
       <div id="gameBoard">
-        {players}
+        {playerBlocks}
       </div>
     )
   }

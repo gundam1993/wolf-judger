@@ -21,9 +21,14 @@ class App extends React.Component {
   componentWillMount () {
     this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
     EE.on('joinSuccess', (res) => {
-      console.log(res)
       this.setState({roomInfo: res.roomInfo})
       this.setState({satge: 'prepare'})
+    })
+    EE.on('newJoin', (res) => {
+      let room = this.state.roomInfo
+      room.players.push(res.joiner)
+      room.playerNumber ++
+      this.setState({roomInfo: room})
     })
   }
   render() {

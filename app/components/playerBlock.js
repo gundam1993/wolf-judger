@@ -9,7 +9,10 @@ class PlayerBlock extends React.Component {
   }
   render() {
     return (
-      <div className="playerBlock"></div>
+      <div className="playerBlock">
+        <div className="playerAvatar"></div>
+        {this.props.player.username}
+      </div>
     )
   }
 }
