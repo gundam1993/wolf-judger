@@ -44,9 +44,13 @@ class Join extends React.Component {
   }
 }
 
-// PropTypes 验证，若传入的 props type 不是 string 将会显示错误
+// PropTypes 验证，若传入的 props type 不是 object 将会显示错误
 Join.propTypes = {
   socket: React.PropTypes.object,
+}
+
+Join.defaultProps = {
+  socket: {},
 }
 
 export default Join
