@@ -23,7 +23,7 @@ class Join extends React.Component {
       return
     }
     this.props.socket.emit('join', {room: 'default', username: this.state.username})
-    EE.emit()
+    this.refs.usernameInput.value = ''
   }
   showHint = (message) => {
     console.log(message)

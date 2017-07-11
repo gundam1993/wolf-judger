@@ -31,6 +31,14 @@ class App extends React.Component {
       room.playerNumber ++
       this.setState({roomInfo: room})
     })
+    EE.on('leaveRoom', () => {
+      this.state.socket.emit('leave')
+      this.setState({roomInfo: {}})
+      this.setState({satge: 'join'})
+    })
+    EE.on('playerLeave', (res) => {
+      this.setState({roomInfo: res.roomInfo})
+    })
   }
   render() {
     let join = null

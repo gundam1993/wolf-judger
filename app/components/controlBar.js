@@ -9,10 +9,13 @@ class ControlBar extends React.Component {
     super(props)
     this.state = {}
   }
+  leave = () => {
+    EE.emit('leaveRoom')
+  }
   render() {
     return (
       <div id="controller">
-        <button id="leave-button">退出房间</button>
+        <button id="leave-button" onClick={this.leave}>退出房间</button>
         <button id="ready">准备</button>
       </div>
     )
