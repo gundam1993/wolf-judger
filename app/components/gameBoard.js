@@ -20,7 +20,6 @@ class GameBoard extends React.Component {
         <PlayerBlock player={players[i]}/>
       )
     }
-    console.log(this.props.roomInfo)
     return (
       <div id="gameBoard">
         {playerBlocks}

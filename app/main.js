@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import Join from './components/join'
 import GameBoard from './components/gameBoard'
+import ControlBar from './components/controlBar'
 
 class App extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends React.Component {
       <div>
         {join}
         <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
+        <ControlBar />
       </div>
     );
   }
