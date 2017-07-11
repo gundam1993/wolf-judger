@@ -3,13 +3,6 @@ var controllerStyle = require('./controller.css')
 var io = require('socket.io-client') 
 import EE from './lib/eventEmitter'
 import SocketEventListener from './lib/SocketEventListener'
-// let startButtom  = document.getElementById('submit-username')
-// let usernameInputer = document.getElementById('username')
-
-// startButtom.addEventListener('click', (ev) => {
-//   console.log(usernameInputer.value)
-//   newGame = new Game(socket, usernameInputer.value)
-// })
 
 import React from 'react';
 import ReactDOM from 'react-dom'
@@ -19,19 +12,28 @@ class App extends React.Component {
     super(props)
     this.state = {
       socket: io('http://localhost:3000'),
-      socketEventListener: {}
+      socketEventListener: {},
+      roomInfo: {},
+      satge: 'join'
     }
   }
   componentWillMount () {
     this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
+    EE.on('joinSuccess', (res) => {
+      console.log(res)
+      this.setState({roomInfo: res.roomInfo})
+      this.setState({satge: 'prepare'})
+    })
   }
   render() {
+    let join = null
+    this.state.satge === 'join' ? join = <Join socket={this.state.socket}/> : join == null
     return (
       <div>
-        <Join socket={this.state.socket}/>
+        {join}
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'))

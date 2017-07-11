@@ -3,7 +3,6 @@ let style = require('../main.css')
 import React from 'react';
 import ReactDOM from 'react-dom'
 import EE from '../lib/eventEmitter'
-// import Game from '../lib/Game'
 
 class Join extends React.Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class Join extends React.Component {
       console.log('昵称不能为空')
       return
     }
-    this.props.socket.emit('join', {room: 'default', username: this.username})
+    this.props.socket.emit('join', {room: 'default', username: this.state.username})
     EE.emit()
   }
   showHint = (message) => {
