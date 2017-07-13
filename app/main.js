@@ -16,14 +16,14 @@ class App extends React.Component {
       socket: io('http://localhost:3000'),
       socketEventListener: {},
       roomInfo: {},
-      satge: 'join'
+      stage: 'join'
     }
   }
   componentWillMount () {
     this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
     EE.on('joinSuccess', (res) => {
       this.setState({roomInfo: res.roomInfo})
-      this.setState({satge: 'prepare'})
+      this.setState({stage: 'prepare'})
     })
     EE.on('newJoin', (res) => {
       this.setState({roomInfo: res.roomInfo})
@@ -31,20 +31,24 @@ class App extends React.Component {
     EE.on('leaveRoom', () => {
       this.state.socket.emit('leave')
       this.setState({roomInfo: {}})
-      this.setState({satge: 'join'})
+      this.setState({stage: 'join'})
     })
     EE.on('playerLeave', (res) => {
       this.setState({roomInfo: res.roomInfo})
     })
+    EE.on('ready', (res) => {
+      this.state.socket.emit('ready')
+      this.setState({stage: 'ready'})
+    })
   }
   render() {
     let join = null
-    this.state.satge === 'join' ? join = <Join socket={this.state.socket}/> : join == null
+    this.state.stage === 'join' ? join = <Join socket={this.state.socket}/> : join == null
     return (
       <div>
         {join}
         <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
-        <ControlBar />
+        <ControlBar stage={this.state.stage} player={{}}/>
       </div>
     );
   }

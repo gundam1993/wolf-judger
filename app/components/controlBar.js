@@ -12,18 +12,29 @@ class ControlBar extends React.Component {
   leave = () => {
     EE.emit('leaveRoom')
   }
+  ready = () => {
+    console.log(this.props)
+    EE.emit('ready')
+  }
   render() {
+    let readyButton = this.props.stage === "prepare" ? <button id="ready" onClick={this.ready}>准备</button> : ""
     return (
       <div id="controller">
         <button id="leave-button" onClick={this.leave}>退出房间</button>
-        <button id="ready">准备</button>
+        {readyButton}
       </div>
     )
   }
 }
 
+ControlBar.propTypes = {
+  player: React.PropTypes.object,
+  stage: React.PropTypes.string
+}
+
 ControlBar.defaultProps = {
-  player: {}
+  player: {},
+  stage: ''
 }
 
 export default ControlBar
