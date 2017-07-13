@@ -40,6 +40,10 @@ class App extends React.Component {
       this.state.socket.emit('ready')
       this.setState({stage: 'ready'})
     })
+    EE.on('gameStart', (res) => {
+      console.log(res)
+      this.setState({roomInfo: res.roomInfo})
+    })
   }
   render() {
     let join = null

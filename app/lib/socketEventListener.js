@@ -21,6 +21,9 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('leave', (res) => {
     EE.emit('playerLeave', res)
   })
+  this.socket.on('gameStart', (res) => {
+    EE.emit('gameStart', res)
+  })
 }
 
 export default SocketEventListener
