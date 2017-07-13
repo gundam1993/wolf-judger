@@ -9,26 +9,39 @@ class HintBar extends React.Component {
     super(props)
     this.state = {
       content: '游戏开始',
+      subContent: '',
       display: false,
-      timmer: {}
+      round: 1
     }
   }
   componentWillMount() {
     EE.on('gameStart', (res) => {
       this.setState({display: true})
-      this.gameStart()
+      this.emitter('gameStartDisplayed', 3000)
+      // setTimeout(() => {
+      //   EE.emit('gameStartDisplayed')
+      // }, 3000)
+    })
+    EE.on('gameStartDisplayed', () => {
+      this.setState({content: `你的角色是${this.props.player.role}`})
+      this.emitter('roleDisplayed', 3000)
+      // setTimeout(() => {
+      //   EE.emit('roleDisplayed')
+      // }, 3000)
+    })
+    EE.on('roleDisplayed', () => {
+      this.setState({content: `第${this.state.round}夜`})
+      this.setState({subContent: '天黑请闭眼'})
+      this.emitter('roundStart', 3000)
     })
   }
-  gameStart = () => {
-    return setTimeout(() => {
-      this.setState({content: `你的角色是${this.props.player.role}`})
-      setTimeout(() => {
-        this.setState({display: false})
-      },3000)
-    }, 3000)
+  emitter = (name, time) => {
+    setTimeout(() => {
+        EE.emit(name)
+      }, time)
   }
   render() {
-    let hint = this.state.display ? <div id="hint">{this.state.content}</div> : ""
+    let hint = this.state.display ? <div id="hint"><p>{this.state.content}</p><p>{this.state.subContent}</p></div> : ""
     return (
       <div>
         {hint}
