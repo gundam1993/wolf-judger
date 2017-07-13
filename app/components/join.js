@@ -22,8 +22,8 @@ class Join extends React.Component {
       console.log('昵称不能为空')
       return
     }
-    this.props.socket.emit('join', {room: 'default', username: this.state.username})
     this.refs.usernameInput.value = ''
+    this.props.socket.emit('join', {room: 'default', username: this.state.username})
   }
   showHint = (message) => {
     console.log(message)

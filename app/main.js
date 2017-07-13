@@ -26,10 +26,7 @@ class App extends React.Component {
       this.setState({satge: 'prepare'})
     })
     EE.on('newJoin', (res) => {
-      let room = this.state.roomInfo
-      room.players.push(res.joiner)
-      room.playerNumber ++
-      this.setState({roomInfo: room})
+      this.setState({roomInfo: res.roomInfo})
     })
     EE.on('leaveRoom', () => {
       this.state.socket.emit('leave')
