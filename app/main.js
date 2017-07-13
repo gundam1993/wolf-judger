@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import Join from './components/join'
 import GameBoard from './components/gameBoard'
 import ControlBar from './components/controlBar'
+import HintBar from './components/hintBar'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class App extends React.Component {
       socket: io('http://localhost:3000'),
       socketEventListener: {},
       roomInfo: {},
-      stage: 'join'
+      stage: 'join',
+      player: {}
     }
   }
   componentWillMount () {
@@ -41,8 +43,9 @@ class App extends React.Component {
       this.setState({stage: 'ready'})
     })
     EE.on('gameStart', (res) => {
-      console.log(res)
+      let id = this.state.socket.id
       this.setState({roomInfo: res.roomInfo})
+      this.setState({player: res.roomInfo.players[id]})
     })
   }
   render() {
@@ -52,7 +55,8 @@ class App extends React.Component {
       <div>
         {join}
         <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
-        <ControlBar stage={this.state.stage} player={{}}/>
+        <ControlBar stage={this.state.stage} />
+        <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} />
       </div>
     );
   }

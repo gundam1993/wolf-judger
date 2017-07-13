@@ -1,0 +1,12 @@
+#hint {
+  position: absolute;
+  top: 40%;
+  bottom: 40%;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+  padding-top: 1rem;
+}
