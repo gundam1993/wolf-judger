@@ -18,20 +18,19 @@ class HintBar extends React.Component {
     EE.on('gameStart', (res) => {
       this.setState({display: true})
       this.emitter('gameStartDisplayed', 3000)
-      // setTimeout(() => {
-      //   EE.emit('gameStartDisplayed')
-      // }, 3000)
     })
     EE.on('gameStartDisplayed', () => {
       this.setState({content: `你的角色是${this.props.player.role}`})
       this.emitter('roleDisplayed', 3000)
-      // setTimeout(() => {
-      //   EE.emit('roleDisplayed')
-      // }, 3000)
     })
     EE.on('roleDisplayed', () => {
       this.setState({content: `第${this.state.round}夜`})
       this.setState({subContent: '天黑请闭眼'})
+      this.emitter('roundStart', 5000)
+    })
+    EE.on('roundStart', () => {
+      this.setState({content: `狼人请睁眼，并选择要杀的对象`})
+      this.setState({subContent: ''})
       this.emitter('roundStart', 3000)
     })
   }
