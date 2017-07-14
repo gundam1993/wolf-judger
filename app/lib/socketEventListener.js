@@ -24,6 +24,9 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('gameStart', (res) => {
     EE.emit('gameStart', res)
   })
+  this.socket.on('victimChooseInconsistent', () => {
+    console.log('victimChooseInconsistent')
+  })
 }
 
 export default SocketEventListener

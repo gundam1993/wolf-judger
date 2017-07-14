@@ -8,8 +8,7 @@ import PlayerBlock from './playerBlock'
 class GameBoard extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
   render() {
     let playerBlocks = []
@@ -18,7 +17,7 @@ class GameBoard extends React.Component {
     let players = Object.values(playersInfo)
     for (let i = 0; i < num; i++) {
       playerBlocks.push(
-        <PlayerBlock player={players[i]}/>
+        <PlayerBlock player={players[i]} />
       )
     }
     return (

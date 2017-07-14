@@ -47,6 +47,9 @@ class App extends React.Component {
       this.setState({roomInfo: res.roomInfo})
       this.setState({player: res.roomInfo.players[id]})
     })
+    EE.on('victimChoose', (res) => {
+      this.state.socket.emit('victimChoose', res)
+    })
   }
   render() {
     let join = null
