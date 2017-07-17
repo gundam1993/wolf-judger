@@ -17,26 +17,41 @@ class HintBar extends React.Component {
   componentWillMount() {
     EE.on('gameStart', (res) => {
       this.setState({display: true})
-      this.emitter('gameStartDisplayed', 100)
+      this.emitter('gameStartDisplayed', 1000)
     })
     EE.on('gameStartDisplayed', () => {
       this.setState({content: `你的角色是${this.props.player.role}`})
-      this.emitter('roleDisplayed', 100)
+      this.emitter('roleDisplayed', 1000)
     })
     EE.on('roleDisplayed', () => {
       this.setState({content: `第${this.state.round}夜`})
       this.setState({subContent: '天黑请闭眼'})
-      this.emitter('roundStart', 100)
+      this.emitter('roundStart', 1000)
     })
     EE.on('roundStart', () => {
       this.setState({content: `狼人请睁眼，并选择要杀的对象`})
       this.setState({subContent: ''})
       if (this.props.player.role === 'wolfman') {
-        this.emitter('wolfWillChooseVictim', 100)
+        this.emitter('wolfWillChooseVictim', 1000)
       }
     })
     EE.on('wolfWillChooseVictim', () => {
       this.setState({display: false})
+    })
+    EE.on('victimChooseInconsistent', () => {
+      if (this.props.player.role === 'wolfman') {
+        this.setState({display: true})
+        this.setState({content: `狼人请达成一致`})
+        this.emitter('wolfWillChooseVictim', 1000)
+      }
+    })
+    EE.on('victimChosed', () => {
+      this.setState({display: true})
+      this.setState({content: `狼人请闭眼`})
+      this.emitter('prophetWillChooseSuspects', 1000)
+    })
+    EE.on('prophetWillChooseSuspects', () => {
+      this.setState({content: `预言家请睁眼，并选择要验证的对象`})
     })
   }
   emitter = (name, time) => {

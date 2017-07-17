@@ -6,7 +6,7 @@ class PlayerBlock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      playerBlockClick: () => {console.log(321)}
+      playerBlockClick: () => {}
     }
   }
   componentWillMount () {
@@ -16,6 +16,9 @@ class PlayerBlock extends React.Component {
     }
     EE.on('wolfWillChooseVictim', () => {
       this.setState({playerBlockClick: victimChoose})
+    })
+    EE.on('victimChoose', () => {
+      this.setState({playerBlockClick: () => {}})
     })
   }
   render() {
