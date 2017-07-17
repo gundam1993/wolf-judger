@@ -26,7 +26,7 @@ class HintBar extends React.Component {
     EE.on('roundStart', () => {
       this.setState({content: `第${this.state.round}夜`})
       this.setState({subContent: '天黑请闭眼'})
-      this.emitter('wolfWillChooseVictim', 1000)
+      this.emitter('prophetWillChooseSuspects', 1000)
     })
     EE.on('wolfWillChooseVictim', () => {
       this.setState({content: `狼人请睁眼，并选择要杀的对象`})
@@ -48,10 +48,11 @@ class HintBar extends React.Component {
     EE.on('victimChosed', () => {
       this.setState({content: `狼人请闭眼`})
       this.setState({display: true})
-      this.emitter('prophetWillChooseSuspects', 1000)
+      this.emitter('witchWillChooseMedicine', 1000)
     })
     EE.on('prophetWillChooseSuspects', () => {
       this.setState({content: `预言家请睁眼，并选择要验证的对象`})
+      this.setState({subContent: ''})
       if (this.props.player.role === 'prophet') {
         this.emitter('prophetChooseSuspects', 1000)
       }
@@ -63,13 +64,19 @@ class HintBar extends React.Component {
       this.setState({content: `你选择的人是:${res === 'good' ? '好人' : '坏人'}`})
       this.setState({subContent: `预言家请闭眼`})
       this.setState({display: true})
-      this.emitter('witchWillChooseMedicine', 1000)
+      this.emitter('wolfWillChooseVictim', 1000)
     })
     EE.on('suspectsChosed', () => {
       this.setState({content: `预言家请闭眼`})
       this.setState({subContent: ''})
       this.setState({display: true})
-      this.emitter('witchWillChooseMedicine', 1000)
+      this.emitter('wolfWillChooseVictim', 1000)
+    })
+    EE.on('witchWillChooseMedicine', () => {
+      this.setState({content: `女巫请睁眼`})
+      if (this.props.player.role === 'witch') {
+        this.emitter('witchChooseMedicine', 1000)
+      }
     })
   }
   emitter = (name, time) => {

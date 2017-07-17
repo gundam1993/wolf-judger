@@ -50,6 +50,9 @@ class App extends React.Component {
     EE.on('victimChoose', (res) => {
       this.state.socket.emit('victimChoose', res)
     })
+    EE.on('victimChosed', (res) => {
+      this.setState({roomInfo: res.roomInfo})
+    })
     EE.on('suspectsChoose', (res) => {
       this.state.socket.emit('suspectsChoose', res)
     })

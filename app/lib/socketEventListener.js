@@ -27,8 +27,9 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('victimChooseInconsistent', () => {
     EE.emit('victimChooseInconsistent')
   })
-  this.socket.on('victimChosed', () => {
-    EE.emit('victimChosed')
+  this.socket.on('victimChosed', (res) => {
+    console.log(res)
+    EE.emit('victimChosed', res)
   })
   this.socket.on('suspectsChosed', () => {
     EE.emit('suspectsChosed')
