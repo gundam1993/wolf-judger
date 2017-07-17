@@ -13,12 +13,21 @@ class PlayerBlock extends React.Component {
     let victimChoose = () => {
       console.log(this.props.player)
       EE.emit('victimChoose', this.props.player)
+      EE.emit('chooseEnd')
+    }
+    let suspectsChoose = () => {
+      console.log(this.props.player)
+      EE.emit('suspectsChoose', this.props.player)
+      EE.emit('chooseEnd')
     }
     EE.on('wolfChooseVictim', () => {
       this.setState({playerBlockClick: victimChoose})
     })
-    EE.on('victimChoose', () => {
+    EE.on('chooseEnd', () => {
       this.setState({playerBlockClick: () => {}})
+    })
+    EE.on('prophetChooseSuspects', () => {
+      this.setState({playerBlockClick: suspectsChoose})
     })
   }
   render() {

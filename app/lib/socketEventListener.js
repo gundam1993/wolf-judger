@@ -30,6 +30,13 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('victimChosed', () => {
     EE.emit('victimChosed')
   })
+  this.socket.on('suspectsChosed', () => {
+    EE.emit('suspectsChosed')
+  })
+  this.socket.on('suspectsChosedResult', (res) => {
+    console.log(res)
+    EE.emit('suspectsChosedResult', res)
+  })
 }
 
 export default SocketEventListener
