@@ -11,7 +11,11 @@ class HintBar extends React.Component {
       content: '游戏开始',
       subContent: '',
       display: false,
-      round: 1
+      round: 1,
+      buttonDisplay: false,
+      hintButtonYes: () => {},
+      hintButtonNo: () => {},
+
     }
   }
   componentWillMount() {
@@ -56,6 +60,9 @@ class HintBar extends React.Component {
       if (this.props.player.role === 'prophet') {
         this.emitter('prophetChooseSuspects', 1000)
       }
+      if (!this.props.roomInfo.roles.prophet) {
+        this.emitter('suspectsChosed', 1000)
+      }
     })
     EE.on('prophetChooseSuspects', () => {
       this.setState({display: false})
@@ -78,6 +85,33 @@ class HintBar extends React.Component {
         this.emitter('witchChooseMedicine', 1000)
       }
     })
+    EE.on('witchChooseMedicine', () => {
+      if (this.props.roomInfo.abilities.witch.medicine) {
+        this.setState({content: `今晚死去的是${this.props.roomInfo.victim[0].username}`})
+        this.setState({subContent: '要使用解药吗？'})
+        this.setState({buttonDisplay: true})
+        this.setState({hintButtonYes: () => {EE.emit('witchUseMedicine')}})
+        this.setState({hintButtonNo: () => {EE.emit('witchChoosePoison')}})
+      } else {
+        this.setState({content: `女巫已经使用过解药了`})
+        this.emitter('witchChoosePoison', 1000)
+      }
+    })
+    EE.on('witchUseMedicine', () => {
+      EE.emit('witchChoosePoison')
+    })
+    EE.on('witchChoosePoison', () => {
+      if (this.props.roomInfo.abilities.witch.poison) {
+        this.setState({content: `要使用毒药吗？`})
+        this.setState({subContent: ''})
+        this.setState({buttonDisplay: true})
+        this.setState({hintButtonYes: () => {EE.emit('witchUsePoison')}})
+        this.setState({hintButtonNo: () => {EE.emit('roundEnd')}})
+      } else {
+        this.setState({content: `女巫已经使用过毒了`})
+        this.emitter('roundEnd', 1000)
+      }
+    })
   }
   emitter = (name, time) => {
     setTimeout(() => {
@@ -85,10 +119,12 @@ class HintBar extends React.Component {
       }, time)
   }
   render() {
-    let hint = this.state.display ? <div id="hint"><p>{this.state.content}</p><p>{this.state.subContent}</p></div> : ""
+    let hint = this.state.display ? <div id="hint"><p>{this.state.content}</p><p>{this.state.subContent}</p></div> : ''
+    let buttons = this.state.buttonDisplay ? <div id='hintButton'><button id="hintButtonYes" onClick={this.state.hintButtonYes}>是</button><button id="hintButtonNo" onClick={this.state.hintButtonNo}>否</button></div> : ''
     return (
       <div>
         {hint}
+        {buttons}
       </div>
     )
   }

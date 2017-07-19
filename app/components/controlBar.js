@@ -18,9 +18,10 @@ class ControlBar extends React.Component {
   }
   render() {
     let readyButton = this.props.stage === "prepare" ? <button id="ready" onClick={this.ready}>准备</button> : ""
+    let leaveButton = this.props.stage === "prepare" ? <button id="leave-button" onClick={this.leave}>退出房间</button> : ""
     return (
       <div id="controller">
-        <button id="leave-button" onClick={this.leave}>退出房间</button>
+        {leaveButton}
         {readyButton}
       </div>
     )
