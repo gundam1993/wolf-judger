@@ -20,6 +20,11 @@ class PlayerBlock extends React.Component {
       EE.emit('suspectsChoose', this.props.player)
       EE.emit('chooseEnd')
     }
+    let poisonChoose = () => {
+      console.log(this.props.player)
+      EE.emit('poisonChoose', this.props.player)
+      EE.emit('chooseEnd')
+    }
     EE.on('wolfChooseVictim', () => {
       this.setState({playerBlockClick: victimChoose})
     })
@@ -28,6 +33,9 @@ class PlayerBlock extends React.Component {
     })
     EE.on('prophetChooseSuspects', () => {
       this.setState({playerBlockClick: suspectsChoose})
+    })
+    EE.on('witchUsePoison', () => {
+      this.setState({playerBlockClick: poisonChoose})
     })
   }
   render() {

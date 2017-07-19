@@ -39,9 +39,11 @@ SocketEventListener.prototype.init = function() {
     EE.emit('suspectsChosedResult', res)
   })
   this.socket.on('witchUseMedicineResult', (res) => {
-    console.log('witchUseMedicineResult')
     console.log(res)
     EE.emit('witchUseMedicineResult', res)
+  })
+  this.socket.on('witchUsePoisonResult', (res) => {
+    EE.emit('witchUsePoisonResult', res)
   })
 }
 

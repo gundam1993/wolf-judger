@@ -105,12 +105,21 @@ class HintBar extends React.Component {
         this.setState({content: `要使用毒药吗？`})
         this.setState({subContent: ''})
         this.setState({buttonDisplay: true})
-        this.setState({hintButtonYes: () => {EE.emit('witchUsePoison')}})
-        this.setState({hintButtonNo: () => {EE.emit('roundEnd')}})
+        this.setState({hintButtonYes: () => {EE.emit('witchWillUsePoison')}})
+        this.setState({hintButtonNo: () => {EE.emit('poisonChoose', {})}})
       } else {
-        this.setState({content: `女巫已经使用过毒了`})
-        this.emitter('roundEnd', 1000)
+        this.setState({content: `女巫已经使用过毒药了`})
+        this.setState({hintButtonNo: () => {EE.emit('poisonChoose', {})}})
+        // this.emitter('nightEnd', 1000)
       }
+    })
+    EE.on('witchWillUsePoison', () => {
+      this.setState({content: `请选择要毒死的目标`})
+      this.setState({buttonDisplay: false})
+      this.emitter('witchUsePoison', 1000)
+    })
+    EE.on('witchUsePoison', () => {
+      this.setState({display: false})
     })
   }
   emitter = (name, time) => {
