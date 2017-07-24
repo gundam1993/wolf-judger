@@ -45,6 +45,9 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('witchUsePoisonResult', (res) => {
     EE.emit('witchUsePoisonResult', res)
   })
+  this.socket.on('gameResult', (res) => {
+    console.log(res.result)
+  })
 }
 
 export default SocketEventListener
