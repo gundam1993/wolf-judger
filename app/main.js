@@ -18,7 +18,8 @@ class App extends React.Component {
       socketEventListener: {},
       roomInfo: {},
       stage: 'join',
-      player: {}
+      player: {},
+      victim: []
     }
   }
   componentWillMount () {
@@ -69,6 +70,10 @@ class App extends React.Component {
       this.setState({roomInfo: res.roomInfo})
       this.state.socket.emit('nightEnd', res)
     })
+    EE.on('nightResult', (res) => {
+      this.setState({roomInfo: res.roomInfo})
+      this.setState({victim: res.victim})
+    })
   }
   render() {
     let join = null
@@ -78,7 +83,7 @@ class App extends React.Component {
         {join}
         <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
         <ControlBar stage={this.state.stage} />
-        <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} />
+        <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
       </div>
     );
   }

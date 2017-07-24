@@ -120,6 +120,24 @@ class HintBar extends React.Component {
     })
     EE.on('witchUsePoison', () => {
       this.setState({display: false})
+      this.setState({buttonDisplay: false})
+    })
+    EE.on('nightResult', () => {
+      this.setState({display: true})
+      this.setState({content: `天亮了...`})
+      this.setState({buttonDisplay: false})
+      this.emitter('showVictim', 1000)
+    })
+    EE.on('showVictim', () => {
+      this.setState({display: true})
+      if (this.props.victim.length === 0) {
+        this.setState({content: `今晚是平安夜`})
+      } else {
+        let victimsName = []
+        this.props.victim.forEach((vic) => {victimsName.push(vic.username)})
+        let nameList = victimsName.join('和')
+        this.setState({content: `今晚死去的是${nameList}`})
+      }
     })
   }
   emitter = (name, time) => {
@@ -142,13 +160,15 @@ class HintBar extends React.Component {
 HintBar.propTypes = {
   roomInfo: React.PropTypes.object,
   player: React.PropTypes.object,
-  stage: React.PropTypes.string
+  stage: React.PropTypes.string,
+  victim: React.PropTypes.array
 }
 
 HintBar.defaultProps = {
   roomInfo: {},
   player: {},
-  stage: ''
+  stage: '',
+  victim: []
 }
 
 export default HintBar
