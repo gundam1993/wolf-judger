@@ -67,6 +67,7 @@ class App extends React.Component {
       this.state.socket.emit('poisonChoose', res)
     })
     EE.on('witchUsePoisonResult', (res) => {
+      console.log(321)
       this.setState({roomInfo: res.roomInfo})
       this.state.socket.emit('nightEnd', res)
     })

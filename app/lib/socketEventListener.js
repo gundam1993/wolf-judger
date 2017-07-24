@@ -49,6 +49,7 @@ SocketEventListener.prototype.init = function() {
     EE.emit('nightResult', res)
   })
   this.socket.on('gameResult', (res) => {
+    console.log(res)
     EE.emit('gameResult', res)
   })
 }

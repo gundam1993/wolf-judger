@@ -91,7 +91,10 @@ class HintBar extends React.Component {
         this.setState({subContent: '要使用解药吗？'})
         this.setState({buttonDisplay: true})
         this.setState({hintButtonYes: () => {EE.emit('witchUseMedicine')}})
-        this.setState({hintButtonNo: () => {EE.emit('witchChoosePoison')}})
+        this.setState({hintButtonNo: () => {
+          console.log(123)
+          EE.emit('witchChoosePoison')
+        }})
       } else {
         this.setState({content: `女巫已经使用过解药了`})
         this.emitter('witchChoosePoison', 1000)
@@ -110,7 +113,6 @@ class HintBar extends React.Component {
       } else {
         this.setState({content: `女巫已经使用过毒药了`})
         this.setState({hintButtonNo: () => {EE.emit('poisonChoose', {})}})
-        // this.emitter('nightEnd', 1000)
       }
     })
     EE.on('witchWillUsePoison', () => {
@@ -137,6 +139,17 @@ class HintBar extends React.Component {
         this.props.victim.forEach((vic) => {victimsName.push(vic.username)})
         let nameList = victimsName.join('和')
         this.setState({content: `今晚死去的是${nameList}`})
+        if (this.state.round === 1) { 
+          this.emitter('victimLastWord', 1000)
+        } else {
+          this.emitter('discussProcessStart', 1000)
+        }
+      }
+    })
+    EE.on('victimLastWord', () => {
+      let killedVictim = this.props.victim.filter((vic) => {return !vic.poisoned})[0]
+      if (killedVictim) {
+        this.setState({content: `请${killedVictim.username}发表遗言`})
       }
     })
   }
