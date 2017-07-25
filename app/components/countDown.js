@@ -12,6 +12,7 @@ class CountDown extends React.Component {
       countDownDisplay: false,
       buttonDisplay: false,
       countDownhandle: () => {},
+      countDownFunction: {}
     }
   }
   getMinute = () => {
@@ -24,6 +25,22 @@ class CountDown extends React.Component {
       return ('0' + second)
     }
     return second
+  }
+  emitter = (name, time) => {
+    setTimeout(() => {
+        EE.emit(name)
+      }, time)
+  }
+  countDown = () => {
+    return setInterval(() => {
+        this.setState({timeLimit: this.state.timeLimit - 1})
+      }, 1000)
+  }
+  componentWillMount() {
+    EE.on('victimLastWord', () => {
+      this.setState({countDownDisplay: true})
+      this.setState({countDownFunction: this.countDown()})
+    })
   }
   render () {
     let countDownBlock = this.state.countDownDisplay ? <div id="countDownBlock">{this.getMinute()}:{this.getSecond()}</div> : ''
