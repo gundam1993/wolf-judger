@@ -149,6 +149,11 @@ class HintBar extends React.Component {
       let killedVictim = this.props.victim.filter((vic) => {return !vic.poisoned})[0]
       if (killedVictim) {
         this.setState({content: `请${killedVictim.username}发表遗言`})
+        if (killedVictim.id === this.props.player.id) {
+          EE.emit('sayMyWord')
+        } else {
+          EE.emit('discussProcessStart')
+        }
       }
     })
   }

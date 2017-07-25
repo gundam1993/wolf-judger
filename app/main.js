@@ -74,6 +74,10 @@ class App extends React.Component {
     EE.on('nightResult', (res) => {
       this.setState({roomInfo: res.roomInfo})
       this.setState({victim: res.victim})
+      this.setState({stage: 'lastWord'})
+    })
+    EE.on('myWordOver', () => {
+      this.state.socket.emit('myWordOver', {stage: this.state.stage})
     })
   }
   render() {
