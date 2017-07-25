@@ -9,6 +9,7 @@ import Join from './components/join'
 import GameBoard from './components/gameBoard'
 import ControlBar from './components/controlBar'
 import HintBar from './components/hintBar'
+import CountDown from './components/CountDown'
 
 class App extends React.Component {
   constructor(props) {
@@ -67,7 +68,6 @@ class App extends React.Component {
       this.state.socket.emit('poisonChoose', res)
     })
     EE.on('witchUsePoisonResult', (res) => {
-      console.log(321)
       this.setState({roomInfo: res.roomInfo})
       this.state.socket.emit('nightEnd', res)
     })
@@ -85,6 +85,7 @@ class App extends React.Component {
         <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
         <ControlBar stage={this.state.stage} />
         <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
+        <CountDown />
       </div>
     );
   }

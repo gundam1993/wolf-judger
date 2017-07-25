@@ -92,7 +92,6 @@ class HintBar extends React.Component {
         this.setState({buttonDisplay: true})
         this.setState({hintButtonYes: () => {EE.emit('witchUseMedicine')}})
         this.setState({hintButtonNo: () => {
-          console.log(123)
           EE.emit('witchChoosePoison')
         }})
       } else {

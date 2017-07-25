@@ -1,0 +1,32 @@
+#countDownContainer {
+  width: 30%;
+  height: 15%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+#countDownBlock {
+  float: left;
+  height: 100%;
+  width: 46%;
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 0.2rem;
+}
+
+#countDownButtonBlock {
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+
+#countDownButton {
+  display: block;
+  background-color: #FFF;
+  height: 70%;
+  width: 4rem;
+  color: #000;
+  border: #FFF;
+  margin: 0 0.5rem;
+}
