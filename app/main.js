@@ -48,36 +48,39 @@ class App extends React.Component {
       this.setState({roomInfo: res.roomInfo})
       this.setState({player: res.roomInfo.players[id]})
     })
-    EE.on('victimChoose', (res) => {
-      this.state.socket.emit('victimChoose', res)
+    EE.on('nextGamePhase', (res) => {
+      this.state.socket.emit('nextGamePhase')
     })
-    EE.on('victimChosed', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
-    EE.on('suspectsChoose', (res) => {
-      this.state.socket.emit('suspectsChoose', res)
-    })
-    EE.on('witchUseMedicine', () => {
-      this.state.socket.emit('witchUseMedicine')
-    })
-    EE.on('witchUseMedicineResult', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
-    EE.on('poisonChoose', (res) => {
-      this.state.socket.emit('poisonChoose', res)
-    })
-    EE.on('witchUsePoisonResult', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-      this.state.socket.emit('nightEnd', res)
-    })
-    EE.on('nightResult', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-      this.setState({victim: res.victim})
-      this.setState({stage: 'lastWord'})
-    })
-    EE.on('myWordOver', () => {
-      this.state.socket.emit('myWordOver', {stage: this.state.stage})
-    })
+    // EE.on('victimChoose', (res) => {
+    //   this.state.socket.emit('victimChoose', res)
+    // })
+    // EE.on('victimChosed', (res) => {
+    //   this.setState({roomInfo: res.roomInfo})
+    // })
+    // EE.on('suspectsChoose', (res) => {
+    //   this.state.socket.emit('suspectsChoose', res)
+    // })
+    // EE.on('witchUseMedicine', () => {
+    //   this.state.socket.emit('witchUseMedicine')
+    // })
+    // EE.on('witchUseMedicineResult', (res) => {
+    //   this.setState({roomInfo: res.roomInfo})
+    // })
+    // EE.on('poisonChoose', (res) => {
+    //   this.state.socket.emit('poisonChoose', res)
+    // })
+    // EE.on('witchUsePoisonResult', (res) => {
+    //   this.setState({roomInfo: res.roomInfo})
+    //   this.state.socket.emit('nightEnd', res)
+    // })
+    // EE.on('nightResult', (res) => {
+    //   this.setState({roomInfo: res.roomInfo})
+    //   this.setState({victim: res.victim})
+    //   this.setState({stage: 'lastWord'})
+    // })
+    // EE.on('myWordOver', () => {
+    //   this.state.socket.emit('myWordOver', {stage: this.state.stage})
+    // })
   }
   render() {
     let join = null

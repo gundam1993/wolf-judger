@@ -25,9 +25,9 @@ class HintBar extends React.Component {
     })
     EE.on('gameStartDisplayed', () => {
       this.setState({content: `你的角色是${this.props.player.role}`})
-      EE.delayEmitter('roundStart', 1000)
+      EE.delayEmitter('closeEye', 1000)
     })
-    EE.on('roundStart', () => {
+    EE.on('closeEye', () => {
       this.setState({content: '天黑请闭眼'})
       EE.delayEmitter('nextGamePhase', 1000)
     })
