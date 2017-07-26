@@ -18,20 +18,20 @@
 
 #hintButton {
   position: absolute;
-  /*top: 40%;*/
-  bottom: 20%;
+  top: 60%;
+  bottom: 10%;
   left: 0;
   right: 0;
   text-align: center;
 }
 
 #hintButton button {
-  display: inline-block;
+  display: block;
   background-color: #FFF;
   background-color: #FFF;
-  height: 70%;
-  width: 4rem;
+  height: 35%;
+  width: 30%;
   color: #000;
   border: #FFF;
-  margin: 0 0.5rem;
+  margin: 0.5rem auto;
 }

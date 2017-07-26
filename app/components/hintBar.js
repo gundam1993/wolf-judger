@@ -11,11 +11,11 @@ class HintBar extends React.Component {
       content: '游戏开始',
       subContent: '',
       display: false,
-      round: 1,
       buttonDisplay: false,
+      hintButtonYesContent: '',
+      hintButtonNoContent: '',
       hintButtonYes: () => {},
       hintButtonNo: () => {},
-
     }
   }
   componentWillMount() {
@@ -37,7 +37,41 @@ class HintBar extends React.Component {
     })
     EE.on('PhaseEnd', (role) => {
       this.setState({content: `${role}请闭眼`})
+      EE.delayEmitter('nextGamePhase', 1000)
     })
+    EE.on('wereWolfStart', () => {
+      this.setState({content: '请狼人确认自己的同伴'})
+      EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
+    })
+    EE.on('seerStart', () => {
+      this.setState({content: '请预言家选择要查看的对象'})
+      this.setState({hintButtonYesContent: '查看一名玩家'})
+      this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
+      this.setState({hintButtonYesContent: '查看一名玩家'})
+      this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
+      this.setState({hintButtonYes: () => {
+        EE.emit('seerChoosePlayer')
+        this.setState({hintButtonYes: () => {}})
+      }})
+      this.setState({hintButtonNo: () => {
+        EE.emit('seerChooseDrop')
+        this.setState({hintButtonNo: () => {}})
+      }})
+      this.setState({buttonDisplay: true})
+    })
+    EE.on('seerChoosePlayer', () => {
+      this.setState({display: false})
+      this.setState({buttonDisplay: false})
+    })
+    EE.on('SeerChoosePlayerResult', (res) => {
+      this.setState({content: `你所选择的玩家是${res.role}`})
+      this.setState({display: true})
+      EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
+    })
+    // EE.on('seerStart', () => {
+    //   this.setState({content: '请预言家选择要验证的对象'})
+    // })
+
     // EE.on('wolfWillChooseVictim', () => {
     //   this.setState({content: `狼人请睁眼，并选择要杀的对象`})
     //   this.setState({subContent: ''})
@@ -164,8 +198,20 @@ class HintBar extends React.Component {
     // })
   }
   render() {
-    let hint = this.state.display ? <div id="hint"><p>{this.state.content}</p><p>{this.state.subContent}</p></div> : ''
-    let buttons = this.state.buttonDisplay ? <div id='hintButton'><button id="hintButtonYes" onClick={this.state.hintButtonYes}>是</button><button id="hintButtonNo" onClick={this.state.hintButtonNo}>否</button></div> : ''
+    let hint = ''
+    let buttons = ''
+    if (this.state.display) {
+      hint = <div id="hint">
+               <p>{this.state.content}</p>
+               <p>{this.state.subContent}</p>
+             </div>
+    }
+    if (this.state.buttonDisplay) {
+      buttons = <div id='hintButton'>
+                  <button id="hintButtonYes" onClick={this.state.hintButtonYes}>{this.state.hintButtonYesContent}</button>
+                  <button id="hintButtonNo" onClick={this.state.hintButtonNo}>{this.state.hintButtonNoContent}</button>
+                </div>
+    }
     return (
       <div>
         {hint}

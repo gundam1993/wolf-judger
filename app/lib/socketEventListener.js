@@ -28,6 +28,13 @@ SocketEventListener.prototype.init = function() {
     console.log(res)
     EE.emit('newGamePhase', res)
   })
+  this.socket.on('SeerChoosePlayerResult', (res) => {
+    if (res) {
+      EE.emit('SeerChoosePlayerResult', res)
+    } else {
+      EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
+    }
+  })
   // this.socket.on('victimChooseInconsistent', () => {
   //   EE.emit('victimChooseInconsistent')
   // })
