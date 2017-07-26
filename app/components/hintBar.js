@@ -31,6 +31,13 @@ class HintBar extends React.Component {
       this.setState({content: '天黑请闭眼'})
       EE.delayEmitter('nextGamePhase', 1000)
     })
+    EE.on('newGamePhase', (res) => {
+      this.setState({content: `${res.phase}请睁眼`})
+      EE.delayEmitter(`${res.phase}Start`, 1000)
+    })
+    EE.on('PhaseEnd', (role) => {
+      this.setState({content: `${role}请闭眼`})
+    })
     // EE.on('wolfWillChooseVictim', () => {
     //   this.setState({content: `狼人请睁眼，并选择要杀的对象`})
     //   this.setState({subContent: ''})

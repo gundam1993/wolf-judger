@@ -24,34 +24,38 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('gameStart', (res) => {
     EE.emit('gameStart', res)
   })
-  this.socket.on('victimChooseInconsistent', () => {
-    EE.emit('victimChooseInconsistent')
-  })
-  this.socket.on('victimChosed', (res) => {
+  this.socket.on('newGamePhase', (res) => {
     console.log(res)
-    EE.emit('victimChosed', res)
+    EE.emit('newGamePhase', res)
   })
-  this.socket.on('suspectsChosed', () => {
-    EE.emit('suspectsChosed')
-  })
-  this.socket.on('suspectsChosedResult', (res) => {
-    console.log(res)
-    EE.emit('suspectsChosedResult', res)
-  })
-  this.socket.on('witchUseMedicineResult', (res) => {
-    console.log(res)
-    EE.emit('witchUseMedicineResult', res)
-  })
-  this.socket.on('witchUsePoisonResult', (res) => {
-    EE.emit('witchUsePoisonResult', res)
-  })
-  this.socket.on('nightResult', (res) => {
-    EE.emit('nightResult', res)
-  })
-  this.socket.on('gameResult', (res) => {
-    console.log(res)
-    EE.emit('gameResult', res)
-  })
+  // this.socket.on('victimChooseInconsistent', () => {
+  //   EE.emit('victimChooseInconsistent')
+  // })
+  // this.socket.on('victimChosed', (res) => {
+  //   console.log(res)
+  //   EE.emit('victimChosed', res)
+  // })
+  // this.socket.on('suspectsChosed', () => {
+  //   EE.emit('suspectsChosed')
+  // })
+  // this.socket.on('suspectsChosedResult', (res) => {
+  //   console.log(res)
+  //   EE.emit('suspectsChosedResult', res)
+  // })
+  // this.socket.on('witchUseMedicineResult', (res) => {
+  //   console.log(res)
+  //   EE.emit('witchUseMedicineResult', res)
+  // })
+  // this.socket.on('witchUsePoisonResult', (res) => {
+  //   EE.emit('witchUsePoisonResult', res)
+  // })
+  // this.socket.on('nightResult', (res) => {
+  //   EE.emit('nightResult', res)
+  // })
+  // this.socket.on('gameResult', (res) => {
+  //   console.log(res)
+  //   EE.emit('gameResult', res)
+  // })
 }
 
 export default SocketEventListener
