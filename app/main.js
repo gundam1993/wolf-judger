@@ -10,6 +10,7 @@ import GameBoard from './components/gameBoard'
 import ControlBar from './components/controlBar'
 import HintBar from './components/hintBar'
 import CountDown from './components/CountDown'
+import DropCardChoose from './components/DropCardChoose'
 
 class App extends React.Component {
   constructor(props) {
@@ -98,6 +99,7 @@ class App extends React.Component {
         <ControlBar stage={this.state.stage} />
         <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
         <CountDown />
+        <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
       </div>
     );
   }
