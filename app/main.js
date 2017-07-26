@@ -20,7 +20,6 @@ class App extends React.Component {
       roomInfo: {},
       stage: 'join',
       player: {},
-      victim: []
     }
   }
   componentWillMount () {
