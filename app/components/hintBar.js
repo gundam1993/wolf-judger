@@ -51,17 +51,17 @@ class HintBar extends React.Component {
       this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
       this.setState({hintButtonYes: () => {
         EE.emit('seerChoosePlayer')
+        this.setState({display: false})
+        this.setState({buttonDisplay: false})
         this.setState({hintButtonYes: () => {}})
       }})
       this.setState({hintButtonNo: () => {
         EE.emit('seerChooseDrop')
+        this.setState({display: false})
+        this.setState({buttonDisplay: false})
         this.setState({hintButtonNo: () => {}})
       }})
       this.setState({buttonDisplay: true})
-    })
-    EE.on('seerChoosePlayer', () => {
-      this.setState({display: false})
-      this.setState({buttonDisplay: false})
     })
     EE.on('SeerChoosePlayerResult', (res) => {
       this.setState({content: `你所选择的玩家是${res.role}`})
