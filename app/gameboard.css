@@ -13,3 +13,7 @@
   background-color: #fff;
   margin: 0.5rem;
 }
+
+.playerBlock.checked {
+  background-color: #ccc;
+}

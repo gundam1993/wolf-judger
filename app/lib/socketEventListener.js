@@ -52,6 +52,9 @@ SocketEventListener.prototype.init = function() {
       EE.delayEmitter(`PhaseEnd`, 1000, '强盗')
     }
   })
+  this.socket.on('troubleMakerExchangeRoleResult', () => {
+    EE.emit(`PhaseEnd`, '捣蛋鬼')
+  })
 }
 
 export default SocketEventListener

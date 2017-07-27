@@ -40,6 +40,7 @@ class HintBar extends React.Component {
       EE.delayEmitter('PhaseEnd', 5000, res.phase)
     })
     EE.on('PhaseEnd', (role) => {
+      this.setState({display: true})
       this.setState({content: `${role}请闭眼`})
       EE.delayEmitter('nextGamePhase', 1000)
     })
@@ -100,6 +101,25 @@ class HintBar extends React.Component {
       this.setState({content: `你现在的身份是${res.role}`})
       this.setState({display: true})
       EE.delayEmitter(`PhaseEnd`, 2000, '强盗')
+    })
+    EE.on('troubleMakerStart', () => {
+      if (this.props.player.role === 'troubleMaker') {
+        this.setState({content: '请捣蛋鬼选择是否要交换身份'})
+        this.setState({hintButtonYesContent: '是'})
+        this.setState({hintButtonNoContent: '否'})
+        this.setState({hintButtonYes: () => {
+          EE.emit('troubleMakerChoosePlayers')
+          this.setState({display: false})
+          this.setState({buttonDisplay: false})
+          this.setState({hintButtonYes: () => {}})
+        }})
+        this.setState({hintButtonNo: () => {
+          EE.emit('troubleMakerNotExchange')
+          this.setState({buttonDisplay: false})
+          this.setState({hintButtonNo: () => {}})
+        }})
+        this.setState({buttonDisplay: true})
+      }
     })
   }
   render() {

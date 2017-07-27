@@ -67,6 +67,12 @@ class App extends React.Component {
     EE.on('robberChosedPlayer', (res) => {
       this.state.socket.emit('robberChosedPlayer', res)
     })
+    EE.on('troubleMakerNotExchange', () => {
+      this.state.socket.emit('troubleMakerNotExchange')
+    })
+    EE.on('troubleMakerChosedPlayer', (res) => {
+      this.state.socket.emit('troubleMakerChosedPlayer', res)
+    })
   }
   render() {
     let join = null
@@ -74,7 +80,7 @@ class App extends React.Component {
     return (
       <div>
         {join}
-        <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} />
+        <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} player={this.state.player} />
         <ControlBar stage={this.state.stage} />
         <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
         <CountDown />

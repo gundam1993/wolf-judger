@@ -6,19 +6,27 @@ class PlayerBlock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      playerBlockClick: () => {}
+      playerBlockClick: () => {},
+      chosed: false
     }
   }
   componentWillMount () {
     let seerChoosePlayer = () => {
-      console.log(this.props.player)
       EE.emit('seerChosedPlayer', this.props.player)
       EE.emit('chooseEnd')
     }
     let robberChoosePlayer = () => {
-      console.log(this.props.player)
       EE.emit('robberChosedPlayer', this.props.player)
       EE.emit('chooseEnd')
+    }
+    let troubleMakerChoosePlayers = () => {
+      if (this.state.chosed) {
+        this.setState({chosed: false})
+        EE.emit('troubleMakerDropingPlayer', this.props.player)
+      } else {
+        this.setState({chosed: true})
+        EE.emit('troubleMakerChosingPlayer', this.props.player)
+      }
     }
     EE.on('seerChoosePlayer', () => {
       this.setState({playerBlockClick: seerChoosePlayer})
@@ -26,13 +34,24 @@ class PlayerBlock extends React.Component {
     EE.on('robberChoosePlayer', () => {
       this.setState({playerBlockClick: robberChoosePlayer})
     })
+    EE.on('troubleMakerChoosePlayers', () => {
+      this.setState({playerBlockClick: troubleMakerChoosePlayers})
+    })
     EE.on('chooseEnd', () => {
       this.setState({playerBlockClick: () => {}})
+      this.setState({chosed: false})
+    })
+    EE.on('playerBlockChooseFail', () => {
+      this.setState({chosed: false})
     })
   }
   render() {
+    let className = 'playerBlock'
+    if (this.state.checked) {
+      className += ' checked'
+    }
     return (
-      <div className="playerBlock" onClick={this.state.playerBlockClick}>
+      <div className={className} onClick={this.state.playerBlockClick}>
         <div className="playerAvatar"></div>
         {this.props.player.username}
       </div>
