@@ -45,34 +45,13 @@ SocketEventListener.prototype.init = function() {
       EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
     }
   })
-  // this.socket.on('victimChooseInconsistent', () => {
-  //   EE.emit('victimChooseInconsistent')
-  // })
-  // this.socket.on('victimChosed', (res) => {
-  //   console.log(res)
-  //   EE.emit('victimChosed', res)
-  // })
-  // this.socket.on('suspectsChosed', () => {
-  //   EE.emit('suspectsChosed')
-  // })
-  // this.socket.on('suspectsChosedResult', (res) => {
-  //   console.log(res)
-  //   EE.emit('suspectsChosedResult', res)
-  // })
-  // this.socket.on('witchUseMedicineResult', (res) => {
-  //   console.log(res)
-  //   EE.emit('witchUseMedicineResult', res)
-  // })
-  // this.socket.on('witchUsePoisonResult', (res) => {
-  //   EE.emit('witchUsePoisonResult', res)
-  // })
-  // this.socket.on('nightResult', (res) => {
-  //   EE.emit('nightResult', res)
-  // })
-  // this.socket.on('gameResult', (res) => {
-  //   console.log(res)
-  //   EE.emit('gameResult', res)
-  // })
+  this.socket.on('robberChangeRoleResult', (res) => {
+    if (res) {
+      EE.emit('robberChangeRoleResult', res)
+    } else {
+      EE.delayEmitter(`PhaseEnd`, 1000, '强盗')
+    }
+  })
 }
 
 export default SocketEventListener

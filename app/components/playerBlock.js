@@ -10,41 +10,25 @@ class PlayerBlock extends React.Component {
     }
   }
   componentWillMount () {
-    // let victimChoose = () => {
-    //   console.log(this.props.player)
-    //   EE.emit('victimChoose', this.props.player)
-    //   EE.emit('chooseEnd')
-    // }
-    // let suspectsChoose = () => {
-    //   console.log(this.props.player)
-    //   EE.emit('suspectsChoose', this.props.player)
-    //   EE.emit('chooseEnd')
-    // }
-    // let poisonChoose = () => {
-    //   console.log(this.props.player)
-    //   EE.emit('poisonChoose', this.props.player)
-    //   EE.emit('chooseEnd')
-    // }
     let seerChoosePlayer = () => {
       console.log(this.props.player)
       EE.emit('seerChosedPlayer', this.props.player)
       EE.emit('chooseEnd')
     }
+    let robberChoosePlayer = () => {
+      console.log(this.props.player)
+      EE.emit('robberChosedPlayer', this.props.player)
+      EE.emit('chooseEnd')
+    }
     EE.on('seerChoosePlayer', () => {
       this.setState({playerBlockClick: seerChoosePlayer})
     })
-    // EE.on('wolfChooseVictim', () => {
-    //   this.setState({playerBlockClick: victimChoose})
-    // })
+    EE.on('robberChoosePlayer', () => {
+      this.setState({playerBlockClick: robberChoosePlayer})
+    })
     EE.on('chooseEnd', () => {
       this.setState({playerBlockClick: () => {}})
     })
-    // EE.on('prophetChooseSuspects', () => {
-    //   this.setState({playerBlockClick: suspectsChoose})
-    // })
-    // EE.on('witchUsePoison', () => {
-    //   this.setState({playerBlockClick: poisonChoose})
-    // })
   }
   render() {
     return (
