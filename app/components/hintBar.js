@@ -45,26 +45,33 @@ class HintBar extends React.Component {
     })
     EE.on('seerStart', () => {
       this.setState({content: '请预言家选择要查看的对象'})
-      this.setState({hintButtonYesContent: '查看一名玩家'})
-      this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
-      this.setState({hintButtonYesContent: '查看一名玩家'})
-      this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
-      this.setState({hintButtonYes: () => {
-        EE.emit('seerChoosePlayer')
-        this.setState({display: false})
-        this.setState({buttonDisplay: false})
-        this.setState({hintButtonYes: () => {}})
-      }})
-      this.setState({hintButtonNo: () => {
-        EE.emit('seerChooseDrop')
-        this.setState({display: false})
-        this.setState({buttonDisplay: false})
-        this.setState({hintButtonNo: () => {}})
-      }})
-      this.setState({buttonDisplay: true})
+      if (this.props.player.role === 'seer') {
+        this.setState({hintButtonYesContent: '查看一名玩家'})
+        this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
+        this.setState({hintButtonYesContent: '查看一名玩家'})
+        this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
+        this.setState({hintButtonYes: () => {
+          EE.emit('seerChoosePlayer')
+          this.setState({display: false})
+          this.setState({buttonDisplay: false})
+          this.setState({hintButtonYes: () => {}})
+        }})
+        this.setState({hintButtonNo: () => {
+          EE.emit('seerChooseDrop')
+          this.setState({display: false})
+          this.setState({buttonDisplay: false})
+          this.setState({hintButtonNo: () => {}})
+        }})
+        this.setState({buttonDisplay: true})
+      }
     })
     EE.on('SeerChoosePlayerResult', (res) => {
       this.setState({content: `你所选择的玩家是${res.role}`})
+      this.setState({display: true})
+      EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
+    })
+    EE.on('SeerChooseDropResult', (res) => {
+      this.setState({content: `你所选择的遗弃身份是${res.roles[0]}和${res.roles[1]}`})
       this.setState({display: true})
       EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
     })

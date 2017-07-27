@@ -25,14 +25,22 @@ class DropCardChoose extends React.Component {
       }
     })
     EE.on('chooseDropCard', (res) => {
-      // if () {}
+      let choose = [].concat(this.state.chosedDrop)
+      console.log(choose)
+      choose.push(res)
+      this.setState({chosedDrop: choose})
+      console.log(this.state.chosedDrop)
     })
     EE.on('seerChooseDrop', () => {
       this.setState({display: true})
-      EE.on()
-    })
-    EE.on('seerChoosingDrop', (res) => {
-      
+      this.setState({DropCardChooseButtonHandlr: () => {
+        if (this.state.chosedDrop.length !== 2) {
+          console.log('请选择两张身份卡')
+        } else {
+          EE.emit('seerChosedDrop', {dropRole: this.state.chosedDrop})
+          this.setState({display: false})
+        }
+      }})
     })
   }
   render() {

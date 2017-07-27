@@ -25,6 +25,10 @@
   color: #fff;
 }
 
+#DropCardChoose div.dropCardBlock.checked {
+  background-color: #ccc;
+}
+
 #DropCardChooseButtonContainer {
   width: 100%;
   text-align: center;

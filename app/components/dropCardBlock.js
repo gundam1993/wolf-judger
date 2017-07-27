@@ -10,7 +10,6 @@ class DropCardBlock extends React.Component {
     }
   }
   dropCardBlockClick = () => {
-    console.log(this.props.index)
     if (this.state.checked) {
       this.setState({checked: false})
       EE.emit('removeDropCard', this.props.index)
@@ -20,8 +19,12 @@ class DropCardBlock extends React.Component {
     }
   }
   render() {
+    let className = 'dropCardBlock'
+    if (this.state.checked) {
+      className += ' checked'
+    }
     return (
-      <div className="dropCardBlock" onClick={this.dropCardBlockClick}>{this.state.checked}</div>
+      <div className={className} onClick={this.dropCardBlockClick}>{this.state.checked}</div>
     )
   }
 }

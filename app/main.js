@@ -58,6 +58,9 @@ class App extends React.Component {
     EE.on('seerChosedPlayer', (res) => {
       this.state.socket.emit('seerChosedPlayer', res)
     })
+    EE.on('seerChosedDrop', (res) => {
+      this.state.socket.emit('seerChosedDrop', res)
+    })
     // EE.on('victimChoose', (res) => {
     //   this.state.socket.emit('victimChoose', res)
     // })
