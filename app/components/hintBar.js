@@ -35,6 +35,10 @@ class HintBar extends React.Component {
       this.setState({content: `${res.phase}请睁眼`})
       EE.delayEmitter(`${res.phase}Start`, 1000)
     })
+    EE.on('jumpPhase', (res) => {
+      this.setState({content: `${res.phase}请睁眼`})
+      EE.delayEmitter('PhaseEnd', 5000, res.phase)
+    })
     EE.on('PhaseEnd', (role) => {
       this.setState({content: `${role}请闭眼`})
       EE.delayEmitter('nextGamePhase', 1000)
@@ -44,8 +48,8 @@ class HintBar extends React.Component {
       EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
     })
     EE.on('seerStart', () => {
-      this.setState({content: '请预言家选择要查看的对象'})
       if (this.props.player.role === 'seer') {
+        this.setState({content: '请预言家选择要查看的对象'})
         this.setState({hintButtonYesContent: '查看一名玩家'})
         this.setState({hintButtonNoContent: '查看两张牌堆中的遗弃身份'})
         this.setState({hintButtonYesContent: '查看一名玩家'})

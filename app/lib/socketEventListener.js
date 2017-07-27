@@ -28,8 +28,8 @@ SocketEventListener.prototype.init = function() {
     console.log(res)
     EE.emit('newGamePhase', res)
   })
-  this.socket.on('PhaseEnd', (res) => {
-    EE.emit(`PhaseEnd`, res.role)
+  this.socket.on('jumpPhase', (res) => {
+    EE.emit(`jumpPhase`, res)
   })
   this.socket.on('SeerChoosePlayerResult', (res) => {
     if (res) {
