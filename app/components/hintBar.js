@@ -45,7 +45,23 @@ class HintBar extends React.Component {
       EE.delayEmitter('nextGamePhase', 1000)
     })
     EE.on('wereWolfStart', () => {
-      this.setState({content: '请狼人确认自己的同伴'})
+      // this.setState({content: '请狼人确认自己的同伴'})
+      // EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
+      if (this.props.player.role === 'wereWolf') {
+        EE.emit('wereWolfGetOtherWereWolf')
+      }
+    })
+    EE.on('wereWolfGetOtherWereWolfResult', (res) => {
+      if (res.wereWolf.username) {
+        this.setState({content: `目前身份是狼人的有：您和${res.wereWolf.username}`})
+        EE.delayEmitter(`wereWolfGotResult`, 1000)
+      } else {
+        this.setState({content: `除您以外目前场上没有狼人，请选择您要查看的遗弃身份`})
+        EE.delayEmitter(`wereWolfChooseDrop`, 1000)
+      }
+    })
+    EE.on('wereWolfChosedDropResult', (res) => {
+      this.setState({content: `您选择的遗弃的身份是${res.role}`})
       EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
     })
     EE.on('seerStart', () => {
@@ -155,8 +171,6 @@ class HintBar extends React.Component {
     EE.on('masonStart', () => {
       if (this.props.player.role === 'mason') {
         EE.emit('masonGetOtherMason')
-      } else {
-
       }
     })
     EE.on('masonGetOtherMasonResult', (res) => {

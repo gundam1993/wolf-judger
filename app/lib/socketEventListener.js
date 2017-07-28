@@ -75,8 +75,21 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('masonGetOtherMasonResult', (res) => {
     EE.emit('masonGetOtherMasonResult', res)
   })
-  this.socket.on('minionEnd', (res) => {
+  this.socket.on('minionEnd', () => {
     EE.emit(`PhaseEnd`, '守卫')
+  })
+  this.socket.on('wereWolfGetOtherWereWolfResult', (res) => {
+    EE.emit(`wereWolfGetOtherWereWolfResult`, res)
+  })
+  this.socket.on('wereWolfChosedDropResult', (res) => {
+    if (res) {
+      EE.emit('wereWolfChosedDropResult', res)
+    } else {
+      EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
+    }
+  })
+  this.socket.on('wereWolfEnd', () => {
+    EE.emit(`PhaseEnd`, '狼人')
   })
 }
 
