@@ -79,6 +79,9 @@ class App extends React.Component {
     EE.on('insomniacGetLastRole', () => {
       this.state.socket.emit('insomniacGetLastRole')
     })
+    EE.on('minionGetWerewolf', () => {
+      this.state.socket.emit('minionGetWerewolf')
+    })
   }
   render() {
     let join = null

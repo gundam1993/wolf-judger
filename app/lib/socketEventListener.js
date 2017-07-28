@@ -65,6 +65,13 @@ SocketEventListener.prototype.init = function() {
       EE.delayEmitter(`PhaseEnd`, 1000, '失眠者')
     }
   })
+  this.socket.on('minionGetWerewolfResult', (res) => {
+    if (res) {
+      EE.emit('minionGetWerewolfResult', res)
+    } else {
+      EE.delayEmitter(`PhaseEnd`, 1000, '爪牙')
+    }
+  })
 }
 
 export default SocketEventListener

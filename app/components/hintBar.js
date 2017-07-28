@@ -136,6 +136,22 @@ class HintBar extends React.Component {
       this.setState({content: `失眠者最后的身份是${res.role}`})
       EE.delayEmitter(`PhaseEnd`, 1000, '失眠者')
     })
+    EE.on('minionStart', () => {
+      if (this.props.player.role === 'minion') {
+        EE.emit('minionGetWerewolf')
+      }
+    })
+    EE.on('minionGetWerewolfResult', (res) => {
+      if (res.wolf.length === 0) {
+        this.setState({content: `场上目前没有狼人`})
+      } else {
+        let names = []
+        res.wolf.forEach((player) => {names.push(player.username)})
+        let result = names.join('和')
+        this.setState({content: `目前身份是狼人的有：${result}`})
+      }
+      EE.delayEmitter(`PhaseEnd`, 1000, '爪牙')
+    })
   }
   render() {
     let hint = ''
