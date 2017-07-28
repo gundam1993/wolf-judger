@@ -152,6 +152,21 @@ class HintBar extends React.Component {
       }
       EE.delayEmitter(`PhaseEnd`, 1000, '爪牙')
     })
+    EE.on('masonStart', () => {
+      if (this.props.player.role === 'mason') {
+        EE.emit('masonGetOtherMason')
+      } else {
+
+      }
+    })
+    EE.on('masonGetOtherMasonResult', (res) => {
+      if (res.mason.username) {
+        this.setState({content: `目前身份是守卫的有：您和${res.mason.username}`})
+      } else {
+        this.setState({content: `除您以外目前场上没有守卫`})
+      }
+      EE.delayEmitter(`masonGotResult`, 1000)
+    })
   }
   render() {
     let hint = ''

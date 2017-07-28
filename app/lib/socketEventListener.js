@@ -72,6 +72,12 @@ SocketEventListener.prototype.init = function() {
       EE.delayEmitter(`PhaseEnd`, 1000, '爪牙')
     }
   })
+  this.socket.on('masonGetOtherMasonResult', (res) => {
+    EE.emit('masonGetOtherMasonResult', res)
+  })
+  this.socket.on('minionEnd', (res) => {
+    EE.emit(`PhaseEnd`, '守卫')
+  })
 }
 
 export default SocketEventListener
