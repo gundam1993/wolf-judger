@@ -121,6 +121,12 @@ class HintBar extends React.Component {
         this.setState({buttonDisplay: true})
       }
     })
+    EE.on('drunkStart', () => {
+      if (this.props.player.role === 'drunk') {
+        this.setState({content: '请选择要交换的身份'})
+        EE.delayEmitter(`drunkChooseDrop`, 1000)
+      }
+    })
   }
   render() {
     let hint = ''

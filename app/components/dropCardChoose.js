@@ -42,6 +42,17 @@ class DropCardChoose extends React.Component {
         }
       }})
     })
+    EE.on('drunkChooseDrop', () => {
+      this.setState({display: true})
+      this.setState({DropCardChooseButtonHandlr: () => {
+        if (this.state.chosedDrop.length !== 1) {
+          console.log('请选择一张身份卡')
+        } else {
+          EE.emit('drunkChosedDrop', {dropRole: this.state.chosedDrop})
+          this.setState({display: false})
+        }
+      }})
+    })
   }
   render() {
     let container = ''

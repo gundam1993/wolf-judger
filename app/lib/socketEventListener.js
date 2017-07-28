@@ -55,6 +55,9 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('troubleMakerExchangeRoleResult', () => {
     EE.emit(`PhaseEnd`, '捣蛋鬼')
   })
+  this.socket.on('drunkChosedDropResult', () => {
+    EE.emit(`PhaseEnd`, '酒鬼')
+  })
 }
 
 export default SocketEventListener
