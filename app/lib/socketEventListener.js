@@ -58,6 +58,13 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('drunkChosedDropResult', () => {
     EE.emit(`PhaseEnd`, '酒鬼')
   })
+  this.socket.on('insomniacLastRoleResult', (res) => {
+    if (res) {
+      EE.emit('insomniacLastRoleResult', res)
+    } else {
+      EE.delayEmitter(`PhaseEnd`, 1000, '失眠者')
+    }
+  })
 }
 
 export default SocketEventListener

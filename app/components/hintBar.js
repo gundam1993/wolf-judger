@@ -127,6 +127,15 @@ class HintBar extends React.Component {
         EE.delayEmitter(`drunkChooseDrop`, 1000)
       }
     })
+    EE.on('insomniacStart', () => {
+      if (this.props.player.role === 'insomniac') {
+        EE.emit('insomniacGetLastRole')
+      }
+    })
+    EE.on('insomniacLastRoleResult', (res) => {
+      this.setState({content: `失眠者最后的身份是${res.role}`})
+      EE.delayEmitter(`PhaseEnd`, 1000, '失眠者')
+    })
   }
   render() {
     let hint = ''
