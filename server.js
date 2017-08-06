@@ -6,7 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const config = require('./webpack.config')
 const server = require('http').Server(app)
-const gameServer = require('./lib/game_server')
+const gameServer = require('./game_server')
 
 const isDev = process.env.NODE_ENV !== 'production'
 const DEFAULT_PORT = 3000

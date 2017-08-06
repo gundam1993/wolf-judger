@@ -9,12 +9,13 @@ var rooms = {
     masonEnd: false,
     wereWolfEnd: false,
     roles: {
-      wereWolf: 4,
-      villager: 2,
-      // troubleMaker: 1,
+      wereWolf: 2,
+      villager: 1,
+      troubleMaker: 1,
+      doppelganger: 1,
       // minion: 3,
       // mason: 2
-      // robber: 1,
+      robber: 1,
     },
     dropRole: [],
     namesUsed: [],
@@ -26,6 +27,15 @@ var rooms = {
 exports.listen = function (server) {
   io = socketio(server)
   io.on('connection', (socket) => {
+    socket.use((packet, next) => {
+      let roomName = Object.keys(socket.rooms)[1]
+      let room = rooms[roomName]
+      console.log('=====packet=====')
+      packet.push(room)
+      console.log(packet)
+      console.log('=========')
+      return next()
+    })
     handleNewPlayer(socket, rooms)
     handleClientDisconnection(socket, rooms)
     handleClientleaveRoom(socket, rooms)
@@ -137,9 +147,10 @@ function handleClientleaveRoom(socket, rooms) {
 
 // 处理客户端准备完成事件
 function handleClientReady(socket, rooms) {
-  socket.on('ready', function () {
+  socket.on('ready', function (room) {
+    console.log(room)
     let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+    // let room = rooms[roomName]
     let player = room.players[socket.id]
     room.ready ++
     room.players[socket.id].ready = true
