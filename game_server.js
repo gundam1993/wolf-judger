@@ -98,9 +98,7 @@ function handleNewPlayer(socket, rooms) {
 
 // 处理客户端断开连接事件
 function handleClientDisconnection(socket, rooms) {
-  socket.on('disconnecting', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('disconnecting', function (room) {
     var player
     if (room && room.players[socket.id]) {
       console.log(room)
@@ -121,9 +119,7 @@ function handleClientDisconnection(socket, rooms) {
 
 // 处理客户端离开房间事件
 function handleClientleaveRoom(socket, rooms) {
-  socket.on('leave', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('leave', function (room) {
     var player, index
     if (room) {
       player = room.players[socket.id]
@@ -148,9 +144,7 @@ function handleClientleaveRoom(socket, rooms) {
 // 处理客户端准备完成事件
 function handleClientReady(socket, rooms) {
   socket.on('ready', function (room) {
-    console.log(room)
-    let roomName = Object.keys(socket.rooms)[1]
-    // let room = rooms[roomName]
+    let roomName = room.name
     let player = room.players[socket.id]
     room.ready ++
     room.players[socket.id].ready = true
@@ -200,9 +194,8 @@ function randomAssign(room, roleList, playerIndex) {
 
 //流程控制
 function handleNextGamePhase(socket, rooms) {
-  socket.on('nextGamePhase', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('nextGamePhase', function (room) {
+    let roomName = room.name
     room.ready ++
     if (room.ready === room.playerLimit) {
       let nowMoveRole = room.roleQueue.shift()
@@ -242,9 +235,8 @@ function handleNextGamePhase(socket, rooms) {
 }
 //预言家查看玩家身份
 function handleSeerChoosePlayer(socket, rooms) {
-  socket.on('seerChosedPlayer', function (player) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('seerChosedPlayer', function (player, room) {
+    let roomName = room.name
     player = room.players[player.id]
     if (player.username) {
       socket.broadcast.in(roomName).emit('SeerChoosePlayerResult')
@@ -254,29 +246,23 @@ function handleSeerChoosePlayer(socket, rooms) {
 }
 //预言家查看弃牌
 function handleSeerChooseDrop(socket, rooms) {
-  socket.on('seerChosedDrop', function (res) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('seerChosedDrop', function (res, room) {
     let roles = [room.dropRole[res.dropRole[0]], room.dropRole[res.dropRole[1]]]
     console.log(roles)
-    socket.broadcast.in(roomName).emit('SeerChooseDropResult')
+    socket.broadcast.in(room.name).emit('SeerChooseDropResult')
     socket.emit('SeerChooseDropResult', { roles: roles })
   })
 }
 //强盗不交换身份
 function handleRobberNotChange(socket, rooms) {
-  socket.on('robberNotChange', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
-    socket.broadcast.in(roomName).emit('robberChangeRoleResult')
+  socket.on('robberNotChange', function (room) {
+    socket.broadcast.in(room.name).emit('robberChangeRoleResult')
     socket.emit('robberChangeRoleResult')
   })
 }
 //强盗交换身份
 function handleRobberChoosePlayer(socket, rooms) {
-  socket.on('robberChosedPlayer', function (player) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('robberChosedPlayer', function (player, room) {
     player = room.players[player.id]
     let robber = room.players[socket.id]
     if (player.username) {
@@ -284,64 +270,54 @@ function handleRobberChoosePlayer(socket, rooms) {
       player.lastRole = 'robber'
     }
     console.log(room)
-    socket.broadcast.in(roomName).emit('robberChangeRoleResult')
+    socket.broadcast.in(room.name).emit('robberChangeRoleResult')
     socket.emit('robberChangeRoleResult', {role: robber.lastRole})
   })
 }
 //捣蛋鬼不交换身份
 function handleTroubleMakerNotExchange(socket, rooms) {
-  socket.on('troubleMakerNotExchange', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
-    socket.broadcast.in(roomName).emit('troubleMakerExchangeRoleResult')
+  socket.on('troubleMakerNotExchange', function (room) {
+    socket.broadcast.in(room.name).emit('troubleMakerExchangeRoleResult')
     socket.emit('troubleMakerExchangeRoleResult')
   })
 }
 //捣蛋鬼交换身份
 function handleTroubleMakerChosedPlayer(socket, rooms) {
-  socket.on('troubleMakerChosedPlayer', function (res) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('troubleMakerChosedPlayer', function (res, room) {
     let player1 = room.players[res.players[0]]
     let player2 = room.players[res.players[1]]
     player1.lastRole = player2.role
     player2.lastRole = player1.role
     console.log(room)
-    socket.broadcast.in(roomName).emit('troubleMakerExchangeRoleResult')
+    socket.broadcast.in(room.name).emit('troubleMakerExchangeRoleResult')
     socket.emit('troubleMakerExchangeRoleResult')
   })
 }
 //酒鬼交换身份
 function handleDrunkChosedDrop (socket, rooms) {
-  socket.on('drunkChosedDrop', function (res) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('drunkChosedDrop', function (res, room) {
     let index = res.dropRole[0]
     let player = room.players[socket.id]
     if (index) {
       player.lastRole = room.dropRole[index]
     }
     console.log(room)
-    socket.broadcast.in(roomName).emit('drunkChosedDropResult')
+    socket.broadcast.in(room.name).emit('drunkChosedDropResult')
     socket.emit('drunkChosedDropResult')
   })
 }
 //失眠者获取最终身份
 function handleInsomniacGetLastRole (socket, rooms) {
-  socket.on('insomniacGetLastRole', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('insomniacGetLastRole', function (room) {
     let player = room.players[socket.id]
     socket.emit('insomniacLastRoleResult', {role: player.lastRole})
-    socket.broadcast.in(roomName).emit('insomniacLastRoleResult')
+    socket.broadcast.in(room.name).emit('insomniacLastRoleResult')
   })
 }
 
 //爪牙获得狼人身份
 function handleMinionGetWerewolf (socket, rooms) {
-  socket.on('minionGetWerewolf', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('minionGetWerewolf', function (room) {
     let wolf = []
     for (let key in room.players) {
       if (room.players[key].role === 'wereWolf') {
@@ -349,15 +325,13 @@ function handleMinionGetWerewolf (socket, rooms) {
       }
     }
     socket.emit('minionGetWerewolfResult', {wolf: wolf})
-    socket.broadcast.in(roomName).emit('minionGetWerewolfResult')
+    socket.broadcast.in(room.name).emit('minionGetWerewolfResult')
   })
 }
 
 //守卫获得队友身份
 function handleMasonGetOtherMason (socket, rooms) {
-  socket.on('masonGetOtherMason', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('masonGetOtherMason', function (room) {
     let mason = {}
     for (let key in room.players) {
       let player = room.players[key]
@@ -370,21 +344,17 @@ function handleMasonGetOtherMason (socket, rooms) {
 }
 //守卫阶段结束
 function handleMasonGotResult (socket, rooms) {
-  socket.on('masonGotResult', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('masonGotResult', function (room) {
     if (!room.masonEnd) {
       room.masonEnd = true
       socket.emit('minionEnd')
-      socket.broadcast.in(roomName).emit('minionEnd')
+      socket.broadcast.in(room.name).emit('minionEnd')
     }
   })
 }
 //狼人获得队友身份
 function handleWereWolfGetOtherWereWolf (socket, rooms) {
-  socket.on('wereWolfGetOtherWereWolf', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('wereWolfGetOtherWereWolf', function (room) {
     let wereWolf = {}
     for (let key in room.players) {
       let player = room.players[key]
@@ -397,26 +367,22 @@ function handleWereWolfGetOtherWereWolf (socket, rooms) {
 }
 //狼人查看遗弃身份
 function handleWwereWolfChosedDrop (socket, rooms) {
-  socket.on('wereWolfChosedDrop', function (res) {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('wereWolfChosedDrop', function (res, room) {
     let index = res.dropRole[0]
     if (index) {
       let result = room.dropRole[index]
       socket.emit('wereWolfChosedDropResult', {role: result})
-      socket.broadcast.in(roomName).emit('wereWolfChosedDropResult')
+      socket.broadcast.in(room.name).emit('wereWolfChosedDropResult')
     }
   })
 }
 //狼人阶段结束
 function handleWereWolfGotResult (socket, rooms) {
-  socket.on('wereWolfGotResult', function () {
-    let roomName = Object.keys(socket.rooms)[1]
-    let room = rooms[roomName]
+  socket.on('wereWolfGotResult', function (room) {
     if (!room.wereWolfEnd) {
       room.wereWolfEnd = true
       socket.emit('wereWolfEnd')
-      socket.broadcast.in(roomName).emit('wereWolfEnd')
+      socket.broadcast.in(room.name).emit('wereWolfEnd')
     }
   })
 }
