@@ -1,4 +1,6 @@
 const socketio = require('socket.io')
+const WereWolf = require('./roles/wereWolf')
+
 var io
 var rooms = {
   default: {
@@ -10,9 +12,9 @@ var rooms = {
     wereWolfEnd: false,
     roles: {
       wereWolf: 2,
-      villager: 1,
+      villager: 2,
       troubleMaker: 1,
-      doppelganger: 1,
+      // doppelganger: 1,
       // minion: 3,
       // mason: 2
       robber: 1,
@@ -32,6 +34,7 @@ exports.listen = function (server) {
       let room = rooms[roomName]
       console.log('=====packet=====')
       packet.push(room)
+      packet.push(socket)
       console.log(packet)
       console.log('=========')
       return next()
@@ -52,9 +55,9 @@ exports.listen = function (server) {
     handleMinionGetWerewolf(socket, rooms)
     handleMasonGetOtherMason(socket, rooms)
     handleMasonGotResult(socket, rooms)
-    handleWereWolfGetOtherWereWolf(socket, rooms)
-    handleWwereWolfChosedDrop(socket, rooms)
-    handleWereWolfGotResult(socket, rooms)
+    socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
+    socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
+    socket.on('wereWolfGotResult', WereWolf.gotResult)
   })
 }
 
@@ -98,7 +101,9 @@ function handleNewPlayer(socket, rooms) {
 
 // 处理客户端断开连接事件
 function handleClientDisconnection(socket) {
-  socket.on('disconnecting', function (room) {
+  socket.on('disconnecting', function () {
+    let roomName = Object.keys(socket.rooms)[1]
+    let room = rooms[roomName]
     var player
     if (room && room.players[socket.id]) {
       console.log(room)
@@ -349,40 +354,6 @@ function handleMasonGotResult (socket) {
       room.masonEnd = true
       socket.emit('minionEnd')
       socket.broadcast.in(room.name).emit('minionEnd')
-    }
-  })
-}
-//狼人获得队友身份
-function handleWereWolfGetOtherWereWolf (socket) {
-  socket.on('wereWolfGetOtherWereWolf', function (room) {
-    let wereWolf = {}
-    for (let key in room.players) {
-      let player = room.players[key]
-      if (player.role === 'wereWolf' && player.id !== socket.id) {
-        wereWolf = player
-      }
-    }
-    socket.emit('wereWolfGetOtherWereWolfResult', {wereWolf: wereWolf})
-  })
-}
-//狼人查看遗弃身份
-function handleWwereWolfChosedDrop (socket) {
-  socket.on('wereWolfChosedDrop', function (res, room) {
-    let index = res.dropRole[0]
-    if (index) {
-      let result = room.dropRole[index]
-      socket.emit('wereWolfChosedDropResult', {role: gresult})
-      socket.broadcast.in(room.name).emit('wereWolfChosedDropResult')
-    }
-  })
-}
-//狼人阶段结束
-function handleWereWolfGotResult (socket) {
-  socket.on('wereWolfGotResult', function (room) {
-    if (!room.wereWolfEnd) {
-      room.wereWolfEnd = true
-      socket.emit('wereWolfEnd')
-      socket.broadcast.in(room.name).emit('wereWolfEnd')
     }
   })
 }
