@@ -2,6 +2,7 @@ const socketio = require('socket.io')
 const WereWolf = require('./roles/wereWolf')
 const Mason = require('./roles/mason')
 const Minion = require('./roles/minion')
+const Insomniac = require('./roles/insomniac')
 
 var io
 var rooms = {
@@ -53,13 +54,14 @@ exports.listen = function (server) {
     handleTroubleMakerNotExchange(socket, rooms)
     handleTroubleMakerChosedPlayer(socket, rooms)
     handleDrunkChosedDrop(socket, rooms)
-    handleInsomniacGetLastRole (socket, rooms)
     socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
     socket.on('masonGetOtherMason', Mason.getOtherMason)
     socket.on('masonGotResult', Mason.gotResult)
     socket.on('minionGetWerewolf', Minion.getWerewolf)
+    socket.on('insomniacGetLastRole', Insomniac.getLastRole)
+
 
   })
 }
@@ -312,14 +314,6 @@ function handleDrunkChosedDrop (socket) {
     console.log(room)
     socket.broadcast.in(room.name).emit('drunkChosedDropResult')
     socket.emit('drunkChosedDropResult')
-  })
-}
-//失眠者获取最终身份
-function handleInsomniacGetLastRole (socket) {
-  socket.on('insomniacGetLastRole', function (room) {
-    let player = room.players[socket.id]
-    socket.emit('insomniacLastRoleResult', {role: player.lastRole})
-    socket.broadcast.in(room.name).emit('insomniacLastRoleResult')
   })
 }
 
