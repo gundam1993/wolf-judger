@@ -1,5 +1,6 @@
 const socketio = require('socket.io')
 const WereWolf = require('./roles/wereWolf')
+const Mason = require('./roles/mason')
 
 var io
 var rooms = {
@@ -13,11 +14,11 @@ var rooms = {
     roles: {
       wereWolf: 2,
       villager: 2,
-      troubleMaker: 1,
+      // troubleMaker: 1,
       // doppelganger: 1,
       // minion: 3,
-      // mason: 2
-      robber: 1,
+      mason: 2
+      // robber: 1,
     },
     dropRole: [],
     namesUsed: [],
@@ -53,11 +54,12 @@ exports.listen = function (server) {
     handleDrunkChosedDrop(socket, rooms)
     handleInsomniacGetLastRole (socket, rooms)
     handleMinionGetWerewolf(socket, rooms)
-    handleMasonGetOtherMason(socket, rooms)
-    handleMasonGotResult(socket, rooms)
     socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
+    socket.on('masonGetOtherMason', Mason.getOtherMason)
+    socket.on('masonGotResult', Mason.gotResult)
+
   })
 }
 
@@ -331,29 +333,5 @@ function handleMinionGetWerewolf (socket) {
     }
     socket.emit('minionGetWerewolfResult', {wolf: wolf})
     socket.broadcast.in(room.name).emit('minionGetWerewolfResult')
-  })
-}
-
-//守卫获得队友身份
-function handleMasonGetOtherMason (socket) {
-  socket.on('masonGetOtherMason', function (room) {
-    let mason = {}
-    for (let key in room.players) {
-      let player = room.players[key]
-      if (player.role === 'mason' && player.id !== socket.id) {
-        mason = player
-      }
-    }
-    socket.emit('masonGetOtherMasonResult', {mason: mason})
-  })
-}
-//守卫阶段结束
-function handleMasonGotResult (socket) {
-  socket.on('masonGotResult', function (room) {
-    if (!room.masonEnd) {
-      room.masonEnd = true
-      socket.emit('minionEnd')
-      socket.broadcast.in(room.name).emit('minionEnd')
-    }
   })
 }
