@@ -4,6 +4,7 @@ const Mason = require('./roles/mason')
 const Minion = require('./roles/minion')
 const Insomniac = require('./roles/insomniac')
 const Drunk = require('./roles/drunk')
+const TroubleMaker = require('./roles/troubleMaker')
 
 
 var io
@@ -53,8 +54,6 @@ exports.listen = function (server) {
     handleSeerChooseDrop(socket, rooms)
     handleRobberNotChange(socket, rooms)
     handleRobberChoosePlayer(socket, rooms)
-    handleTroubleMakerNotExchange(socket, rooms)
-    handleTroubleMakerChosedPlayer(socket, rooms)
     socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
@@ -63,6 +62,8 @@ exports.listen = function (server) {
     socket.on('minionGetWerewolf', Minion.getWerewolf)
     socket.on('insomniacGetLastRole', Insomniac.getLastRole)
     socket.on('drunkChosedDrop', Drunk.exchangeIdentity)
+    socket.on('troubleMakerChosedPlayer', TroubleMaker.exchangeIdentity)
+    socket.on('troubleMakerNotExchange', TroubleMaker.notExchangeIdentity)
 
   })
 }
@@ -283,25 +284,6 @@ function handleRobberChoosePlayer(socket) {
     console.log(room)
     socket.broadcast.in(room.name).emit('robberChangeRoleResult')
     socket.emit('robberChangeRoleResult', {role: robber.lastRole})
-  })
-}
-//捣蛋鬼不交换身份
-function handleTroubleMakerNotExchange(socket) {
-  socket.on('troubleMakerNotExchange', function (room) {
-    socket.broadcast.in(room.name).emit('troubleMakerExchangeRoleResult')
-    socket.emit('troubleMakerExchangeRoleResult')
-  })
-}
-//捣蛋鬼交换身份
-function handleTroubleMakerChosedPlayer(socket) {
-  socket.on('troubleMakerChosedPlayer', function (res, room) {
-    let player1 = room.players[res.players[0]]
-    let player2 = room.players[res.players[1]]
-    player1.lastRole = player2.role
-    player2.lastRole = player1.role
-    console.log(room)
-    socket.broadcast.in(room.name).emit('troubleMakerExchangeRoleResult')
-    socket.emit('troubleMakerExchangeRoleResult')
   })
 }
 
