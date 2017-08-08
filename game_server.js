@@ -3,6 +3,8 @@ const WereWolf = require('./roles/wereWolf')
 const Mason = require('./roles/mason')
 const Minion = require('./roles/minion')
 const Insomniac = require('./roles/insomniac')
+const Drunk = require('./roles/drunk')
+
 
 var io
 var rooms = {
@@ -53,7 +55,6 @@ exports.listen = function (server) {
     handleRobberChoosePlayer(socket, rooms)
     handleTroubleMakerNotExchange(socket, rooms)
     handleTroubleMakerChosedPlayer(socket, rooms)
-    handleDrunkChosedDrop(socket, rooms)
     socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
@@ -61,7 +62,7 @@ exports.listen = function (server) {
     socket.on('masonGotResult', Mason.gotResult)
     socket.on('minionGetWerewolf', Minion.getWerewolf)
     socket.on('insomniacGetLastRole', Insomniac.getLastRole)
-
+    socket.on('drunkChosedDrop', Drunk.exchangeIdentity)
 
   })
 }
@@ -301,19 +302,6 @@ function handleTroubleMakerChosedPlayer(socket) {
     console.log(room)
     socket.broadcast.in(room.name).emit('troubleMakerExchangeRoleResult')
     socket.emit('troubleMakerExchangeRoleResult')
-  })
-}
-//酒鬼交换身份
-function handleDrunkChosedDrop (socket) {
-  socket.on('drunkChosedDrop', function (res, room) {
-    let index = res.dropRole[0]
-    let player = room.players[socket.id]
-    if (index) {
-      player.lastRole = room.dropRole[index]
-    }
-    console.log(room)
-    socket.broadcast.in(room.name).emit('drunkChosedDropResult')
-    socket.emit('drunkChosedDropResult')
   })
 }
 
