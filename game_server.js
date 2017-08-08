@@ -5,7 +5,8 @@ const Minion = require('./roles/minion')
 const Insomniac = require('./roles/insomniac')
 const Drunk = require('./roles/drunk')
 const TroubleMaker = require('./roles/troubleMaker')
-
+const Robber = require('./roles/robber')
+const Seer = require('./roles/seer')
 
 var io
 var rooms = {
@@ -50,10 +51,6 @@ exports.listen = function (server) {
     handleClientleaveRoom(socket, rooms)
     handleClientReady(socket, rooms)
     handleNextGamePhase(socket, rooms)
-    handleSeerChoosePlayer(socket, rooms)
-    handleSeerChooseDrop(socket, rooms)
-    handleRobberNotChange(socket, rooms)
-    handleRobberChoosePlayer(socket, rooms)
     socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
@@ -64,7 +61,10 @@ exports.listen = function (server) {
     socket.on('drunkChosedDrop', Drunk.exchangeIdentity)
     socket.on('troubleMakerChosedPlayer', TroubleMaker.exchangeIdentity)
     socket.on('troubleMakerNotExchange', TroubleMaker.notExchangeIdentity)
-
+    socket.on('robberNotChange', Robber.notChangeIdentity)
+    socket.on('robberChosedPlayer', Robber.changeIdentity)
+    socket.on('seerChosedPlayer', Seer.checkPlayerIdentity)
+    socket.on('seerChosedDrop', Seer.checkDropIdentity)
   })
 }
 
@@ -245,45 +245,3 @@ function handleNextGamePhase(socket) {
     }
   })
 }
-//预言家查看玩家身份
-function handleSeerChoosePlayer(socket) {
-  socket.on('seerChosedPlayer', function (player, room) {
-    let roomName = room.name
-    player = room.players[player.id]
-    if (player.username) {
-      socket.broadcast.in(roomName).emit('SeerChoosePlayerResult')
-      socket.emit('SeerChoosePlayerResult', { role: player.role })
-    }
-  })
-}
-//预言家查看弃牌
-function handleSeerChooseDrop(socket) {
-  socket.on('seerChosedDrop', function (res, room) {
-    let roles = [room.dropRole[res.dropRole[0]], room.dropRole[res.dropRole[1]]]
-    console.log(roles)
-    socket.broadcast.in(room.name).emit('SeerChooseDropResult')
-    socket.emit('SeerChooseDropResult', { roles: roles })
-  })
-}
-//强盗不交换身份
-function handleRobberNotChange(socket) {
-  socket.on('robberNotChange', function (room) {
-    socket.broadcast.in(room.name).emit('robberChangeRoleResult')
-    socket.emit('robberChangeRoleResult')
-  })
-}
-//强盗交换身份
-function handleRobberChoosePlayer(socket) {
-  socket.on('robberChosedPlayer', function (player) {
-    player = room.players[player.id]
-    let robber = room.players[socket.id]
-    if (player.username) {
-      robber.lastRole = player.role
-      player.lastRole = 'robber'
-    }
-    console.log(room)
-    socket.broadcast.in(room.name).emit('robberChangeRoleResult')
-    socket.emit('robberChangeRoleResult', {role: robber.lastRole})
-  })
-}
-
