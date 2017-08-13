@@ -7,6 +7,8 @@ const Drunk = require('./roles/drunk')
 const TroubleMaker = require('./roles/troubleMaker')
 const Robber = require('./roles/robber')
 const Seer = require('./roles/seer')
+const Doppelganger = require('./roles/doppelganger')
+
 
 var io
 var rooms = {
@@ -21,10 +23,10 @@ var rooms = {
       wereWolf: 2,
       villager: 2,
       // troubleMaker: 1,
-      // doppelganger: 1,
+      doppelganger: 1,
       // minion: 3,
-      mason: 2
-      // robber: 1,
+      // mason: 2
+      robber: 1,
     },
     dropRole: [],
     namesUsed: [],
@@ -39,11 +41,8 @@ exports.listen = function (server) {
     socket.use((packet, next) => {
       let roomName = Object.keys(socket.rooms)[1]
       let room = rooms[roomName]
-      console.log('=====packet=====')
       packet.push(room)
       packet.push(socket)
-      console.log(packet)
-      console.log('=========')
       return next()
     })
     handleNewPlayer(socket, rooms)
@@ -65,6 +64,7 @@ exports.listen = function (server) {
     socket.on('robberChosedPlayer', Robber.changeIdentity)
     socket.on('seerChosedPlayer', Seer.checkPlayerIdentity)
     socket.on('seerChosedDrop', Seer.checkDropIdentity)
+    socket.on('doppelgangerChosedPlayer', Doppelganger.getNewIdentity)
   })
 }
 

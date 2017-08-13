@@ -28,6 +28,9 @@ class PlayerBlock extends React.Component {
         EE.emit('troubleMakerChosingPlayer', this.props.player)
       }
     }
+    let doppelgangerChoosePlayer = () => {
+      EE.emit('doppelgangerChosingPlayer', this.props.player)
+    }
     EE.on('seerChoosePlayer', () => {
       this.setState({playerBlockClick: seerChoosePlayer})
     })
@@ -36,6 +39,9 @@ class PlayerBlock extends React.Component {
     })
     EE.on('troubleMakerChoosePlayers', () => {
       this.setState({playerBlockClick: troubleMakerChoosePlayers})
+    })
+    EE.on('doppelgangerChoosePlayer', () => {
+      this.setState({playerBlockClick: doppelgangerChoosePlayer})
     })
     EE.on('chooseEnd', () => {
       this.setState({playerBlockClick: () => {}})

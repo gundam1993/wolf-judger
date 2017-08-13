@@ -44,9 +44,23 @@ class HintBar extends React.Component {
       this.setState({content: `${role}请闭眼`})
       EE.delayEmitter('nextGamePhase', 1000)
     })
+    EE.on('doppelgangerStart', () => {
+      if (this.props.player.role === 'doppelganger') {
+        this.setState({content: '请化身幽灵选择一个玩家查看身份'})
+        EE.delayEmitter('doppelgangerChoosePlayer', 1000)
+      }
+    })
+    EE.on('doppelgangerChoosePlayer', () => {
+      this.setState({display: false})
+    })
+    EE.on('doppelgangerChangeRoleResult', (res) => {
+      this.setState({content: `化身幽灵选择的身份是${res.role}`})
+      this.setState({display: true})
+      if (['villager', 'tanner', 'hunter', 'wereWolf', 'mason'].includes(res.role)) {
+        EE.delayEmitter('doppelgangerNoFutherMove', 1000)
+      }
+    })
     EE.on('wereWolfStart', () => {
-      // this.setState({content: '请狼人确认自己的同伴'})
-      // EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
       if (this.props.player.role === 'wereWolf') {
         EE.emit('wereWolfGetOtherWereWolf')
       }

@@ -91,6 +91,12 @@ SocketEventListener.prototype.init = function() {
   this.socket.on('wereWolfEnd', () => {
     EE.emit(`PhaseEnd`, '狼人')
   })
+  this.socket.on('wereWolfEnd', () => {
+    EE.emit(`PhaseEnd`, '狼人')
+  })
+  this.socket.on('doppelgangerChangeRoleResult', (res) => {
+    EE.emit('doppelgangerChangeRoleResult', res)
+  })
 }
 
 export default SocketEventListener

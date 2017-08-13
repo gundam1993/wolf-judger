@@ -12,7 +12,7 @@ exports.notChangeIdentity = function (room, socket) {
 exports.changeIdentity = function (player, room, socket) {
   player = room.players[player.id]
   let robber = room.players[socket.id]
-  if (player.username) {
+  if (player.hasOwnProperty(username)) {
     robber.lastRole = player.role
     player.lastRole = 'robber'
   }

@@ -97,6 +97,9 @@ class App extends React.Component {
     EE.on('wereWolfGotResult', () => {
       this.state.socket.emit('wereWolfGotResult')
     })
+    EE.on('doppelgangerChosedPlayer', (res) => {
+      this.state.socket.emit('doppelgangerChosedPlayer', res)
+    })
   }
   render() {
     let join = null

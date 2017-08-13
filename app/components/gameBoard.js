@@ -14,7 +14,6 @@ class GameBoard extends React.Component {
   }
   componentWillMount () {
     EE.on('troubleMakerChosingPlayer', (res) => {
-
       if (res.id === this.props.player.id) {
         console.log('请勿选择自己')
         this.setState({chooseList: []})
@@ -36,6 +35,16 @@ class GameBoard extends React.Component {
         choose.splice(index,1)
         this.setState({chooseList: choose})
       }
+    })
+    EE.on('doppelgangerChosingPlayer', (res) => {
+      console.log(res)
+      if (res.id === this.props.player.id) {
+        console.log('请勿选择自己')
+        EE.emit('doppelgangerChoosePlayer')
+        return
+      }
+      EE.emit('doppelgangerChosedPlayer', {player: res})
+      EE.emit('chooseEnd')
     })
   }
   render() {
