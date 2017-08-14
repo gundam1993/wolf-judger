@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 
 import Join from './join'
 import GameBoard from './gameBoard'
+import ControlBar from './controlBar'
 
 class StateContainer extends React.Component {
   constructor (props) {
@@ -47,12 +48,18 @@ class StateContainer extends React.Component {
       this.state.socket.emit('ready')
       this.setState({stage: 'ready'})
     })
+    EE.on('gameStart', (res) => {
+      let id = this.state.socket.id
+      this.setState({roomInfo: res.roomInfo})
+      this.setState({player: res.roomInfo.players[id]})
+    })
   }
   render() {
     return (
       <div>
         <Join display={this.state.join.display} />
         <GameBoard roomInfo={this.state.roomInfo} player={this.state.player} />
+        <ControlBar stage={this.state.stage} />
       </div>
     )
   }
