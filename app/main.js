@@ -16,20 +16,9 @@ import DropCardChoose from './components/DropCardChoose'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      // socket: io('http://localhost:3000'),
-      // socketEventListener: {},
-      // roomInfo: {},
-      // stage: 'join',
-      // player: {},
-    }
+    this.state = {}
   }
   componentWillMount () {
-    // this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
-    EE.on('joinSuccess', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-      this.setState({stage: 'prepare'})
-    })
     EE.on('newJoin', (res) => {
       this.setState({roomInfo: res.roomInfo})
     })
@@ -103,19 +92,11 @@ class App extends React.Component {
     })
   }
   render() {
-    let join = null
-    this.state.stage === 'join' ? join = <Join socket={this.state.socket}/> : join == null
     return (
       <div>
         <StateContainer />
-        // {join}
-        // <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} player={this.state.player} />
-        // <ControlBar stage={this.state.stage} />
-        // <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
-        // <CountDown />
-        // <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
       </div>
-    );
+    )
   }
 }
 
