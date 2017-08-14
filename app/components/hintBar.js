@@ -58,6 +58,8 @@ class HintBar extends React.Component {
       this.setState({display: true})
       if (['villager', 'tanner', 'hunter', 'wereWolf', 'mason'].includes(res.role)) {
         EE.delayEmitter('doppelgangerNoFutherMove', 1000)
+      } else if (res.role === 'seer') {
+        
       }
     })
     EE.on('wereWolfStart', () => {

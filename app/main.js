@@ -5,6 +5,7 @@ import SocketEventListener from './lib/SocketEventListener'
 
 import React from 'react';
 import ReactDOM from 'react-dom'
+import StateContainer from './components/stateContainer'
 import Join from './components/join'
 import GameBoard from './components/gameBoard'
 import ControlBar from './components/controlBar'
@@ -16,15 +17,15 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      socket: io('http://localhost:3000'),
-      socketEventListener: {},
-      roomInfo: {},
-      stage: 'join',
-      player: {},
+      // socket: io('http://localhost:3000'),
+      // socketEventListener: {},
+      // roomInfo: {},
+      // stage: 'join',
+      // player: {},
     }
   }
   componentWillMount () {
-    this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
+    // this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
     EE.on('joinSuccess', (res) => {
       this.setState({roomInfo: res.roomInfo})
       this.setState({stage: 'prepare'})
@@ -106,12 +107,13 @@ class App extends React.Component {
     this.state.stage === 'join' ? join = <Join socket={this.state.socket}/> : join == null
     return (
       <div>
-        {join}
-        <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} player={this.state.player} />
-        <ControlBar stage={this.state.stage} />
-        <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
-        <CountDown />
-        <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
+        <StateContainer />
+        // {join}
+        // <GameBoard roomInfo={this.state.roomInfo} socket={this.state.socket} player={this.state.player} />
+        // <ControlBar stage={this.state.stage} />
+        // <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} victim={this.state.victim}/>
+        // <CountDown />
+        // <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
       </div>
     );
   }
