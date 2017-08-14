@@ -146,7 +146,7 @@ function handleClientleaveRoom(socket) {
         let rooms = Object.keys(socket.rooms)
         console.log(rooms)
       })
-      socket.broadcast.to(roomName).emit('leave', {
+      socket.broadcast.to(room.name).emit('leave', {
         roomInfo: room
       })
     }
