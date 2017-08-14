@@ -226,14 +226,12 @@ HintBar.propTypes = {
   roomInfo: React.PropTypes.object,
   player: React.PropTypes.object,
   stage: React.PropTypes.string,
-  victim: React.PropTypes.array
 }
 
 HintBar.defaultProps = {
   roomInfo: {},
   player: {},
   stage: '',
-  victim: []
 }
 
 export default HintBar

@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import Join from './join'
 import GameBoard from './gameBoard'
 import ControlBar from './controlBar'
+import HintBar from './hintBar'
 
 class StateContainer extends React.Component {
   constructor (props) {
@@ -60,6 +61,7 @@ class StateContainer extends React.Component {
         <Join display={this.state.join.display} />
         <GameBoard roomInfo={this.state.roomInfo} player={this.state.player} />
         <ControlBar stage={this.state.stage} />
+        <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} />
       </div>
     )
   }
