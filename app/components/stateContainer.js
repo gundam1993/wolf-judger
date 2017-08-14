@@ -37,9 +37,7 @@ class StateContainer extends React.Component {
       this.state.socket.emit('join', res)
     })
     EE.on('joinSuccess', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-      this.setState({stage: 'prepare'})
-      this.setState({joinDisplay: false})
+      this.setState({roomInfo: res.roomInfo, joinDisplay: false, stage: 'prepare'})
     })
     EE.on('newJoin', (res) => {
       this.setState({roomInfo: res.roomInfo})
@@ -180,37 +178,104 @@ class StateContainer extends React.Component {
       this.state.socket.emit('robberChosedPlayer', res)
     })
 
-
-    EE.on('troubleMakerNotExchange', () => {
-      this.state.socket.emit('troubleMakerNotExchange')
+    EE.on('troubleMakerStart', () => {
+      if (this.props.player.role === 'troubleMaker') {
+        this.setState({hintBarContent: '请捣蛋鬼选择是否要交换身份'})
+        this.setState({hintBtnContent1: '是'})
+        this.setState({hintBtnContent2: '否'})
+        this.setState({hintBtnFunc1: () => {
+          EE.emit('troubleMakerChoosePlayers')
+          this.setState({hintBarDisplay: false})
+          this.setState({hintBarBtnDisplay: false})
+          this.setState({hintBtnFunc1: () => {}})
+        }})
+        this.setState({hintBtnFunc2: () => {
+          this.state.socket.emit('troubleMakerNotExchange')
+          this.setState({hintBarBtnDisplay: false})
+          this.setState({hintBtnFunc2: () => {}})
+        }})
+        this.setState({hintBarBtnDisplay: true})
+      }
     })
     EE.on('troubleMakerChosedPlayer', (res) => {
       this.state.socket.emit('troubleMakerChosedPlayer', res)
     })
 
-
+    EE.on('drunkStart', () => {
+      if (this.state.player.role === 'drunk') {
+        this.setState({hintBarContent: '请选择要交换的身份'})
+        EE.delayEmitter(`drunkChooseDrop`, 1000)
+      }
+    })
     EE.on('drunkChosedDrop', (res) => {
       this.state.socket.emit('drunkChosedDrop', res)
     })
 
 
-    EE.on('insomniacGetLastRole', () => {
-      this.state.socket.emit('insomniacGetLastRole')
+    EE.on('insomniacStart', () => {
+      if (this.props.player.role === 'insomniac') {
+        this.state.socket.emit('insomniacGetLastRole')
+      }
+    })
+    EE.on('insomniacLastRoleResult', (res) => {
+      this.setState({hintBarContent: `失眠者最后的身份是${res.role}`})
+      EE.delayEmitter(`PhaseEnd`, 1000, '失眠者')
     })
 
 
-    EE.on('minionGetWerewolf', () => {
-      this.state.socket.emit('minionGetWerewolf')
+    EE.on('minionStart', () => {
+      if (this.props.player.role === 'minion') {
+        this.state.socket.emit('minionGetWerewolf')
+      }
+    })
+    EE.on('minionGetWerewolfResult', (res) => {
+      if (res.wolf.length === 0) {
+        this.setState({hintBarContent: `场上目前没有狼人`})
+      } else {
+        let names = []
+        res.wolf.forEach((player) => {names.push(player.username)})
+        let result = names.join('和')
+        this.setState({hintBarContent: `目前身份是狼人的有：${result}`})
+      }
+      EE.delayEmitter(`PhaseEnd`, 1000, '爪牙')
     })
 
 
-    EE.on('masonGetOtherMason', () => {
-      this.state.socket.emit('masonGetOtherMason')
+    EE.on('masonStart', () => {
+      if (this.state.player.role === 'mason') {
+        this.state.socket.emit('masonGetOtherMason')
+      }
+    })
+    EE.on('masonGetOtherMasonResult', (res) => {
+      if (res.mason.username) {
+        this.setState({hintBarContent: `目前身份是守卫的有：您和${res.mason.username}`})
+      } else {
+        this.setState({hintBarContent: `除您以外目前场上没有守卫`})
+      }
+      EE.delayEmitter(`masonGotResult`, 1000)
     })
     EE.on('masonGotResult', () => {
       this.state.socket.emit('masonGotResult')
     })
     
+    EE.on('doppelgangerStart', () => {
+      if (this.state.player.role === 'doppelganger') {
+        this.setState({hintBarContent: '请化身幽灵选择一个玩家查看身份'})
+        EE.delayEmitter('doppelgangerChoosePlayer', 1000)
+      }
+    })
+    EE.on('doppelgangerChoosePlayer', () => {
+      this.setState({hintBarDisplay: false})
+    })
+    EE.on('doppelgangerChangeRoleResult', (res) => {
+      this.setState({hintBarContent: `化身幽灵选择的身份是${res.role}`})
+      this.setState({hintBarDisplay: true})
+      if (['villager', 'tanner', 'hunter', 'wereWolf', 'mason'].includes(res.role)) {
+        EE.delayEmitter('doppelgangerNoFutherMove', 1000)
+      } else if (res.role === 'seer') {
+        
+      }
+    })
     EE.on('doppelgangerChosedPlayer', (res) => {
       this.state.socket.emit('doppelgangerChosedPlayer', res)
     })
