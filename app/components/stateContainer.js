@@ -182,7 +182,7 @@ class StateContainer extends React.Component {
             EE.emit('robberChoosePlayer')
             this.setState({
               hintBarDisplay: false,
-              hintBarBtnDisplay: false
+              hintBarBtnDisplay: false,
               hintBtnFunc1: () => {}
             })
           },
