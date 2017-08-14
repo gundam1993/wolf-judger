@@ -6,8 +6,6 @@ import SocketEventListener from './lib/SocketEventListener'
 import React from 'react';
 import ReactDOM from 'react-dom'
 import StateContainer from './components/stateContainer'
-import Join from './components/join'
-import GameBoard from './components/gameBoard'
 import ControlBar from './components/controlBar'
 import HintBar from './components/hintBar'
 import CountDown from './components/CountDown'
@@ -19,21 +17,7 @@ class App extends React.Component {
     this.state = {}
   }
   componentWillMount () {
-    EE.on('newJoin', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
-    EE.on('leaveRoom', () => {
-      this.state.socket.emit('leave')
-      this.setState({roomInfo: {}})
-      this.setState({stage: 'join'})
-    })
-    EE.on('playerLeave', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
-    EE.on('ready', (res) => {
-      this.state.socket.emit('ready')
-      this.setState({stage: 'ready'})
-    })
+    
     EE.on('gameStart', (res) => {
       let id = this.state.socket.id
       this.setState({roomInfo: res.roomInfo})

@@ -67,13 +67,11 @@ class GameBoard extends React.Component {
 
 GameBoard.propTypes = {
   roomInfo: React.PropTypes.object,
-  socket: React.PropTypes.object,
   player: React.PropTypes.object,
 }
 
 GameBoard.defaultProps = {
   roomInfo: {},
-  socket: {},
   player: {},
 }
 

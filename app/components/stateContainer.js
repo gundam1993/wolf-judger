@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 
 import Join from './join'
+import GameBoard from './gameBoard'
 
 class StateContainer extends React.Component {
   constructor (props) {
@@ -31,11 +32,27 @@ class StateContainer extends React.Component {
       this.setState({stage: 'prepare'})
       this.setState({join: {display: false}})
     })
+    EE.on('newJoin', (res) => {
+      this.setState({roomInfo: res.roomInfo})
+    })
+    EE.on('leaveRoom', () => {
+      this.state.socket.emit('leave')
+      this.setState({roomInfo: {}})
+      this.setState({stage: 'join'})
+    })
+    EE.on('playerLeave', (res) => {
+      this.setState({roomInfo: res.roomInfo})
+    })
+    EE.on('ready', (res) => {
+      this.state.socket.emit('ready')
+      this.setState({stage: 'ready'})
+    })
   }
   render() {
     return (
       <div>
-        <Join display={this.state.join.display} socket={this.socket} />
+        <Join display={this.state.join.display} />
+        <GameBoard roomInfo={this.state.roomInfo} player={this.state.player} />
       </div>
     )
   }
