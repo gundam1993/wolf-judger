@@ -1,7 +1,4 @@
 var controllerStyle = require('./controller.css')
-var io = require('socket.io-client') 
-import EE from './lib/eventEmitter'
-import SocketEventListener from './lib/SocketEventListener'
 
 import React from 'react';
 import ReactDOM from 'react-dom'

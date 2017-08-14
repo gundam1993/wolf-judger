@@ -22,8 +22,8 @@ var rooms = {
     roles: {
       wereWolf: 2,
       villager: 2,
-      // troubleMaker: 1,
-      doppelganger: 1,
+      troubleMaker: 1,
+      // doppelganger: 1,
       // minion: 3,
       // mason: 2
       robber: 1,
