@@ -9,6 +9,8 @@ import Join from './join'
 import GameBoard from './gameBoard'
 import ControlBar from './controlBar'
 import HintBar from './hintBar'
+import DropCardChoose from './DropCardChoose'
+
 
 class StateContainer extends React.Component {
   constructor (props) {
@@ -113,6 +115,7 @@ class StateContainer extends React.Component {
         <GameBoard roomInfo={this.state.roomInfo} player={this.state.player} />
         <ControlBar stage={this.state.stage} />
         <HintBar stage={this.state.stage} roomInfo={this.state.roomInfo} player={this.state.player} />
+        <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
       </div>
     )
   }
