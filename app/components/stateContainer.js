@@ -37,15 +37,22 @@ class StateContainer extends React.Component {
       this.state.socket.emit('join', res)
     })
     EE.on('joinSuccess', (res) => {
-      this.setState({roomInfo: res.roomInfo, joinDisplay: false, stage: 'prepare'})
+      this.setState({
+        roomInfo: res.roomInfo, 
+        joinDisplay: false, 
+        stage: 'prepare'
+      })
     })
     EE.on('newJoin', (res) => {
       this.setState({roomInfo: res.roomInfo})
     })
     EE.on('leaveRoom', () => {
       this.state.socket.emit('leave')
-      this.setState({roomInfo: {}})
-      this.setState({stage: 'join'})
+      this.setState({
+        roomInfo: {}, 
+        joinDisplay: true, 
+        stage: 'join'
+      })
     })
     EE.on('playerLeave', (res) => {
       this.setState({roomInfo: res.roomInfo})
@@ -56,10 +63,12 @@ class StateContainer extends React.Component {
     })
     EE.on('gameStart', (res) => {
       let id = this.state.socket.id
-      this.setState({roomInfo: res.roomInfo})
-      this.setState({player: res.roomInfo.players[id]})
-      this.setState({hintBarContent: '游戏开始'})
-      this.setState({hintBarDisplay: true})
+      this.setState({
+        roomInfo: res.roomInfo,
+        player: res.roomInfo.players[id],
+        hintBarContent: '游戏开始',
+        hintBarDisplay: true
+      })
       EE.delayEmitter('gameStartDisplayed', 1000)
     })
     EE.on('gameStartDisplayed', () => {
@@ -70,12 +79,14 @@ class StateContainer extends React.Component {
       this.setState({hintBarContent: `天黑请闭眼`})
       EE.delayEmitter('nextGamePhase', 1000)
     })
-    EE.on('nextGamePhase', (res) => {
+    EE.on('nextGamePhase', () => {
       this.state.socket.emit('nextGamePhase')
     })
     EE.on('newGamePhase', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-      this.setState({hintBarContent: `${res.phase}请睁眼`})
+      this.setState({
+        roomInfo: res.roomInfo,
+        hintBarContent: `${res.phase}请睁眼`
+      })
       EE.delayEmitter(`${res.phase}Start`, 1000)
     })
     EE.on('jumpPhase', (res) => {
@@ -115,32 +126,42 @@ class StateContainer extends React.Component {
 
     EE.on('seerStart', () => {
       if (this.state.player.role === 'seer') {
-        this.setState({hintBarContent: '请预言家选择要查看的对象'})
-        this.setState({hintBtnContent1: '查看一名玩家'})
-        this.setState({hintBtnContent2: '查看两张牌堆中的遗弃身份'})
-        this.setState({hintBtnFunc1: () => {
-          EE.emit('seerChoosePlayer')
-          this.setState({hintBarDisplay: false})
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc1: () => {}})
-        }})
-        this.setState({hintBtnFunc2: () => {
-          EE.emit('seerChooseDrop')
-          this.setState({hintBarDisplay: false})
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc2: () => {}})
-        }})
-        this.setState({hintBarBtnDisplay: true})
+        this.setState({
+          hintBarContent: '请预言家选择要查看的对象',
+          hintBtnContent1: '查看一名玩家',
+          hintBtnContent2: '查看两张牌堆中的遗弃身份',
+          hintBarBtnDisplay: true,
+          hintBtnFunc1: () => {
+            EE.emit('seerChoosePlayer')
+            this.setState({
+              hintBarDisplay: false,
+              hintBarBtnDisplay: false,
+              hintBtnFunc1: () => {},
+            })
+          },
+          hintBtnFunc2: () => {
+            EE.emit('seerChooseDrop')
+            this.setState({
+              hintBarDisplay: false,
+              hintBarBtnDisplay: false,
+              hintBtnFunc2: () => {},
+            })
+          }
+        })
       }
     })
     EE.on('SeerChoosePlayerResult', (res) => {
-      this.setState({hintBarContent: `你所选择的玩家是${res.role}`})
-      this.setState({hintBarDisplay: true})
+      this.setState({
+        hintBarContent: `你所选择的玩家是${res.role}`,
+        hintBarDisplay: true
+      })
       EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
     })
     EE.on('SeerChooseDropResult', (res) => {
-      this.setState({contehintBarContentnt: `你所选择的遗弃身份是${res.roles[0]}和${res.roles[1]}`})
-      this.setState({hintBarDisplay: true})
+      this.setState({
+        contehintBarContentnt: `你所选择的遗弃身份是${res.roles[0]}和${res.roles[1]}`,
+        hintBarDisplay: true
+      })
       EE.delayEmitter(`PhaseEnd`, 1000, '预言家')
     })
     EE.on('seerChosedPlayer', (res) => {
@@ -152,26 +173,34 @@ class StateContainer extends React.Component {
 
     EE.on('robberStart', () => {
       if (this.state.player.role === 'robber') {
-        this.setState({hintBarContent: '请强盗选择是否要交换身份'})
-        this.setState({hintBtnContent1: '是'})
-        this.setState({hintBtnContent2: '否'})
-        this.setState({hintBtnFunc1: () => {
-          EE.emit('robberChoosePlayer')
-          this.setState({hintBarDisplay: false})
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc1: () => {}})
-        }})
-        this.setState({hintBtnFunc2: () => {
-          this.state.socket.emit('robberNotChange')
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc2: () => {}})
-        }})
-        this.setState({hintBarBtnDisplay: true})
+        this.setState({
+          hintBarContent: '请强盗选择是否要交换身份',
+          hintBtnContent1: '是',
+          hintBtnContent2: '否',
+          hintBarBtnDisplay: true,
+          hintBtnFunc1: () => {
+            EE.emit('robberChoosePlayer')
+            this.setState({
+              hintBarDisplay: false,
+              hintBarBtnDisplay: false
+              hintBtnFunc1: () => {}
+            })
+          },
+          hintBtnFunc2: () => {
+            this.state.socket.emit('robberNotChange')
+            this.setState({
+              hintBarBtnDisplay: false,
+              hintBtnFunc2: () => {}
+            })
+          }
+        })
       }
     })
     EE.on('robberChangeRoleResult', (res) => {
-      this.setState({hintBarContent: `你现在的身份是${res.role}`})
-      this.setState({hintBarDisplay: true})
+      this.setState({
+        hintBarContent: `你现在的身份是${res.role}`,
+        hintBarDisplay: true
+      })
       EE.delayEmitter(`PhaseEnd`, 2000, '强盗')
     })
     EE.on('robberChosedPlayer', (res) => {
@@ -180,21 +209,27 @@ class StateContainer extends React.Component {
 
     EE.on('troubleMakerStart', () => {
       if (this.props.player.role === 'troubleMaker') {
-        this.setState({hintBarContent: '请捣蛋鬼选择是否要交换身份'})
-        this.setState({hintBtnContent1: '是'})
-        this.setState({hintBtnContent2: '否'})
-        this.setState({hintBtnFunc1: () => {
-          EE.emit('troubleMakerChoosePlayers')
-          this.setState({hintBarDisplay: false})
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc1: () => {}})
-        }})
-        this.setState({hintBtnFunc2: () => {
-          this.state.socket.emit('troubleMakerNotExchange')
-          this.setState({hintBarBtnDisplay: false})
-          this.setState({hintBtnFunc2: () => {}})
-        }})
-        this.setState({hintBarBtnDisplay: true})
+        this.setState({
+          hintBarContent: '请捣蛋鬼选择是否要交换身份',
+          hintBtnContent1: '是',
+          hintBtnContent2: '否',
+          hintBarBtnDisplay: true,
+          hintBtnFunc1: () => {
+            EE.emit('troubleMakerChoosePlayers')
+            this.setState({
+              hintBarDisplay: false,
+              hintBarBtnDisplay: false,
+              hintBtnFunc1: () => {},
+            })
+          },
+          hintBtnFunc2: () => {
+            this.state.socket.emit('troubleMakerNotExchange')
+            this.setState({
+              hintBarBtnDisplay: false,
+              hintBtnFunc2: () => {},
+            })
+          }
+        })
       }
     })
     EE.on('troubleMakerChosedPlayer', (res) => {
@@ -268,8 +303,10 @@ class StateContainer extends React.Component {
       this.setState({hintBarDisplay: false})
     })
     EE.on('doppelgangerChangeRoleResult', (res) => {
-      this.setState({hintBarContent: `化身幽灵选择的身份是${res.role}`})
-      this.setState({hintBarDisplay: true})
+      this.setState({
+        hintBarContent: `化身幽灵选择的身份是${res.role}`,
+        hintBarDisplay: true,
+      })
       if (['villager', 'tanner', 'hunter', 'wereWolf', 'mason'].includes(res.role)) {
         EE.delayEmitter('doppelgangerNoFutherMove', 1000)
       } else if (res.role === 'seer') {
@@ -288,7 +325,6 @@ class StateContainer extends React.Component {
         <ControlBar stage = {this.state.stage} />
         <HintBar content = {this.state.hintBarContent} 
                  display = {this.state.hintBarDisplay} 
-                 player = {this.state.player}
                  btnDisplay = {this.state.hintBarBtnDisplay}
                  btnContent1 = {this.state.hintBtnContent1}
                  btnContent2 = {this.state.hintBtnContent2}
