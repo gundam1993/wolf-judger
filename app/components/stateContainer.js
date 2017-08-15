@@ -99,7 +99,7 @@ class StateContainer extends React.Component {
     })
 
     EE.on('wereWolfStart', () => {
-      if (this.state.player.role === 'wereWolf') {
+      if (this.state.player.lastRole === 'wereWolf') {
         this.state.socket.emit('wereWolfGetOtherWereWolf')
       }
     })
@@ -277,7 +277,7 @@ class StateContainer extends React.Component {
 
 
     EE.on('masonStart', () => {
-      if (this.state.player.role === 'mason') {
+      if (this.state.player.lastRole === 'mason') {
         this.state.socket.emit('masonGetOtherMason')
       }
     })
