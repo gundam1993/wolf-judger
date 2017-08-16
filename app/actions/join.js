@@ -1,6 +1,3 @@
-/*
- * action 类型
- */
 export const SHOW_JOIN = 'SHOW_JOIN'
 export const HIDE_JOIN = 'HIDE_JOIN'
 export const JOIN_NEW_ROOM = 'JOIN_NEW_ROOM'
@@ -16,6 +13,6 @@ export function hideJoin() {
 }
 
 // 加入新房间
-export function joinNewRoom(info) {
-  return {type: JOIN_NEW_ROOM, info: info}
+export function joinNewRoom() {
+  return {type: JOIN_NEW_ROOM}
 }

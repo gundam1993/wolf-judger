@@ -1,25 +1,29 @@
 import { connect } from 'react-redux'
-import { showJoin, hideJoin, joinNewRoom } from '../actions'
+import actions from '../actions'
 import Join from '../components/join'
 
-
+console.log(actions)
 const mapStateToProps = (state) => {
   return {
-    display: state.join.display
+    display: state.join.display,
+    username: state.player.username,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onJoinClick: () => {
-      dispatch(joinNewRoom({room: 'default', username: '1'}))
+    onJoinInput: (e) => {
+      dispatch(actions.updateUsername(e.target.value))
+    },
+    onJoinClick: (e) => {
+      dispatch(actions.joinNewRoom())
     }
   }
 }
 
 const JoinPage = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Join)
 
 export default JoinPage

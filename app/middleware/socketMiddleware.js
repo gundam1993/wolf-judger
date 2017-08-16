@@ -1,4 +1,4 @@
-import { showJoin, hideJoin } from '../actions'
+import actions from '../actions'
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -11,12 +11,15 @@ function createSocketMiddleware(socket) {
       })
       socket.on('joinSuccess', (res) => {
         console.log(res)
-        next(hideJoin())
+        next(actions.hideJoin())
       })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :
-        socket.emit('join', action.info)
+        let username = store.getState().player.username
+        socket.emit('join', {room: 'default', username: username})
+      default:
+        return next(action)
     }
   }
 }

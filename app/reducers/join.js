@@ -1,7 +1,5 @@
 let init = {
   display: true,
-  username: '',
-  room: '',
 }
 
 const join = (state = init, action) => {
@@ -12,9 +10,6 @@ const join = (state = init, action) => {
       return newState
     case 'HIDE_JOIN' :
       newState = Object.assign({}, state, {display: false})
-      return newState
-    case 'JOIN_NEW_ROOM' :
-      newState = Object.assign({}, state, action.info)
       return newState
     default:
       return state 
