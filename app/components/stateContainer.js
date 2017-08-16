@@ -1,11 +1,10 @@
 var io = require('socket.io-client') 
 import EE from '../lib/eventEmitter'
 import SocketEventListener from '../lib/SocketEventListener'
-
 import React from 'react';
-import ReactDOM from 'react-dom'
 
 import Join from './join'
+import JoinPage from '../containers/join'
 import GameBoard from './gameBoard'
 import ControlBar from './controlBar'
 import HintBar from './hintBar'
@@ -320,7 +319,7 @@ class StateContainer extends React.Component {
   render() {
     return (
       <div>
-        <Join display = {this.state.joinDisplay} />
+        <JoinPage />
         <GameBoard roomInfo = {this.state.roomInfo} player = {this.state.player} />
         <ControlBar stage = {this.state.stage} />
         <HintBar content = {this.state.hintBarContent} 

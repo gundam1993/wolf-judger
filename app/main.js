@@ -1,21 +1,17 @@
 var controllerStyle = require('./controller.css')
 
 import React from 'react';
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider }from 'react-redux'
+import gameApp from './reducers'
 import StateContainer from './components/stateContainer'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-  render() {
-    return (
-      <div>
-        <StateContainer />
-      </div>
-    )
-  }
-}
+let store = createStore(gameApp)
 
-ReactDOM.render(<App />, document.getElementById('app'))
+render(
+  <Provider store={store}>
+    <StateContainer />
+  </Provider>, 
+  document.getElementById('app')
+)

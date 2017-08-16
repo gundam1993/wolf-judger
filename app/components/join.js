@@ -51,7 +51,8 @@ class Join extends React.Component {
 
 // PropTypes 验证，若传入的 props type 不是 object 将会显示错误
 Join.propTypes = {
-  display: React.PropTypes.boolean,
+  display: React.PropTypes.bool.isRequired,
+  onJoinClick: React.PropTypes.func.isRequired,
 }
 
 Join.defaultProps = {
