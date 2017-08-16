@@ -97,9 +97,14 @@ function handleNewPlayer(socket, rooms) {
       currentRoom.players[socket.id] = newJoiner
       currentRoom.playerNumber ++
       socket.broadcast.to(room).emit('newJoin', {
-        roomInfo: currentRoom
+        player: newJoiner
       })
-      socket.emit('joinSuccess', {player: newJoiner})
+      let roomInfo = {
+        name: currentRoom.name,
+        playerLimit: currentRoom.playerLimit,
+        players: currentRoom.players,
+      }
+      socket.emit('joinSuccess', {roomInfo: roomInfo, player: newJoiner})
     } else {
       socket.emit('joinFail', {res: '对不起，该房间已经满员了'})
     }

@@ -3,6 +3,7 @@ let init = {
   id: '',
   role: '',
   lastRole: '',
+  ready: false,
 }
 
 const player = (state = init, action) => {

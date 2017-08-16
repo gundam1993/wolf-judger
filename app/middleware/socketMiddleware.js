@@ -11,6 +11,8 @@ function createSocketMiddleware(socket) {
       })
       socket.on('joinSuccess', (res) => {
         console.log(res)
+        store.dispatch(actions.updateUserId(res.player.id))
+        store.dispatch(actions.updateRoom(res.roomInfo))
         next(actions.hideJoin())
       })
     }
