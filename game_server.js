@@ -99,7 +99,7 @@ function handleNewPlayer(socket, rooms) {
       socket.broadcast.to(room).emit('newJoin', {
         roomInfo: currentRoom
       })
-      socket.emit('joinSuccess', {roomInfo: currentRoom})
+      socket.emit('joinSuccess', {player: newJoiner})
     } else {
       socket.emit('joinFail', {res: '对不起，该房间已经满员了'})
     }
