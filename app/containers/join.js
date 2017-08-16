@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import actions from '../actions'
-import Join from '../components/join'
+import JoinPage from '../components/join'
 
 console.log(actions)
 const mapStateToProps = (state) => {
@@ -21,9 +21,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const JoinPage = connect(
+const Join = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Join)
+)(JoinPage)
 
-export default JoinPage
+export default Join

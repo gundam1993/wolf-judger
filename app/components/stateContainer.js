@@ -3,8 +3,7 @@ import EE from '../lib/eventEmitter'
 import SocketEventListener from '../lib/SocketEventListener'
 import React from 'react';
 
-import Join from './join'
-import JoinPage from '../containers/join'
+import Join from '../containers/join'
 import GameBoard from './gameBoard'
 import ControlBar from './controlBar'
 import HintBar from './hintBar'
@@ -15,11 +14,7 @@ class StateContainer extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      socket: io("http://localhost:3000"),
-      socketEventListener: {},
-      roomInfo: {},
       stage: 'join',
-      player: {},
       joinDisplay: true,
       hintBarContent: '',
       hintBarDisplay: false,
@@ -31,17 +26,7 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-    // this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
-    EE.on('userLogin', (res) => {
-      this.state.socket.emit('join', res)
-    })
-    EE.on('joinSuccess', (res) => {
-      this.setState({
-        roomInfo: res.roomInfo, 
-        joinDisplay: false, 
-        stage: 'prepare'
-      })
-    })
+
     EE.on('newJoin', (res) => {
       this.setState({roomInfo: res.roomInfo})
     })
@@ -319,7 +304,7 @@ class StateContainer extends React.Component {
   render() {
     return (
       <div>
-        <JoinPage />
+        <Join />
         <GameBoard roomInfo = {this.state.roomInfo} player = {this.state.player} />
         <ControlBar stage = {this.state.stage} />
         <HintBar content = {this.state.hintBarContent} 
