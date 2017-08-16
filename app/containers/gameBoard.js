@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import actions from '../actions'
-import JoinPage from '../components/join'
+import GameBoardPage from '../components/gameBoard'
 
 const mapStateToProps = (state) => {
   return {
-    display: state.join.display,
-    username: state.player.username,
+    playerLimit: state.room.playerLimit,
+    players: state.room.players,
   }
 }
 
@@ -20,9 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const Join = connect(
+const GameBoard = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(JoinPage)
+)(GameBoardPage)
 
-export default Join
+export default GameBoard

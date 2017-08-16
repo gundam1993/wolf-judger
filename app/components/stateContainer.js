@@ -4,7 +4,7 @@ import SocketEventListener from '../lib/SocketEventListener'
 import React from 'react';
 
 import Join from '../containers/join'
-import GameBoard from './gameBoard'
+import GameBoard from '../containers/gameBoard'
 import ControlBar from './controlBar'
 import HintBar from './hintBar'
 import DropCardChoose from './DropCardChoose'
@@ -305,7 +305,7 @@ class StateContainer extends React.Component {
     return (
       <div>
         <Join />
-        <GameBoard roomInfo = {this.state.roomInfo} player = {this.state.player} />
+        <GameBoard />
         <ControlBar stage = {this.state.stage} />
         <HintBar content = {this.state.hintBarContent} 
                  display = {this.state.hintBarDisplay} 
@@ -314,7 +314,7 @@ class StateContainer extends React.Component {
                  btnContent2 = {this.state.hintBtnContent2}
                  btnFunc1 =  {this.state.hintBtnFunc1}
                  btnFunc2 =  {this.state.hintBtnFunc2}/>
-        <DropCardChoose dropRole={this.state.roomInfo.dropRole}/>
+        <DropCardChoose/>
       </div>
     )
   }

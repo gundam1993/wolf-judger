@@ -1,5 +1,5 @@
 let init = {
-  players: [],
+  players: {},
   name: 'default',
   playerLimit: 0,
 }

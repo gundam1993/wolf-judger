@@ -49,8 +49,8 @@ class GameBoard extends React.Component {
   }
   render() {
     let playerBlocks = []
-    let num = this.props.roomInfo.playerLimit || 0
-    let playersInfo = this.props.roomInfo.players || []
+    let num = this.props.playerLimit || 0
+    let playersInfo = this.props.players || []
     let players = Object.values(playersInfo)
     for (let i = 0; i < num; i++) {
       playerBlocks.push(
@@ -66,13 +66,13 @@ class GameBoard extends React.Component {
 }
 
 GameBoard.propTypes = {
-  roomInfo: React.PropTypes.object,
-  player: React.PropTypes.object,
+  playerLimit: React.PropTypes.number.isRequired,
+  players: React.PropTypes.object.isRequired,
 }
 
 GameBoard.defaultProps = {
-  roomInfo: {},
-  player: {},
+  playerLimit: 0,
+  players: {},
 }
 
 export default GameBoard
