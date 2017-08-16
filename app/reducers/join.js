@@ -1,9 +1,21 @@
-const join = (state = {display: true}, action) => {
+let init = {
+  display: true,
+  username: '',
+  room: '',
+}
+
+const join = (state = init, action) => {
+  let newState
   switch (action.type) {
     case 'SHOW_JOIN' :
-      return {display: true}
+      newState = Object.assign({}, state, {display: true})
+      return newState
     case 'HIDE_JOIN' :
-      return {display: false}
+      newState = Object.assign({}, state, {display: false})
+      return newState
+    case 'JOIN_NEW_ROOM' :
+      newState = Object.assign({}, state, action.info)
+      return newState
     default:
       return state 
   }

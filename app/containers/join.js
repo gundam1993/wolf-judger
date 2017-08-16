@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { showJoin, hideJoin } from '../actions'
+import { showJoin, hideJoin, joinNewRoom } from '../actions'
 import Join from '../components/join'
 
 
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onJoinClick: () => {
-      dispatch(hideJoin())
+      dispatch(joinNewRoom({room: 'default', username: '1'}))
     }
   }
 }

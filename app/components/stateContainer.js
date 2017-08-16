@@ -31,7 +31,7 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-    this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
+    // this.setState({socketEventListener: new SocketEventListener(this.state.socket)})
     EE.on('userLogin', (res) => {
       this.state.socket.emit('join', res)
     })

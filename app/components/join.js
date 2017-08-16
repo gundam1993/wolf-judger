@@ -40,7 +40,7 @@ class Join extends React.Component {
                  defaultValue={this.state.username} 
                  onChange={this.usernameChange}/>
           <button id="submit-username"
-                  onClick={this.connect}>开始游戏</button>
+                  onClick={this.props.onJoinClick}>开始游戏</button>
         </div>
       )
     } else {
