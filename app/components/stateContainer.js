@@ -5,7 +5,7 @@ import React from 'react';
 
 import Join from '../containers/join'
 import GameBoard from '../containers/gameBoard'
-import ControlBar from './controlBar'
+import ControlBar from '../containers/controlBar'
 import HintBar from './hintBar'
 import DropCardChoose from './DropCardChoose'
 
@@ -306,7 +306,7 @@ class StateContainer extends React.Component {
       <div>
         <Join />
         <GameBoard />
-        <ControlBar stage = {this.state.stage} />
+        <ControlBar />
         <HintBar content = {this.state.hintBarContent} 
                  display = {this.state.hintBarDisplay} 
                  btnDisplay = {this.state.hintBarBtnDisplay}
