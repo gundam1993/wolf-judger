@@ -13,8 +13,8 @@ const mapDispatchToProps = (dispatch) => {
     onReadyClick: (e) => {
       dispatch(actions.playerReady())
     },
-    onJoinClick: (e) => {
-      dispatch(actions.joinNewRoom())
+    onLeaveClick: (e) => {
+      dispatch(actions.leaveRoom())
     }
   }
 }

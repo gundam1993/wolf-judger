@@ -15,6 +15,8 @@ const player = (state = init, action) => {
     case 'PLAYER_READY' :
       newState = Object.assign({}, state, {ready: true})
       return newState
+    case 'LEAVE_ROOM' :
+      return init
     default:
       return state 
   }

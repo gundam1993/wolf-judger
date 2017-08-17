@@ -27,6 +27,10 @@ function createSocketMiddleware(socket) {
       case 'PLAYER_READY' :
         socket.emit('ready')
         break
+      case 'LEAVE_ROOM' :
+        socket.emit('leave')
+        return next(actions.showJoin())
+        
     }
     return next(action)
   }

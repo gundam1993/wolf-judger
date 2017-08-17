@@ -14,5 +14,5 @@ export function updateUserId (id) {
 
 //用户准备
 export function playerReady() {
-  return {type: PLAYER_READY}
+  return {type: PLAYER_READY }
 }
