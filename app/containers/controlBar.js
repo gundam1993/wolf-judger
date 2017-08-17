@@ -4,15 +4,14 @@ import controlBarComponent from '../components/controlBar'
 
 const mapStateToProps = (state) => {
   return {
-    playerLimit: state.room.playerLimit,
-    players: state.room.players,
+    ready: state.player.ready,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onJoinInput: (e) => {
-      dispatch(actions.updateUsername(e.target.value))
+    onReadyClick: (e) => {
+      dispatch(actions.playerReady())
     },
     onJoinClick: (e) => {
       dispatch(actions.joinNewRoom())

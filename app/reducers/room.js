@@ -2,7 +2,6 @@ let init = {
   players: {},
   name: 'default',
   playerLimit: 0,
-  ready: false,
 }
 
 const room = (state = init, action) => {

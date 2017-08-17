@@ -27,9 +27,6 @@ class StateContainer extends React.Component {
   }
   componentWillMount () {
 
-    EE.on('newJoin', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
     EE.on('leaveRoom', () => {
       this.state.socket.emit('leave')
       this.setState({

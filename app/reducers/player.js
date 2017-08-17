@@ -12,6 +12,9 @@ const player = (state = init, action) => {
     case 'UPDATE_USERNAME' :
       newState = Object.assign({}, state, {username: action.username})
       return newState
+    case 'PLAYER_READY' :
+      newState = Object.assign({}, state, {ready: true})
+      return newState
     default:
       return state 
   }

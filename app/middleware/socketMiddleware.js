@@ -23,9 +23,12 @@ function createSocketMiddleware(socket) {
       case 'JOIN_NEW_ROOM' :
         let username = store.getState().player.username
         socket.emit('join', {room: 'default', username: username})
-      default:
-        return next(action)
+        break
+      case 'PLAYER_READY' :
+        socket.emit('ready')
+        break
     }
+    return next(action)
   }
 }
 

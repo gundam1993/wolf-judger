@@ -142,7 +142,7 @@ function handleClientleaveRoom(socket) {
       player = room.players[socket.id]
       let nameIndex = room.namesUsed.indexOf(player.username)
       room.namesUsed.splice(nameIndex, 1)
-      if (room.players[socket.id].ready) {
+      if (player.ready) {
         room.ready --
       }
       delete room.players[socket.id]
@@ -163,8 +163,12 @@ function handleClientReady(socket) {
   socket.on('ready', function (room) {
     let roomName = room.name
     let player = room.players[socket.id]
+    if (player.ready) {
+      return
+    }
     room.ready ++
-    room.players[socket.id].ready = true
+    player.ready = true
+    console.log(room.ready)
     if (room.ready < room.playerLimit) {
       socket.broadcast.to(roomName).emit('playerReady', {
         roomInfo: room
