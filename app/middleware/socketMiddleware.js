@@ -15,6 +15,9 @@ function createSocketMiddleware(socket) {
         store.dispatch(actions.updateRoom(res.roomInfo))
         next(actions.hideJoin())
       })
+      socket.on('newJoin', (res) => {
+        next(actions.addNewPlayer(res.player))
+      })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :

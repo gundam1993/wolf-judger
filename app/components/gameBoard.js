@@ -49,8 +49,8 @@ class GameBoard extends React.Component {
   }
   render() {
     let playerBlocks = []
-    let num = this.props.playerLimit || 0
-    let playersInfo = this.props.players || []
+    let num = this.props.playerLimit
+    let playersInfo = this.props.players
     let players = Object.values(playersInfo)
     for (let i = 0; i < num; i++) {
       playerBlocks.push(
