@@ -18,6 +18,10 @@ function createSocketMiddleware(socket) {
       socket.on('newJoin', (res) => {
         next(actions.addNewPlayer(res.player))
       })
+      socket.on('playerLeave', (res) => {
+        console.log(res)
+        next(actions.playerLeave(res))
+      })
       socket.on('gameStart', (res) => {
         console.log(res)
         store.dispatch(actions.updateRole(res.role))

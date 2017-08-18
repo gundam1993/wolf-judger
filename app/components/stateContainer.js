@@ -26,22 +26,6 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-
-    EE.on('leaveRoom', () => {
-      this.state.socket.emit('leave')
-      this.setState({
-        roomInfo: {}, 
-        joinDisplay: true, 
-        stage: 'join'
-      })
-    })
-    EE.on('playerLeave', (res) => {
-      this.setState({roomInfo: res.roomInfo})
-    })
-    EE.on('ready', (res) => {
-      this.state.socket.emit('ready')
-      this.setState({stage: 'ready'})
-    })
     EE.on('gameStart', (res) => {
       let id = this.state.socket.id
       this.setState({
