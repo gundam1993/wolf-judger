@@ -15,6 +15,10 @@ const room = (state = init, action) => {
       players[action.player.id] = action.player
       newState = Object.assign({}, state, {players: players})
       return newState
+    case 'PLAYER_LEAVE' :
+      newState = Object.assign({}, state)
+      newState.players = action.players
+      return newState
     case 'LEAVE_ROOM' :
       return init
     default:
