@@ -127,9 +127,7 @@ function handleClientDisconnection(socket) {
       }
       delete room.players[socket.id]
       room.playerNumber --
-      socket.broadcast.to(roomName).emit('leave', {
-        roomInfo: room
-      })
+      socket.broadcast.to(roomName).emit('playerLeave', room.players)
     }
   })
 }
@@ -151,9 +149,7 @@ function handleClientleaveRoom(socket) {
         let rooms = Object.keys(socket.rooms)
         console.log(rooms)
       })
-      socket.broadcast.to(room.name).emit('leave', {
-        roomInfo: room
-      })
+      socket.broadcast.to(room.name).emit('playerLeave', room.players)
     }
   })
 }
