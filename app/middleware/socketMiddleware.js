@@ -20,6 +20,9 @@ function createSocketMiddleware(socket) {
       })
       socket.on('gameStart', (res) => {
         console.log(res)
+        store.dispatch(actions.updateRole(res.role))
+        store.dispatch(actions.updateLastRole(res.lastRole))
+        next(action)
       })
     }
     switch (action.type) {
