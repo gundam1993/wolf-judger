@@ -15,6 +15,12 @@ const player = (state = init, action) => {
     case 'PLAYER_READY' :
       newState = Object.assign({}, state, {ready: true})
       return newState
+    case 'UPDATE_ROLE' :
+      newState = Object.assign({}, state, {role: action.role})
+      return newState
+    case 'UPDATE_LAST_ROLE' :
+      newState = Object.assign({}, state, {lastRole: action.lastRole})
+      return newState
     case 'LEAVE_ROOM' :
       return init
     default:
