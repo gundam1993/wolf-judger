@@ -18,6 +18,9 @@ function createSocketMiddleware(socket) {
       socket.on('newJoin', (res) => {
         next(actions.addNewPlayer(res.player))
       })
+      socket.on('gameStart', (res) => {
+        console.log(res)
+      })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :

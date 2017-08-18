@@ -176,12 +176,11 @@ function handleClientReady(socket) {
     } else {
       room.ready = 0
       playerRoleAssign(room)
-      socket.broadcast.in(roomName).emit('gameStart', {
-        roomInfo: room
+      players = room.players
+      Object.keys(players).forEach((id) => {
+        socket.broadcast.in(id).emit('gameStart', players[id])
       })
-      socket.emit('gameStart', {
-        roomInfo: room
-      })
+      socket.emit('gameStart', player)
     }
   })
 }
