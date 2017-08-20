@@ -1,8 +1,6 @@
 let style = require('../hint.css')
 
 import React from 'react';
-import ReactDOM from 'react-dom'
-import EE from '../lib/eventEmitter'
 
 class HintBar extends React.Component {
   constructor(props) {
@@ -35,8 +33,8 @@ class HintBar extends React.Component {
 }
 
 HintBar.propTypes = {
-  content: React.PropTypes.string,
-  display: React.PropTypes.boolean,
+  content: React.PropTypes.string.isRequired,
+  display: React.PropTypes.bool.isRequired,
   btnDisplay: React.PropTypes.boolean,
   btnContent1: React.PropTypes.string,
   btnContent2: React.PropTypes.string,

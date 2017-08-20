@@ -4,7 +4,8 @@ import hintBarComponent from '../components/hintBar'
 
 const mapStateToProps = (state) => {
   return {
-    context: state.hint.context,
+    content: state.hint.content,
+    display: state.hint.display,
   }
 }
 
