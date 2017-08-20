@@ -9,7 +9,7 @@ const hint = (state = init, action) => {
       newState = Object.assign({}, state, {context: action.context})
       return newState
     default :
-      return newState
+      return state
   }
 }
 
