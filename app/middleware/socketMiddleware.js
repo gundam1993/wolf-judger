@@ -27,6 +27,7 @@ function createSocketMiddleware(socket) {
         store.dispatch(actions.updateRole(res.role))
         store.dispatch(actions.updateLastRole(res.lastRole))
         store.dispatch(actions.updateHintContent('游戏开始'))
+        store.dispatch(actions.updateSubContent(`您的身份是${res.role}`))
         store.dispatch(actions.displayHint())
         next(action)
       })

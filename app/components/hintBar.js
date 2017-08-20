@@ -3,12 +3,6 @@ let style = require('../hint.css')
 import React from 'react';
 
 class HintBar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      subContent: '',
-    }
-  }
   render() {
     if (!this.props.display) {
       return (<div></div>)
@@ -24,7 +18,7 @@ class HintBar extends React.Component {
       <div>
         <div id="hint">
           <p>{this.props.content}</p>
-          <p>{this.state.subContent}</p>
+          <p>{this.props.subContent}</p>
         </div>
         {buttons}
       </div>
@@ -35,6 +29,7 @@ class HintBar extends React.Component {
 HintBar.propTypes = {
   content: React.PropTypes.string.isRequired,
   display: React.PropTypes.bool.isRequired,
+  subContent: React.PropTypes.string.isRequired,
   btnDisplay: React.PropTypes.boolean,
   btnContent1: React.PropTypes.string,
   btnContent2: React.PropTypes.string,

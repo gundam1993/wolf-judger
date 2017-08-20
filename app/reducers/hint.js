@@ -11,7 +11,7 @@ const hint = (state = init, action) => {
       newState = Object.assign({}, state, {content: action.content})
       return newState
     case 'UPDATE_SUB_CONTENT' :
-      newState = Object.assign({}, state, {content: action.content})
+      newState = Object.assign({}, state, {subContent: action.content})
       return newState
     case 'DISPLAY_HINT' :
       newState = Object.assign({}, state, {display: true})
