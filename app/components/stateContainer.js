@@ -7,7 +7,7 @@ import Join from '../containers/join'
 import GameBoard from '../containers/gameBoard'
 import ControlBar from '../containers/controlBar'
 import HintBar from '../containers/hintBar'
-import DropCardChoose from './DropCardChoose'
+import DropCardChoose from '../containers/DropCardChoose'
 
 
 class StateContainer extends React.Component {
@@ -268,7 +268,7 @@ class StateContainer extends React.Component {
         <GameBoard />
         <ControlBar />
         <HintBar />
-        <DropCardChoose/>
+        <DropCardChoose />
       </div>
     )
   }
