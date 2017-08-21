@@ -1,5 +1,6 @@
 import actions from '../actions'
-import * as publicFlow from '../gameFlow/public' 
+import * as publicFlow from '../gameFlow/public'
+import * as wereWolfFlow from '../gameFlow/werewolf'  
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -35,6 +36,10 @@ function createSocketMiddleware(socket) {
         publicFlow.jumpPhase(store, actions, res)
         next(action)
       })
+      socket.on('wereWolfGotPartner', (res) => {
+        wereWolfFlow.wereWolfGotPartner(store, actions, res)
+        next(action)
+      })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :
@@ -49,6 +54,9 @@ function createSocketMiddleware(socket) {
         return next(actions.showJoin())
       case 'NEXT_GAME_PHASE' :
         socket.emit('nextGamePhase')
+        break
+      case 'WEREWOLF_GET_PARTNER' :
+        socket.emit('wereWolfGetPartner')
         break
     }
     return next(action)

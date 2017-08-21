@@ -1,4 +1,4 @@
-import * as WolfwerePhase from './wolfwere'
+import * as WolfwerePhase from './werewolf'
 
 // 游戏开始，显示身份信息
 export const gameStart = (store, actions, res) => {
@@ -23,15 +23,25 @@ const nextGamePhase = (store, actions) => {
   store.dispatch({type: 'NEXT_GAME_PHASE'})
 }
 
-//新游戏阶段开始，显示睁眼信息
+// 新游戏阶段开始，显示睁眼信息
 export const newGamePhaseStart = (store, actions, res) => {
   store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
-  delayEmitter(nextGamePhase, [store, actions], 1000)
+  switch (res.phase) {
+    case 'wereWolf' :
+      delayEmitter(WolfwerePhase.wereWolfStart, [store, actions], 1000)
+      break
+  }
 }
 
-//新游戏阶段开始，但是无人需要睁眼，显示睁眼信息，等待后跳过
+// 新游戏阶段开始，但是无人需要睁眼，显示睁眼信息，等待后显示闭眼信息
 export const jumpPhase = (store, actions, res) => {
   store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
+  delayEmitter(PhaseEnd, [store, actions, res], 1000)
+}
+
+// 阶段结束，显示闭眼信息，通知服务器开始新阶段
+export const PhaseEnd = (store, actions, res) => {
+  store.dispatch(actions.updateHintContent(`${res.phase}请闭眼`))
   delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 

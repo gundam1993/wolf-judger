@@ -20,9 +20,9 @@ var rooms = {
     masonEnd: false,
     wereWolfEnd: false,
     roles: {
-      wereWolf: 2,
+      wereWolf: 3,
       villager: 2,
-      troubleMaker: 1,
+      // troubleMaker: 1,
       // doppelganger: 1,
       // minion: 3,
       // mason: 2
@@ -50,7 +50,7 @@ exports.listen = function (server) {
     handleClientleaveRoom(socket, rooms)
     handleClientReady(socket, rooms)
     handleNextGamePhase(socket, rooms)
-    socket.on('wereWolfGetOtherWereWolf', WereWolf.getTeammate)
+    socket.on('wereWolfGetPartner', WereWolf.getTeammate)
     socket.on('wereWolfChosedDrop', WereWolf.ChosedDrop)
     socket.on('wereWolfGotResult', WereWolf.gotResult)
     socket.on('masonGetOtherMason', Mason.getOtherMason)

@@ -4,15 +4,15 @@
 
 //狼人获取同伴名字
 exports.getTeammate = function (room, socket) {
-  let wereWolf = {}
+  let wereWolf = []
   for (let key in room.players) {
     let player = room.players[key]
     if (player.role === 'wereWolf' && player.id !== socket.id) {
-      wereWolf = player
-      break
+      wereWolf.push(player.username)
     }
   }
-  socket.emit('wereWolfGetOtherWereWolfResult', {wereWolf: wereWolf})
+  console.log(wereWolf)
+  socket.emit('wereWolfGotPartner', {wereWolf: wereWolf})
 }
 
 //狼人无同伴，查看一张弃置的身份牌

@@ -26,13 +26,6 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-    EE.on('closeEye', () => {
-      this.setState({hintBarContent: `天黑请闭眼`})
-      EE.delayEmitter('nextGamePhase', 1000)
-    })
-    EE.on('nextGamePhase', () => {
-      this.state.socket.emit('nextGamePhase')
-    })
     EE.on('newGamePhase', (res) => {
       this.setState({
         roomInfo: res.roomInfo,
