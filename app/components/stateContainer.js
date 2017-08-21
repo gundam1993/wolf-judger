@@ -26,20 +26,6 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-    EE.on('gameStart', (res) => {
-      let id = this.state.socket.id
-      this.setState({
-        roomInfo: res.roomInfo,
-        player: res.roomInfo.players[id],
-        hintBarContent: '游戏开始',
-        hintBarDisplay: true
-      })
-      EE.delayEmitter('gameStartDisplayed', 1000)
-    })
-    EE.on('gameStartDisplayed', () => {
-      this.setState({hintBarContent: `你的角色是${this.state.player.role}`})
-      EE.delayEmitter('closeEye', 1000)
-    })
     EE.on('closeEye', () => {
       this.setState({hintBarContent: `天黑请闭眼`})
       EE.delayEmitter('nextGamePhase', 1000)

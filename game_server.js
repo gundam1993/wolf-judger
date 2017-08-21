@@ -223,22 +223,18 @@ function handleNextGamePhase(socket) {
         for (let key in room.players) {
           if (room.players[key].role === nowMoveRole) {
             socket.broadcast.in(roomName).emit('newGamePhase', {
-              roomInfo: room,
               phase: nowMoveRole
             })
             socket.emit('newGamePhase', {
-              roomInfo: room,
               phase: nowMoveRole
             })
             return
           }
         }
         socket.broadcast.in(roomName).emit('jumpPhase', {
-          roomInfo: room,
           phase: nowMoveRole
         })
         socket.emit('jumpPhase', {
-          roomInfo: room,
           phase: nowMoveRole
         })
       } else {

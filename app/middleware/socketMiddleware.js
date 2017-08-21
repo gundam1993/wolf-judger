@@ -1,4 +1,5 @@
 import actions from '../actions'
+import * as publicFlow from '../gameFlow/public' 
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -23,12 +24,15 @@ function createSocketMiddleware(socket) {
         next(actions.playerLeave(res))
       })
       socket.on('gameStart', (res) => {
-        console.log(res)
-        store.dispatch(actions.updateRole(res.role))
-        store.dispatch(actions.updateLastRole(res.lastRole))
-        store.dispatch(actions.updateHintContent('游戏开始'))
-        store.dispatch(actions.updateSubContent(`您的身份是${res.role}`))
-        store.dispatch(actions.displayHint())
+        publicFlow.gameStart(store, actions, res)
+        next(action)
+      })
+      socket.on('newGamePhase', (res) => {
+        publicFlow.newGamePhase(store, actions, res)
+        next(action)
+      })
+      socket.on('jumpPhase', (res) => {
+        publicFlow.jumpPhase(store, actions, res)
         next(action)
       })
     }
@@ -43,7 +47,9 @@ function createSocketMiddleware(socket) {
       case 'LEAVE_ROOM' :
         socket.emit('leave')
         return next(actions.showJoin())
-        
+      case 'NEXT_GAME_PHASE' :
+        socket.emit('nextGamePhase')
+        break
     }
     return next(action)
   }
