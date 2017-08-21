@@ -1,3 +1,5 @@
+import * as WolfwerePhase from './wolfwere'
+
 // 游戏开始，显示身份信息
 export const gameStart = (store, actions, res) => {
   console.log(res)
@@ -22,8 +24,9 @@ const nextGamePhase = (store, actions) => {
 }
 
 //新游戏阶段开始，显示睁眼信息
-export const newGamePhase = (store, actions, res) => {
+export const newGamePhaseStart = (store, actions, res) => {
   store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
+  delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 
 //新游戏阶段开始，但是无人需要睁眼，显示睁眼信息，等待后跳过
@@ -32,8 +35,9 @@ export const jumpPhase = (store, actions, res) => {
   delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 
+// 延迟调用函数
 const delayEmitter =  (func, args, time) => {
   setTimeout(() => {
       func(...args)
     }, time)
-}
+  }

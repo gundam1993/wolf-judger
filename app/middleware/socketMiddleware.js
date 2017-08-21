@@ -28,7 +28,7 @@ function createSocketMiddleware(socket) {
         next(action)
       })
       socket.on('newGamePhase', (res) => {
-        publicFlow.newGamePhase(store, actions, res)
+        publicFlow.newGamePhaseStart(store, actions, res)
         next(action)
       })
       socket.on('jumpPhase', (res) => {
