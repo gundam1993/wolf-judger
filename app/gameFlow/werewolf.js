@@ -15,7 +15,12 @@ export const wereWolfGotPartner = (store, actions, res) => {
   } else {
     store.dispatch(actions.updateHintContent('除您以外目前场上没有狼人'))
     store.dispatch(actions.updateSubContent('您可以查看一张遗弃身份'))
+    delayEmitter(wereWolfChooseDrop, [store, actions], 1000)
   }
+}
+
+const wereWolfChooseDrop = (store, actions) => {
+  store.dispatch(actions.displayDrop())
 }
 
 // 狼人获得同伴信息后，阶段结束

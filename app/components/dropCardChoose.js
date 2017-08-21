@@ -64,23 +64,24 @@ class DropCardChoose extends React.Component {
   //   })
   // }
   render() {
-    let container = ''
     if (this.props.display) {
-      let cards = []
-      for (let i = 0; i < this.props.dropRole.length; i++) {
-        cards.push(<DropCardBlock index={i} />)
-      }
-      container = <div id="DropCardContainer">
-                    <div id="DropCardChoose">{cards}</div>
-                    <div id='DropCardChooseButtonContainer'>
-                      <button id='DropCardChooseButton' onClick={this.state.DropCardChooseButtonHandlr}>确定</button>
-                    </div>
-                  </div>
+      return (
+        <div>
+          <div id="DropCardContainer">
+            <div id="DropCardChoose">
+            <DropCardBlock index= "0" />
+            <DropCardBlock index= "1" />
+            <DropCardBlock index= "2" />
+            </div>
+            <div id='DropCardChooseButtonContainer'>
+              <button id='DropCardChooseButton' onClick={this.state.DropCardChooseButtonHandlr}>确定</button>
+            </div>
+          </div>
+        </div>
+      )
     }
     return (
-      <div>
-        {container}
-      </div>
+      <div></div>
     )
   }
 }
