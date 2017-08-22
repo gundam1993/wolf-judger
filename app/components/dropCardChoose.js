@@ -5,13 +5,8 @@ import React from 'react';
 import DropCardBlock from './dropCardBlock'
 
 class DropCardChoose extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      display: false,
-      chosedDrop: [],
-      DropCardChooseButtonHandlr: () => {}
-    }
+  DropCardChooseButtonHandler = () => {
+    this.props.onDropCardConfirm(this.props.chosenDrop, this.props.chosenLimit, this.props.socketEvent)
   }
   // componentWillMount() {
   //   EE.on('removeDropCard', (res) => {
@@ -69,12 +64,12 @@ class DropCardChoose extends React.Component {
         <div>
           <div id="DropCardContainer">
             <div id="DropCardChoose">
-            <DropCardBlock index= "0" />
-            <DropCardBlock index= "1" />
-            <DropCardBlock index= "2" />
+            <DropCardBlock index= {0} chosen={this.props.chosenDrop} click={this.props.onDropCardClick} />
+            <DropCardBlock index= {1} chosen={this.props.chosenDrop} click={this.props.onDropCardClick} />
+            <DropCardBlock index= {2} chosen={this.props.chosenDrop} click={this.props.onDropCardClick} />
             </div>
             <div id='DropCardChooseButtonContainer'>
-              <button id='DropCardChooseButton' onClick={this.state.DropCardChooseButtonHandlr}>确定</button>
+              <button id='DropCardChooseButton' onClick={this.DropCardChooseButtonHandler}>确定</button>
             </div>
           </div>
         </div>
@@ -87,11 +82,21 @@ class DropCardChoose extends React.Component {
 }
 
 DropCardChoose.propTypes = {
-  display: React.PropTypes.bool.isRequired
+  display: React.PropTypes.bool.isRequired,
+  chosenDrop: React.PropTypes.array.isRequired,
+  onDropCardClick: React.PropTypes.func.isRequired,
+  chosenLimit: React.PropTypes.number.isRequired,
+  socketEvent: React.PropTypes.string.isRequired,
+  onDropCardConfirm: React.PropTypes.func.isRequired,
 }
 
 DropCardChoose.defaultProps = {
-  display: false
+  display: false,
+  chosenDrop: [],
+  onDropCardClick: () => {},
+  chosenLimit: 0,
+  socketEvent: '',
+  onDropCardConfirm: () => {},
 }
 
 export default DropCardChoose

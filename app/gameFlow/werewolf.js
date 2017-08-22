@@ -1,6 +1,6 @@
 // 狼人发送消息确认行动开始
 export const wereWolfStart = (store, actions) => {
-  if (store.getState().player.role === 'wereWolf') {
+  if (store.getState().player.lastRole === 'wereWolf') {
     store.dispatch({type: 'WEREWOLF_GET_PARTNER'})
   }
 }
@@ -20,6 +20,8 @@ export const wereWolfGotPartner = (store, actions, res) => {
 }
 
 const wereWolfChooseDrop = (store, actions) => {
+  store.dispatch(actions.updateDropLimit(1))
+  store.dispatch(actions.updateSocketEvent('wereWolfChosedDrop'))
   store.dispatch(actions.displayDrop())
 }
 

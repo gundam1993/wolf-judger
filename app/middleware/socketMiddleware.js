@@ -40,6 +40,9 @@ function createSocketMiddleware(socket) {
         wereWolfFlow.wereWolfGotPartner(store, actions, res)
         next(action)
       })
+      socket.on('wereWolfChosedDropResult', (res) => {
+        console.log(res)
+      })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :
@@ -57,6 +60,9 @@ function createSocketMiddleware(socket) {
         break
       case 'WEREWOLF_GET_PARTNER' :
         socket.emit('wereWolfGetPartner')
+        break
+      case 'SUBMIT_SOCKET_EVENT' :
+        socket.emit(action.event, action.payload)
         break
     }
     return next(action)

@@ -17,7 +17,7 @@ exports.getTeammate = function (room, socket) {
 
 //狼人无同伴，查看一张弃置的身份牌
 exports.ChosedDrop = function (res, room, socket) {
-  let index = res.dropRole[0]
+  let index = res[0]
   if (index) {
     let result = room.dropRole[index]
     socket.emit('wereWolfChosedDropResult', {role: result})
