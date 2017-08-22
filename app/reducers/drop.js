@@ -1,5 +1,6 @@
 let init = {
     display: false,
+    chosenDrop: [],
   }
   
   const drop = (state = init, action) => {
