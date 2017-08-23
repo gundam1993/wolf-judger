@@ -7,3 +7,5 @@ npm-debug.log
 
 static/.DS_Store
 .DS_Store
+
+/dist
