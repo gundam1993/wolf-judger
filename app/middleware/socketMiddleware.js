@@ -41,7 +41,7 @@ function createSocketMiddleware(socket) {
         next(action)
       })
       socket.on('wereWolfChosedDropResult', (res) => {
-        console.log(res)
+        wereWolfFlow.wereWolfChosedDropResult(store, actions, res)
       })
     }
     switch (action.type) {

@@ -1,3 +1,5 @@
+import { phaseEnd } from './public'
+
 // 狼人发送消息确认行动开始
 export const wereWolfStart = (store, actions) => {
   if (store.getState().player.lastRole === 'wereWolf') {
@@ -19,10 +21,21 @@ export const wereWolfGotPartner = (store, actions, res) => {
   }
 }
 
+// 狼人选择遗弃身份
 const wereWolfChooseDrop = (store, actions) => {
   store.dispatch(actions.updateDropLimit(1))
   store.dispatch(actions.updateSocketEvent('wereWolfChosedDrop'))
   store.dispatch(actions.displayDrop())
+}
+
+// 狼人获得遗弃身份信息，阶段结束
+export const wereWolfChosedDropResult = (store, actions, res) => {
+  if (res && res.role) {
+    store.dispatch(actions.updateHintContent('您所选择的遗弃身份是：'))
+    store.dispatch(actions.updateSubContent(`${res.role}`))
+    store.dispatch(actions.displayHint())
+  }
+  delayEmitter(phaseEnd, [store, actions, {phase: '狼人'}], 1000)
 }
 
 // 狼人获得同伴信息后，阶段结束
