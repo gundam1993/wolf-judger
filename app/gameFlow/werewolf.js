@@ -40,7 +40,7 @@ export const wereWolfChosedDropResult = (store, actions, res) => {
 
 // 狼人获得同伴信息后，阶段结束
 const wereWolfGotResult = (store, actions) => {
-  store.dispatch({type: 'WEREWOLF_GOT_RESULT'})
+  store.dispatch({type: 'SUBMIT_SOCKET_EVENT', event: 'wereWolfGotResult'})
 }
 
 // 延迟调用函数

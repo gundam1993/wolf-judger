@@ -43,6 +43,9 @@ function createSocketMiddleware(socket) {
       socket.on('wereWolfChosedDropResult', (res) => {
         wereWolfFlow.wereWolfChosedDropResult(store, actions, res)
       })
+      socket.on('phaseEnd', (res) => {
+        publicFlow.phaseEnd(store, actions, res)
+      })
     }
     switch (action.type) {
       case 'JOIN_NEW_ROOM' :
@@ -62,7 +65,11 @@ function createSocketMiddleware(socket) {
         socket.emit('wereWolfGetPartner')
         break
       case 'SUBMIT_SOCKET_EVENT' :
-        socket.emit(action.event, action.payload)
+        if (action.payload) {
+          socket.emit(action.event, action.payload)
+        } else {
+          socket.emit(action.event)
+        }
         break
     }
     return next(action)

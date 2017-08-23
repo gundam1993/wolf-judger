@@ -29,7 +29,7 @@ exports.ChosedDrop = function (res, room, socket) {
 exports.gotResult = function (room, socket) {
   if (!room.wereWolfEnd) {
     room.wereWolfEnd = true
-    socket.emit('wereWolfEnd')
-    socket.broadcast.in(room.name).emit('wereWolfEnd')
+    socket.emit('phaseEnd', {phase: 'wereWolf'})
+    socket.broadcast.in(room.name).emit('phaseEnd', {phase: 'wereWolf'})
   }
 }
