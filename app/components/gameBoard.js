@@ -1,4 +1,5 @@
 let style = require('../styles/gameBoard.scss')
+let playerBlockStyle = require('../styles/playerBlock.scss')
 
 import React from 'react';
 import PlayerBlock from './playerBlock'
@@ -52,12 +53,23 @@ class GameBoard extends React.Component {
     let players = Object.values(playersInfo)
     for (let i = 0; i < num; i++) {
       playerBlocks.push(
-        <PlayerBlock player={players[i]} />
+        <PlayerBlock player={players[i]} index={i + 1}/>
       )
     }
+    playerBlocks.push(
+      <PlayerBlock  index={4}/>
+    )
+    playerBlocks.push(
+      <PlayerBlock  index={5}/>
+    )
     return (
       <div id="gameBoard">
-        {playerBlocks}
+        <div id="leftPlayers" className="playersList">
+          {playerBlocks}
+        </div>
+        <div id="rightPlayers" className="playersList">
+          {playerBlocks}
+        </div>
       </div>
     )
   }

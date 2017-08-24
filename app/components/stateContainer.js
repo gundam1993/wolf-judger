@@ -219,7 +219,7 @@ class StateContainer extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="app">
         <Join />
         <GameBoard />
         <ControlBar />

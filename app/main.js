@@ -17,5 +17,5 @@ render(
   <Provider store={store}>
     <StateContainer />
   </Provider>, 
-  document.getElementById('app')
+  document.getElementsByTagName('body')[0]
 )

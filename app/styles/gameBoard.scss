@@ -1,20 +1,26 @@
 #gameBoard {
     // background-color: #000;
     height: 85%;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: space-around;
-  }
-  
-  .playerBlock {
-    width: 6rem;
-    height: 7rem;
-    background-color: #fff;
-    margin: 0.5rem;
-  }
-  
-  .playerBlock.checked {
-    background-color: #ccc;
+    width: 100%;
+    position: relative;
+    // display: flex;
+    // flex-wrap: wrap;
+    // align-content: center;
+    // justify-content: space-around;
+
+    .playersList {
+      width: 25%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+    }
+
+    #leftPlayers {
+      left: 0;
+    }
+
+    #rightPlayers {
+      right: 0;
+    }
   }
   

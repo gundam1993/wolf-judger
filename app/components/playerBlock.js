@@ -56,8 +56,11 @@ class PlayerBlock extends React.Component {
     }
     return (
       <div className={className} onClick={this.state.playerBlockClick}>
-        <div className="playerAvatar"></div>
-        {this.props.player.username}
+        <div className="playerIndex">{this.props.index}</div>
+        <div className="playerAvatar">
+          <img src="/avatar.png" />
+        </div>
+        <div className="playerName">{this.props.player.username}</div>
       </div>
     )
   }
@@ -65,6 +68,7 @@ class PlayerBlock extends React.Component {
 
 PlayerBlock.defaultProps = {
   player: {},
+  index: 0,
   click: {}
 }
 

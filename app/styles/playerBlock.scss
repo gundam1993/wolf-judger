@@ -1,0 +1,48 @@
+.playerBlock {
+    width: 80%;
+    height: 18.3%;
+    background-color: #918781;
+    margin: 0.5rem auto;
+    border-radius: 0.3rem;
+    box-shadow: 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+    padding: 0.2rem;
+    box-sizing: border-box;
+    position: relative;
+
+    .playerIndex {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #918781;
+      color: #F7F8F8;
+      width: 1rem;
+      text-align: center;
+      border-radius: 0.3rem 0 0.3rem 0;
+    }
+
+    .playerAvatar {
+      width: 100%;
+      border-radius: 0.3rem;
+      img {
+        width: 100%;
+        display: block;
+        border-radius: 0.3rem;
+        vertical-align: baseline;
+      }
+    }
+
+    .playerName {
+      text-align: center;
+      color: #F7F8F8;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.8rem;
+      margin-top: 0.1rem;
+    }
+  }
+  
+  .playerBlock.checked {
+    background-color: #ccc;
+  }
