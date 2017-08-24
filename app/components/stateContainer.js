@@ -23,48 +23,6 @@ class StateContainer extends React.Component {
     }
   }
   componentWillMount () {
-    // EE.on('newGamePhase', (res) => {
-    //   this.setState({
-    //     roomInfo: res.roomInfo,
-    //     hintBarContent: `${res.phase}请睁眼`
-    //   })
-    //   EE.delayEmitter(`${res.phase}Start`, 1000)
-    // })
-    // EE.on('jumpPhase', (res) => {
-    //   this.setState({hintBarContent: `${res.phase}请睁眼`})
-    //   EE.delayEmitter('PhaseEnd', 5000, res.phase)
-    // })
-    // EE.on('PhaseEnd', (role) => {
-    //   this.setState({hintBarContent: `${role}请闭眼`})
-    //   EE.delayEmitter('nextGamePhase', 1000)
-    // })
-
-    // EE.on('wereWolfStart', () => {
-    //   if (this.state.player.lastRole === 'wereWolf') {
-    //     this.state.socket.emit('wereWolfGetOtherWereWolf')
-    //   }
-    // })
-    // EE.on('wereWolfGetOtherWereWolfResult', (res) => {
-    //   if (res.wereWolf.username) {
-    //     this.setState({hintBarContent: `目前身份是狼人的有：您和${res.wereWolf.username}`})
-    //     EE.delayEmitter(`wereWolfGotResult`, 1000)
-    //   } else {
-    //     this.setState({hintBarContent: `除您以外目前场上没有狼人，请选择您要查看的遗弃身份`})
-    //     EE.delayEmitter(`wereWolfChooseDrop`, 1000)
-    //   }
-    // })
-    // EE.on('wereWolfChosedDropResult', (res) => {
-    //   this.setState({hintBarContent: `您选择的遗弃的身份是${res.role}`})
-    //   EE.delayEmitter(`PhaseEnd`, 1000, '狼人')
-    // })
-    // EE.on('wereWolfChosedDrop', (res) => {
-    //   this.state.socket.emit('wereWolfChosedDrop', res)
-    // })
-    // EE.on('wereWolfGotResult', () => {
-    //   this.state.socket.emit('wereWolfGotResult')
-    // })
-
-
     // EE.on('seerStart', () => {
     //   if (this.state.player.role === 'seer') {
     //     this.setState({

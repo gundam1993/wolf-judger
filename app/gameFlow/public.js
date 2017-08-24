@@ -1,4 +1,10 @@
 import { wereWolfStart } from './werewolf'
+import { seerStart } from './seer'
+
+const RoleEntrance = {
+  wereWolf: wereWolfStart,
+  seer: seerStart
+}
 
 // 游戏开始，显示身份信息
 export const gameStart = (store, actions, res) => {
@@ -26,11 +32,7 @@ const nextGamePhase = (store, actions) => {
 // 新游戏阶段开始，显示睁眼信息
 export const newGamePhaseStart = (store, actions, res) => {
   store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
-  switch (res.phase) {
-    case 'wereWolf' :
-      delayEmitter(wereWolfStart, [store, actions], 1000)
-      break
-  }
+  delayEmitter(RoleEntrance[res.phase], [store, actions], 1000)
 }
 
 // 新游戏阶段开始，但是无人需要睁眼，显示睁眼信息，等待后显示闭眼信息
