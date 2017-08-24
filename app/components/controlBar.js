@@ -1,4 +1,4 @@
-let style = require('../controller.css')
+let style = require('../controller.scss')
 
 import React from 'react';
 

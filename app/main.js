@@ -1,4 +1,4 @@
-var controllerStyle = require('./controller.css')
+var controllerStyle = require('./controller.scss')
 
 import React from 'react';
 import { render } from 'react-dom'

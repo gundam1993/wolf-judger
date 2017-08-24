@@ -5,7 +5,9 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -20,6 +22,8 @@ module.exports = {
       filename: 'index.html'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
@@ -37,6 +41,9 @@ module.exports = {
           presets: ['es2015', 'react', 'stage-0'],
           plugins: ["transform-decorators-legacy"]
         },
+        // options: {
+        //   plugins: ["transform-decorators-legacy"]
+        // }
       },
       {
         test: /\.css$/,
