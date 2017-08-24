@@ -1,4 +1,4 @@
-let style = require('../gameboard.css')
+let style = require('../styles/gameBoard.scss')
 
 import React from 'react';
 import PlayerBlock from './playerBlock'

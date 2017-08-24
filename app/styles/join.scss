@@ -1,0 +1,36 @@
+#username-block {
+  position: absolute;
+  background-color: #0F2540;
+  color: #fff;
+  text-align: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  h1 {
+    margin-top: 50%;
+  }
+}
+  
+  
+#username {
+  width: 15rem;
+  height: 2rem;
+  font-size: 2rem;
+  outline: none;
+}
+
+#submit-username {
+  display: block;
+  text-align: center;
+  margin: 1rem auto 0 auto;
+  width: 8rem;
+  height: 2rem;
+  background-color: #F75C2F;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: #fff;
+  border: none;
+}

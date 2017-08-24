@@ -1,4 +1,4 @@
-let style = require('../main.css')
+let style = require('../styles/join.scss')
 import React from 'react';
 
 class Join extends React.Component {

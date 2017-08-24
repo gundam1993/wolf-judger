@@ -1,3 +1,4 @@
+let controllerStyle = require('../styles/main.scss')
 import React from 'react';
 
 import Join from '../containers/join'
