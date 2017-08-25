@@ -6,6 +6,8 @@ import GameBoard from '../containers/gameBoard'
 import ControlBar from '../containers/controlBar'
 import HintBar from '../containers/hintBar'
 import DropCardChoose from '../containers/DropCardChoose'
+import TopControlBar from '../containers/topControlBar'
+
 
 
 class StateContainer extends React.Component {
@@ -221,6 +223,7 @@ class StateContainer extends React.Component {
     return (
       <div id="app">
         <Join />
+        <TopControlBar />
         <GameBoard />
         <ControlBar />
         
