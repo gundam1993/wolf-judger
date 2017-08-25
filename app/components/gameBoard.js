@@ -3,6 +3,7 @@ let playerBlockStyle = require('../styles/playerBlock.scss')
 
 import React from 'react';
 import PlayerBlock from './playerBlock'
+import HintBar from '../containers/hintBar'
 
 class GameBoard extends React.Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class GameBoard extends React.Component {
         <div id="leftPlayers" className="playersList">
           {playerBlocks}
         </div>
+        <HintBar />
         <div id="rightPlayers" className="playersList">
           {playerBlocks}
         </div>

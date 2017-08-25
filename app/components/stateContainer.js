@@ -223,7 +223,7 @@ class StateContainer extends React.Component {
         <Join />
         <GameBoard />
         <ControlBar />
-        <HintBar />
+        
         <DropCardChoose />
       </div>
     )

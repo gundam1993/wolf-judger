@@ -1,12 +1,12 @@
-let style = require('../hint.css')
+let style = require('../styles/hintBar.scss')
 
 import React from 'react';
 
 class HintBar extends React.Component {
   render() {
-    if (!this.props.display) {
-      return (<div></div>)
-    }
+    // if (!this.props.display) {
+    //   return (<div></div>)
+    // }
     let buttons = ''
     if (this.props.btnDisplay) {
       buttons = <div id='hintButton'>
@@ -15,7 +15,7 @@ class HintBar extends React.Component {
                 </div>
     }
     return (
-      <div>
+      <div id="hintBar">
         <div id="hint">
           <p>{this.props.content}</p>
           <p>{this.props.subContent}</p>
