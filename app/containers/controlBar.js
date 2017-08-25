@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import actions from '../actions'
-import controlBarComponent from '../components/controlBar'
+import bottomControlBarComponent from '../components/bottomControlBar'
 
 const mapStateToProps = (state) => {
   return {
@@ -19,9 +19,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const controlBar = connect(
+const bottomControlBar = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(controlBarComponent)
+)(bottomControlBarComponent)
 
-export default controlBar
+export default bottomControlBar
