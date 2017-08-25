@@ -11,12 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onJoinInput: (e) => {
-    //   dispatch(actions.updateUsername(e.target.value))
-    // },
-    // onJoinClick: (e) => {
-    //   dispatch(actions.joinNewRoom())
-    // }
+    onLeaveClick: (e) => {
+      dispatch(actions.leaveRoom())
+    }
   }
 }
 
