@@ -58,7 +58,7 @@ class PlayerBlock extends React.Component {
       <div className={className} onClick={this.state.playerBlockClick}>
         <div className="playerIndex">{this.props.index}</div>
         <div className="playerAvatar">
-          <img src="/avatar.png" />
+          <img src="/img/avatar.png" />
         </div>
         <div className="playerName">{this.props.player.username}</div>
       </div>
