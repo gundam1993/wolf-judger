@@ -22,4 +22,22 @@
     bottom: 118%;
     left: 35%;
   }
+
+  #inputTypeToggleButton {
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 0.9rem;
+    background-color: #E9B581;
+    color: #DFE2E3;
+    text-align: center;
+    line-height: 1.7rem;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+    border: 1px solid #DFE2E3;
+    box-shadow: 0.1rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+
+    i.iconfont {
+      font-size: 1.3rem;
+    }
+  }
 }
