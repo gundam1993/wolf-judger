@@ -14,8 +14,11 @@ const mapDispatchToProps = (dispatch) => {
     onReadyClick: (e) => {
       dispatch(actions.playerReady())
     },
-    onLeaveClick: (e) => {
-      dispatch(actions.leaveRoom())
+    changeInputTypeToText: () => {
+      dispatch(actions.changeInputTypeToText())
+    },
+    changeInputTypeToAudio: () => {
+      dispatch(actions.changeInputTypeToAudio())
     }
   }
 }
