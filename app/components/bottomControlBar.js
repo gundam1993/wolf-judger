@@ -4,12 +4,13 @@ import React from 'react';
 
 class BottomControlBar extends React.Component {
   render() {
-    if (this.props.ready) {
-      return (<div></div>)
+    let readyButton
+    if (!this.props.ready) {
+      readyButton = <div id="readyButton" onClick={this.props.onReadyClick}>准 备</div>
     }
     return (
       <div id="bottomControlBar">
-        <button id="ready" onClick={this.props.onReadyClick}>准备</button>
+        {readyButton}
       </div>
     )
   }

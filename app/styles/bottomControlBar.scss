@@ -1,7 +1,25 @@
 #bottomControlBar {
-  height: 7%;
+  height: 6.8%;
   width: 100%;
   background-color: #454243;
   position: relative;
   border-top: 1px solid rgba(69, 66, 67, 0.6);
+
+  #readyButton {
+    width: 30%;
+    height: 2rem;
+    margin: 0 auto;
+    background-color: #918781;
+    color: #DFE2E3;
+    text-align: center;
+    line-height: calc(2rem - 4px);
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    border: 2px solid #454243;
+    box-shadow: 0.1rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.3rem;
+    position: absolute;
+    bottom: 118%;
+    left: 35%;
+  }
 }
