@@ -3,7 +3,7 @@ import React from 'react';
 
 import Join from '../containers/join'
 import GameBoard from '../containers/gameBoard'
-import BottomControlBar from '../containers/controlBar'
+import BottomControlBar from '../containers/bottomControlBar'
 import HintBar from '../containers/hintBar'
 import DropCardChoose from '../containers/DropCardChoose'
 import TopControlBar from '../containers/topControlBar'

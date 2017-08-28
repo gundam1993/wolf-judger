@@ -5,6 +5,7 @@ import bottomControlBarComponent from '../components/bottomControlBar'
 const mapStateToProps = (state) => {
   return {
     ready: state.player.ready,
+    inputType: state.bottomControlBar.inputType
   }
 }
 
