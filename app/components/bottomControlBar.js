@@ -17,14 +17,22 @@ class BottomControlBar extends React.Component {
     }
     if (this.props.inputType === 'text') {
       toggleIcon = <i className="iconfont icon-yuyin"></i>
+      inputBox = <input id="inputBox" />
     } else {
       toggleIcon = <i className="iconfont icon-duanluo"></i>
+      audioButton = <div id="audioButton">
+                      <i className="iconfont icon-yuyin"></i>按住说话
+                    </div>
     }
     return (
       <div id="bottomControlBar">
         {readyButton}
         <div id="inputTypeToggleButton" onClick={this.inputTypeToggle}>
           {toggleIcon}
+        </div>
+        <div id="inputContainer">
+          {inputBox}
+          {audioButton}
         </div>
       </div>
     )
