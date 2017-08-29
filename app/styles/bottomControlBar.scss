@@ -24,6 +24,7 @@
   }
 
   #inputTypeToggleButton {
+    position: absolute;
     height: 1.7rem;
     width: 1.7rem;
     border-radius: 0.9rem;
@@ -31,13 +32,47 @@
     color: #DFE2E3;
     text-align: center;
     line-height: 1.7rem;
-    margin-left: 1rem;
+    left: 1rem;
     margin-top: 0.2rem;
-    border: 1px solid #DFE2E3;
+    border: 2px solid #DFE2E3;
     box-shadow: 0.1rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
 
     i.iconfont {
       font-size: 1.2rem;
+    }
+  }
+
+  #inputContainer {
+    position: absolute;
+    height: 1.5rem;
+    width: 65%;
+    top: 0;
+    left: 20%;
+    border-radius: 0.75rem;
+    text-align: center;
+    background-color: #fff;
+    margin-top: 0.3rem;
+    
+    
+    #inputBox {
+      width: 87%;
+      height: 75%;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    #audioButton {
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      background-color: #E9B581;
+      color: #DFE2E3;
+      user-select: none;
+      box-shadow: 0.1rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+
+      &:active {
+        box-shadow:0.1rem 0.1rem 0 rgba(0,0,0,.2) inset;
+      }
     }
   }
 }
