@@ -11,13 +11,14 @@ class BottomControlBar extends React.Component {
     this.props.changeInputTypeToText()
   }
   render() {
-    let readyButton, inputBox, audioButton, toggleIcon
+    let readyButton, inputBox, audioButton, sendButton, toggleIcon
     if (!this.props.ready) {
       readyButton = <div id="readyButton" onClick={this.props.onReadyClick}>准 备</div>
     }
     if (this.props.inputType === 'text') {
       toggleIcon = <i className="iconfont icon-yuyin"></i>
       inputBox = <input id="inputBox" />
+      sendButton = <div className="roundButton" id="sendButton"><i className="iconfont icon-send"></i></div>
     } else {
       toggleIcon = <i className="iconfont icon-duanluo"></i>
       audioButton = <div id="audioButton">
@@ -27,13 +28,14 @@ class BottomControlBar extends React.Component {
     return (
       <div id="bottomControlBar">
         {readyButton}
-        <div id="inputTypeToggleButton" onClick={this.inputTypeToggle}>
+        <div className="roundButton" id="inputTypeToggleButton" onClick={this.inputTypeToggle}>
           {toggleIcon}
         </div>
         <div id="inputContainer">
           {inputBox}
           {audioButton}
         </div>
+        {sendButton}
       </div>
     )
   }
