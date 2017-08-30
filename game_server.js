@@ -92,7 +92,9 @@ function handleNewPlayer(socket, rooms) {
         role: '',
         lastRole: '',
         ready: false,
+        avatar: '/img/avatar.png',
       }
+      console.log(newJoiner)
       currentRoom.namesUsed.push(username)
       currentRoom.players[socket.id] = newJoiner
       currentRoom.playerNumber ++

@@ -53,7 +53,7 @@ class GameBoard extends React.Component {
     let limit = this.props.playerLimit
     let players = Object.values(this.props.players)
     for (let i = 0; i < 10; i++) {
-      let playerBlock = <PlayerBlock locked={(i + 1 < limit)} player={players[i]} index={i + 1}/>
+      let playerBlock = <PlayerBlock locked={(i + 1 > limit)} player={players[i]} index={i + 1}/>
       if (i % 2) {
         rightPlayers.push(playerBlock)
       } else {
