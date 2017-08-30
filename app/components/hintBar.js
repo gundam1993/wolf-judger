@@ -1,6 +1,7 @@
 let style = require('../styles/hintBar.scss')
 
-import React from 'react';
+import React from 'react'
+import HintInfo from './hintInfo'
 
 class HintBar extends React.Component {
   render() {
