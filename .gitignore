@@ -3,9 +3,6 @@ node_modules
 
 # logs
 npm-debug.log
-
-
 static/.DS_Store
 .DS_Store
-
 /dist
