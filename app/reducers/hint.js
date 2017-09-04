@@ -1,17 +1,14 @@
 let init = {
-  content: '',
-  subContent: '',
+  content: [],
   display: false,
 }
 
 const hint = (state = init, action) => {
   let newState
   switch (action.type) {
-    case 'UPDATE_HINT_CONTENT' :
-      newState = Object.assign({}, state, {content: action.content})
-      return newState
-    case 'UPDATE_SUB_CONTENT' :
-      newState = Object.assign({}, state, {subContent: action.content})
+    case 'ADD_HINT_CONTENT' :
+      let newContent = [].concat(state.content, [action.content])
+      newState = Object.assign({}, state, {content: newContent})
       return newState
     case 'DISPLAY_HINT' :
       newState = Object.assign({}, state, {display: true})
