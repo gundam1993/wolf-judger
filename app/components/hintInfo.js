@@ -9,10 +9,12 @@ class HintInfo extends React.Component {
       from = ''
       content = <div className="systemHint">{this.props.content}</div>
     }
-    <div className="hintInfoContainer">
-      {from}
-      {content}
-    </div>
+    return (
+      <div className="hintInfoContainer">
+        {from}
+        {content}
+      </div>
+    )
   }
 }
 

@@ -18,6 +18,10 @@ function createSocketMiddleware(socket) {
         next(actions.hideJoin())
       })
       socket.on('newJoin', (res) => {
+        store.dispatch(actions.addHintContent({
+          from: 'system',
+          content: `${res.player.username}进入了房间`,
+        }))
         next(actions.addNewPlayer(res.player))
       })
       socket.on('playerLeave', (res) => {

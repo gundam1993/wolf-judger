@@ -5,9 +5,6 @@ import HintInfo from './hintInfo'
 
 class HintBar extends React.Component {
   render() {
-    // if (!this.props.display) {
-    //   return (<div></div>)
-    // }
     let buttons = ''
     if (this.props.btnDisplay) {
       buttons = <div id='hintButton'>
@@ -15,11 +12,13 @@ class HintBar extends React.Component {
                   <button id="hintButtonNo" onClick={this.props.btnFunc2}>{this.props.btnContent2}</button>
                 </div>
     }
+    let hints = this.props.content.map((content) => {
+      return <HintInfo from={content.from} content={content.content} />
+    })
     return (
       <div id="hintBar">
         <div id="hint">
-          <p>{this.props.content}</p>
-          <p>{this.props.subContent}</p>
+          {hints}
         </div>
         {buttons}
       </div>
@@ -28,9 +27,9 @@ class HintBar extends React.Component {
 }
 
 HintBar.propTypes = {
-  content: React.PropTypes.string.isRequired,
+  content: React.PropTypes.array.isRequired,
   display: React.PropTypes.bool.isRequired,
-  subContent: React.PropTypes.string.isRequired,
+  // subContent: React.PropTypes.string.isRequired,
   btnDisplay: React.PropTypes.boolean,
   btnContent1: React.PropTypes.string,
   btnContent2: React.PropTypes.string,
