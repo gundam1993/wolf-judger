@@ -151,7 +151,7 @@ function handleClientleaveRoom(socket) {
         let rooms = Object.keys(socket.rooms)
         console.log(rooms)
       })
-      socket.broadcast.to(room.name).emit('playerLeave', room.players)
+      socket.broadcast.to(room.name).emit('playerLeave', { players: room.players, leaveUsername: player.username})
     }
   })
 }

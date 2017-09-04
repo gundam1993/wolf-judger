@@ -26,7 +26,11 @@ function createSocketMiddleware(socket) {
       })
       socket.on('playerLeave', (res) => {
         console.log(res)
-        next(actions.playerLeave(res))
+        store.dispatch(actions.addHintContent({
+          from: 'system',
+          content: `${res.leaveUsername}离开了房间`,
+        }))
+        next(actions.playerLeave(res.players))
       })
       socket.on('gameStart', (res) => {
         publicFlow.gameStart(store, actions, res)
