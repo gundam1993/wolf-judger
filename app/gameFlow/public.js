@@ -1,5 +1,6 @@
 import { wereWolfStart } from './werewolf'
 import { seerStart } from './seer'
+import * as FlowHelper from './flowHelper'
 
 const RoleEntrance = {
   wereWolf: wereWolfStart,
@@ -11,16 +12,16 @@ export const gameStart = (store, actions, res) => {
   console.log(res)
   store.dispatch(actions.updateRole(res.role))
   store.dispatch(actions.updateLastRole(res.lastRole))
-  store.dispatch(actions.updateHintContent('游戏开始'))
-  store.dispatch(actions.updateSubContent(`您的身份是${res.role}`))
-  store.dispatch(actions.displayHint())
-  delayEmitter(closeEye, [store, actions], 1000)
+  FlowHelper.systemHint(store, actions, '游戏开始')
+  FlowHelper.systemHint(store, actions, `您的身份是${res.role}`)
+  FlowHelper.judgeSay(store, actions, '天黑请闭眼。')
+  FlowHelper.delayEmitter(closeEye, [store, actions], 1000)
 }
 
 // 显示闭眼信息
 const closeEye = (store, actions) => {
-  store.dispatch(actions.updateHintContent('天黑请闭眼'))
-  store.dispatch(actions.updateSubContent(''))
+  // store.dispatch(actions.updateHintContent('天黑请闭眼'))
+  // store.dispatch(actions.updateSubContent(''))
   delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 
