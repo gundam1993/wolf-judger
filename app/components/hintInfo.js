@@ -3,7 +3,10 @@ import React from 'react'
 
 class HintInfo extends React.Component {
   render() {
-    let from = <div className="hintFrom">{this.props.from}</div>
+    let from = <div className="hintFrom">
+                 <div className={`fromMark ${this.props.from === '法官' ? 'system' : ''}`}>{this.props.from === '法官' ? '系统' : '玩家'}</div>
+                  {this.props.from}
+               </div>
     let content = <div className="hintContent">{this.props.content}</div>
     if (this.props.from === 'system') {
       from = ''
