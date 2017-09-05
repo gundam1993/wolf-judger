@@ -1,9 +1,36 @@
-.systemHint {
-  width: 80%;
-  margin: 0.5rem auto;
-  font-size: 0.8rem;
-  text-align: center;
-  border-radius: 0.2rem;
-  background-color: rgba(0, 0, 0, 0.2);
+.hintInfoContainer {
+  width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
+  font-size: 0.8rem;  
+  margin-top: 0.5rem;
   color: #F7F8F8;
+
+  .systemHint {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .hintFrom {
+    background-color: #E9B581;
+    float: left;
+    padding: 0 0.3rem;
+    border-radius: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .hintContent {
+    width: 96%;
+    margin: auto;
+    display: block;
+    overflow: auto;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    color: #454243;
+    background-color: #F7F8F8;
+    box-sizing: border-box;
+  }
 }
