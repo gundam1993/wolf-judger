@@ -15,22 +15,35 @@
   }
   
   .hintFrom {
+    margin-bottom: 0.4rem;
     background-color: #E9B581;
-    float: left;
+    display: inline-block;
     padding: 0 0.3rem;
     border-radius: 0.3rem;
-    margin-bottom: 0.3rem;
   }
 
   .hintContent {
+    position: relative;
     width: 96%;
     margin: auto;
     display: block;
-    overflow: auto;
     padding: 0.2rem 0.5rem;
     border-radius: 0.3rem;
     color: #454243;
     background-color: #F7F8F8;
     box-sizing: border-box;
+  }
+
+  .hintContent:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 0.3rem solid transparent;
+    border-right: 0.3rem solid transparent;
+    border-bottom: 0.4rem solid #fff;
+    display: block;
+    position: absolute;
+    top: -0.3rem;
+    z-index: 10000;
   }
 }
