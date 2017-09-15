@@ -1,0 +1,68 @@
+#DropCardContainer {
+  position: absolute;
+  top: 30%;
+  bottom: 30%;
+  left: 5%;
+  right: 5%;
+  background-color: #fff;
+  border-radius: 1rem;
+}
+
+#DropCardChoose {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#DropCardChoose div {
+  width: 30%;
+  border: 3px solid #FFF;
+  color: #fff;
+
+  img {
+    width: 100%;
+    vertical-align: bottom;
+  }
+}
+
+#DropCardChoose div.dropCardBlock.checked {
+  border: 3px solid #F13564;
+}
+
+#DropCardChooseButtonContainer {
+  width: 100%;
+  text-align: center;
+  height: 15%;
+  margin-top: 1rem;
+}
+
+#DropCardChooseButton {
+  display: block;
+  text-align: center;
+  margin: auto;
+  width: 12rem;
+  height: 2.2rem;
+  background-color: #F13564;
+  font-size: 1.2rem;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+}
+
+#DropMask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+
+#dropHint {
+  text-align: center;
+  margin: 0.5rem;
+}

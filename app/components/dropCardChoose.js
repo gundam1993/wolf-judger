@@ -1,4 +1,4 @@
-let style = require('../dropCardChoose.css')
+let style = require('../styles/dropCardChoose.scss')
 
 import React from 'react';
 
@@ -62,7 +62,9 @@ class DropCardChoose extends React.Component {
     if (this.props.display) {
       return (
         <div>
+          <div id="DropMask"></div>
           <div id="DropCardContainer">
+            <div id="dropHint">请选择</div>
             <div id="DropCardChoose">
             <DropCardBlock index= {0} chosen={this.props.chosenDrop} click={this.props.onDropCardClick} />
             <DropCardBlock index= {1} chosen={this.props.chosenDrop} click={this.props.onDropCardClick} />

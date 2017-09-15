@@ -10,7 +10,9 @@ class DropCardBlock extends React.Component {
       className += ' checked'
     }
     return (
-      <div className={className} onClick={this.dropCardBlockClick}></div>
+      <div className={className} onClick={this.dropCardBlockClick}>
+        <img src="/img/ques.png" alt="ques"/>
+      </div>
     )
   }
 }
