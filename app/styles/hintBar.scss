@@ -7,4 +7,9 @@
     margin: 0.5rem 0;
     background-color: #FAFBFC; 
     border-radius: 0.3rem;
+    overflow: auto;
+
+    #hint {
+        padding: 0 0 1rem 0;
+    }
 }
