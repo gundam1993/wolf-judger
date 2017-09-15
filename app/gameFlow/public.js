@@ -32,20 +32,19 @@ const nextGamePhase = (store, actions) => {
 
 // 新游戏阶段开始，显示睁眼信息
 export const newGamePhaseStart = (store, actions, res) => {
-  store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
+  FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
   delayEmitter(RoleEntrance[res.phase], [store, actions], 1000)
 }
 
 // 新游戏阶段开始，但是无人需要睁眼，显示睁眼信息，等待后显示闭眼信息
 export const jumpPhase = (store, actions, res) => {
-  store.dispatch(actions.updateHintContent(`${res.phase}请睁眼`))
+  FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
   delayEmitter(phaseEnd, [store, actions, res], 1000)
 }
 
 // 阶段结束，显示闭眼信息，通知服务器开始新阶段
 export const phaseEnd = (store, actions, res) => {
-  store.dispatch(actions.updateHintContent(`${res.phase}请闭眼`))
-  store.dispatch(actions.updateSubContent(''))
+  FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
   delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 
