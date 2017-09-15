@@ -7,10 +7,12 @@ class Join extends React.Component {
       return (
         <div id="username-block">
           <h1>请输入您的昵称：</h1>
-          <input id="username" 
-                 type="text" 
-                 ref="usernameInput"
-                 onInput={this.props.onJoinInput}/>
+          <div id="input-block">
+            <input id="username" 
+                  type="text" 
+                  ref="usernameInput"
+                  onInput={this.props.onJoinInput}/>
+          </div>                  
           <button id="submit-username"
                   onClick={this.props.onJoinClick}>开始游戏</button>
         </div>

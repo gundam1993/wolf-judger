@@ -1,7 +1,7 @@
 #username-block {
   position: absolute;
-  background-color: #454243;
-  color: #F7F8F8;
+  background-color: #FAFBFC;
+  color: #919EC4;
   text-align: center;
   top: 0;
   right: 0;
@@ -13,24 +13,38 @@
     margin-top: 50%;
   }
 }
-  
+
+#input-block {
+  width: 15rem;
+  height: 2.5rem;
+  font-size: 2rem;
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 0.3rem rgba(0,0,0, 0.2);
+}
   
 #username {
-  width: 15rem;
-  height: 2rem;
-  font-size: 2rem;
+  width: 80%;
+  height: 75%;
+  font-size: 1.8rem;
+  border: none;
   outline: none;
+  
 }
 
 #submit-username {
   display: block;
   text-align: center;
   margin: 1rem auto 0 auto;
-  width: 8rem;
-  height: 2rem;
-  background-color: #E9B581;
+  width: 12rem;
+  height: 2.2rem;
+  background-color: #F13564;
   font-size: 1.2rem;
-  line-height: 2rem;
+  line-height: 2.2rem;
   color: #fff;
   border: none;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 0.3rem rgba(248,202,215, 0.6);
 }
