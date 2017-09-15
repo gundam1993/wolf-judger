@@ -44,7 +44,7 @@ export const jumpPhase = (store, actions, res) => {
 
 // 阶段结束，显示闭眼信息，通知服务器开始新阶段
 export const phaseEnd = (store, actions, res) => {
-  FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
+  FlowHelper.judgeSay(store, actions, `${res.phase}请闭眼`)
   delayEmitter(nextGamePhase, [store, actions], 1000)
 }
 
