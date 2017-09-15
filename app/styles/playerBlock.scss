@@ -1,7 +1,7 @@
 .playerBlock {
     width: 80%;
     height: 17%;
-    background-color: #918781;
+    background-color: #FAFBFC;
     margin: 0.5rem auto;
     border-radius: 0.3rem;
     box-shadow: 0.1rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
@@ -13,8 +13,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-color: #918781;
-      color: #F7F8F8;
+      background-color: #FAFBFC;
+      color: #919EC4;
       width: 1rem;
       text-align: center;
       border-radius: 0.3rem 0 0.3rem 0;
@@ -23,8 +23,8 @@
     .playerAvatar {
       width: 100%;
       border-radius: 0.3rem;
-      background-color: #454243;
-      box-shadow:0.2rem 0.2rem 0 rgba(0,0,0,.3) inset;
+      background-color: #D9D9DB;
+      box-shadow:0.2rem 0.2rem 0.3rem rgba(0,0,0,.3) inset;
       img {
         width: 100%;
         display: block;
@@ -35,7 +35,7 @@
 
     .playerName {
       text-align: center;
-      color: #F7F8F8;
+      color: #919EC4;
       width: 100%;
       overflow: hidden;
       white-space: nowrap;

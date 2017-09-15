@@ -16,10 +16,18 @@
   
   .hintFrom {
     margin-bottom: 0.4rem;
-    background-color: #E9B581;
     display: inline-block;
     padding: 0 0.3rem;
-    border-radius: 0.3rem;
+    color: #000;
+
+    .fromMark.system {
+      background-color: #919EC4;
+      border-radius: 0.3rem;
+      color: #F7F8F8;
+      padding: 0 0.3rem;
+      float: left;
+      margin-right: 0.2rem;
+    }
   }
 
   .hintContent {
@@ -29,8 +37,8 @@
     display: block;
     padding: 0.2rem 0.5rem;
     border-radius: 0.3rem;
-    color: #454243;
-    background-color: #F7F8F8;
+    color: #000;
+    background-color: #D9D9DB;
     box-sizing: border-box;
   }
 
@@ -40,7 +48,7 @@
     height: 0;
     border-left: 0.3rem solid transparent;
     border-right: 0.3rem solid transparent;
-    border-bottom: 0.4rem solid #fff;
+    border-bottom: 0.4rem solid #D9D9DB;
     display: block;
     position: absolute;
     top: -0.3rem;
