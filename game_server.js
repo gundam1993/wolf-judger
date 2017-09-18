@@ -216,34 +216,41 @@ function handleNextGamePhase(socket) {
     let roomName = room.name
     room.ready ++
     if (room.ready === room.playerLimit) {
-      let nowMoveRole = room.roleQueue.shift()
-      while (!room.roles[nowMoveRole] ) {
-        nowMoveRole = room.roleQueue.shift()
-      }
-      if (nowMoveRole !== undefined) {
-        room.ready = 0
-        for (let key in room.players) {
-          if (room.players[key].role === nowMoveRole) {
-            socket.broadcast.in(roomName).emit('newGamePhase', {
-              phase: nowMoveRole
-            })
-            socket.emit('newGamePhase', {
-              phase: nowMoveRole
-            })
-            return
-          }
-        }
-        socket.broadcast.in(roomName).emit('jumpPhase', {
-          phase: nowMoveRole
-        })
-        socket.emit('jumpPhase', {
-          phase: nowMoveRole
-        })
-      } else {
-        room.ready = 0
+      let phase = getNextGamePhase(room)
+      console.log(phase)
+      if (phase === 'nightEnd') {
         socket.broadcast.in(roomName).emit('nightEnd', { roomInfo: room })
         socket.emit('nightEnd', { roomInfo: room })
+      } else {
+        socket.broadcast.in(roomName).emit('newGamePhase', {
+          phase: phase
+        })
+        socket.emit('newGamePhase', {
+          phase: phase
+        })
       }
+      room.ready = 0      
     }
   })
+}
+
+function getNextGamePhase(room) {
+  let nowMoveRole = room.roleQueue.shift()
+  console.log(nowMoveRole)
+  if (room.roleQueue.length > 0) {
+    if (!room.roles[nowMoveRole]) {
+      console.log("dont't have this role in game")
+      return getNextGamePhase(room)
+    } else {
+      for (let key in room.players) {
+        if (room.players[key].role === nowMoveRole) {
+          console.log(nowMoveRole)
+          return nowMoveRole
+        }
+      }
+      return getNextGamePhase(room)
+    }
+  } else {
+    return "nightEnd"
+  }
 }
