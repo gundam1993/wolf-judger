@@ -40,10 +40,6 @@ function createSocketMiddleware(socket) {
         publicFlow.newGamePhaseStart(store, actions, res)
         next(action)
       })
-      socket.on('jumpPhase', (res) => {
-        publicFlow.jumpPhase(store, actions, res)
-        next(action)
-      })
       socket.on('wereWolfGotPartner', (res) => {
         wereWolfFlow.wereWolfGotPartner(store, actions, res)
         next(action)
