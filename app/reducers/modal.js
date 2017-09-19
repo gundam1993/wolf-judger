@@ -1,40 +1,40 @@
 let init = {
     display: false,
-    chosenDrop: [],
+    chosenItem: [],
     chosenLimit: 0,
     socketEvent: '',
   }
   
   const modal = (state = init, action) => {
     let newState
-    let chosenDrop
+    let chosenItem
     let dropIndex
     switch (action.type) {
-      case 'DISPLAY_DROP' :
+      case 'DISPLAY_MODAL' :
         newState = Object.assign({}, state, {display: true})
         return newState
-      case 'HIDE_DROP' :
+      case 'HIDE_MODAL' :
         newState = Object.assign({}, state, {display: false})
         return newState
-      case 'CHOOSE_DROP':
-        chosenDrop = [].concat(state.chosenDrop)
-        if (chosenDrop.indexOf(action.index) === -1) {
-          chosenDrop.push(action.index)
+      case 'CHOOSE_ITEM':
+        chosenItem = [].concat(state.chosenItem)
+        if (chosenItem.indexOf(action.index) === -1) {
+          chosenItem.push(action.index)
         }
-        newState = Object.assign({}, state, {chosenDrop: chosenDrop})
+        newState = Object.assign({}, state, {chosenItem: chosenItem})
         return newState
-      case 'REMOVE_DROP' :
-        chosenDrop = [].concat(state.chosenDrop)
-        dropIndex = chosenDrop.indexOf(action.index)
+      case 'removeItem' :
+        chosenItem = [].concat(state.chosenItem)
+        dropIndex = chosenItem.indexOf(action.index)
         if (dropIndex !== -1) {
-          chosenDrop.splice(dropIndex, 1)
+          chosenItem.splice(dropIndex, 1)
         }
-        newState = Object.assign({}, state, {chosenDrop: chosenDrop})
+        newState = Object.assign({}, state, {chosenItem: chosenItem})
         return newState
-      case 'CLEAN_DROP' :
-        newState = Object.assign({}, state, {chosenDrop: []})
+      case 'CLEAN_CHOSEN' :
+        newState = Object.assign({}, state, {chosenItem: []})
         return newState
-      case 'UPDATE_DROP_LIMIT' :
+      case 'UPDATE_CHOSEN_LIMIT' :
         newState = Object.assign({}, state, {chosenLimit: action.chosenLimit})
         return newState
       case 'UPDATE_SOCKET_EVENT' :

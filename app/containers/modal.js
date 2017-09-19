@@ -4,34 +4,31 @@ import ModalComponent from '../components/modal'
 
 const mapStateToProps = (state) => {
   return {
-    display: state.drop.display,
-    chosenDrop: state.drop.chosenDrop,
-    chosenLimit: state.drop.chosenLimit,
-    socketEvent: state.drop.socketEvent,
+    display: state.modal.display,
+    chosenItem: state.modal.chosenItem,
+    chosenLimit: state.modal.chosenLimit,
+    socketEvent: state.modal.socketEvent,
   }
 }
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    onDropCardClick: (index, chosenDrop) => {
-      if (chosenDrop.indexOf(index) !== -1) {
-        dispatch(actions.removeDrop(index))
-        return
-      }
-      dispatch(actions.chooseDrop(index))
+    onRadioChoose: (e) => {
+      dispatch(actions.cleanChosen())
+      dispatch(actions.chooseItem(e.target.value))
     },
-    onDropCardConfirm: (chosenDrop, chosenLimit, socketEvent) => {
-      if (chosenDrop.length !== chosenLimit) {
+    onModalButtonClick: (chosenItem, chosenLimit, socketEvent) => {
+      if (chosenItem.length !== chosenLimit) {
         console.log(`请选择${chosenLimit}个遗弃身份`)
         return
       }
       dispatch({ 
         type: 'SUBMIT_SOCKET_EVENT', 
         event: socketEvent, 
-        payload: chosenDrop,
+        payload: chosenItem,
       })
-      dispatch(actions.hideDrop())
-      dispatch(actions.cleanDrop())
+      dispatch(actions.hideModal())
+      dispatch(actions.cleanChosen())
       
     }
   }

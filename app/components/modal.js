@@ -5,20 +5,22 @@ import React from 'react';
 import RadioSelector from './radioSelector'
 
 class Modal extends React.Component {
-  DropCardChooseButtonHandler = () => {
-    this.props.onDropCardConfirm(this.props.chosenDrop, this.props.chosenLimit, this.props.socketEvent)
+  buttonHandler = () => {
+    this.props.onModalButtonClick(this.props.chosenItem, this.props.chosenLimit, this.props.socketEvent)
   }
   render() {
+    let src = [{src: "/img/ques.png"}, {src: "/img/ques.png"}, {src: "/img/ques.png"}]
+    let radio = this.props.chosenLimit === 1 ? <RadioSelector options={src} onChoose={this.props.onRadioChoose} /> : ''
     if (this.props.display) {
       return (
-        <div>
-          <div id="ModalMask"></div>
+        <div id="Modal">
           <div id="ModalContainer">
-            <RadioSelector options={[0,1,2]}/>
+            {radio}
             <div id='ModalButtonContainer'>
-              <button id='ModalButton' onClick={this.DropCardChooseButtonHandler}>确定</button>
+              <button id='ModalButton' onClick={this.buttonHandler}>确定</button>
             </div>
           </div>
+          <div id="ModalMask"></div>          
         </div>
       )
     }
@@ -31,7 +33,7 @@ class Modal extends React.Component {
 Modal.propTypes = {
   display: React.PropTypes.bool.isRequired,
   chosenDrop: React.PropTypes.array.isRequired,
-  onDropCardClick: React.PropTypes.func.isRequired,
+  onRadioChoose: React.PropTypes.func.isRequired,
   chosenLimit: React.PropTypes.number.isRequired,
   socketEvent: React.PropTypes.string.isRequired,
   onDropCardConfirm: React.PropTypes.func.isRequired,
@@ -40,7 +42,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   display: false,
   chosenDrop: [],
-  onDropCardClick: () => {},
+  onRadioChoose: () => {},
   chosenLimit: 0,
   socketEvent: '',
   onDropCardConfirm: () => {},
