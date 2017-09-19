@@ -5,7 +5,7 @@ let init = {
     socketEvent: '',
   }
   
-  const drop = (state = init, action) => {
+  const modal = (state = init, action) => {
     let newState
     let chosenDrop
     let dropIndex
@@ -45,4 +45,4 @@ let init = {
     }
   }
   
-  export default drop
+  export default modal

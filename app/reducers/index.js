@@ -3,7 +3,7 @@ import join from './join'
 import player from './player'
 import room from './room'
 import hint from './hint'
-import drop from './drop'
+import modal from './modal'
 import bottomControlBar from './bottomControlBar'
 
 const gameApp = combineReducers({
@@ -11,7 +11,7 @@ const gameApp = combineReducers({
   player,
   room,
   hint,
-  drop,
+  modal,
   bottomControlBar,
 })
 
