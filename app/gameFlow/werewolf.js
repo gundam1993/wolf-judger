@@ -22,9 +22,9 @@ export const wereWolfGotPartner = (store, actions, res) => {
 
 // 狼人选择遗弃身份
 const wereWolfChooseDrop = (store, actions) => {
-  store.dispatch(actions.updateDropLimit(1))
+  store.dispatch(actions.updateChosenLimit(1))
   store.dispatch(actions.updateSocketEvent('wereWolfChosedDrop'))
-  store.dispatch(actions.displayDrop())
+  store.dispatch(actions.displayModal())
 }
 
 // 狼人获得遗弃身份信息，阶段结束
@@ -32,7 +32,7 @@ export const wereWolfChosedDropResult = (store, actions, res) => {
   if (res && res.role) {
     FlowHelper.judgeSay(store, actions, `您所选择的遗弃身份是：${res.role}`)
   }
-  delayEmitter(phaseEnd, [store, actions, {phase: '狼人'}], 1000)
+  delayEmitter(phaseEnd, [store, actions, {phase: 'wereWolf'}], 1000)
 }
 
 // 狼人获得同伴信息后，阶段结束
