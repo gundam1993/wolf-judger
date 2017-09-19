@@ -1,34 +1,34 @@
 
-export const DISPLAY_DROP = 'DISPLAY_DROP'
-export const HIDE_DROP = 'HIDE_DROP'
-export const CHOOSE_DROP = 'CHOOSE_DROP'
-export const REMOVE_DROP = 'REMOVE_DROP'
-export const CLEAN_DROP = 'CLEAN_DROP'
-export const UPDATE_DROP_LIMIT = 'UPDATE_DROP_LIMIT'
+export const DISPLAY_MODAL = 'DISPLAY_MODAL'
+export const HIDE_MODAL = 'HIDE_MODAL'
+export const CHOOSE_ITEM = 'CHOOSE_ITEM'
+export const REMOVE_ITEM = 'REMOVE_ITEM'
+export const CLEAN_CHOSEN = 'CLEAN_CHOSEN'
+export const UPDATE_CHOSEN_LIMIT = 'UPDATE_CHOSEN_LIMIT'
 export const UPDATE_SOCKET_EVENT = 'UPDATE_SOCKET_EVENT'
 
-export function displayDrop () {
-  return { type: DISPLAY_DROP }
+export function displayModal () {
+  return { type: DISPLAY_MODAL }
 }
 
-export function hideDrop () {
-  return { type: HIDE_DROP }
+export function hideModal () {
+  return { type: HIDE_MODAL }
 }
 
-export function chooseDrop (index) {
-  return { type: CHOOSE_DROP, index: index }
+export function chooseItem (index) {
+  return { type: CHOOSE_ITEM, index: index }
 }
 
-export function removeDrop (index) {
-  return { type: REMOVE_DROP, index: index }
+export function removeItem (index) {
+  return { type: REMOVE_ITEM, index: index }
 }
 
-export function cleanDrop () {
-  return { type: CLEAN_DROP }
+export function cleanChosen () {
+  return { type: CLEAN_CHOSEN }
 }
 
-export function updateDropLimit (limit) {
-  return { type: UPDATE_DROP_LIMIT, chosenLimit: limit }
+export function updateChosenLimit (limit) {
+  return { type: UPDATE_CHOSEN_LIMIT, chosenLimit: limit }
 }
 
 export function updateSocketEvent (event) {
