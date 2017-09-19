@@ -8,16 +8,14 @@
   align-items: center;
   vertical-align: middle;
   justify-content: center;
-  z-index: 1000;
+  
 }
 #ModalContainer {
-  // position: absolute;
-  // top: 30%;
-  // bottom: 30%;
-  // left: 5%;
-  // right: 5%;
+  margin: 0 1rem;
   background-color: #fff;
   border-radius: 1rem;
+  z-index: 1000;
+  padding: 1rem;
 }
 
 #DropCardChoose {
