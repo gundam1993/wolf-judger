@@ -4,7 +4,6 @@ import React from 'react';
 
 class RadioSelector extends React.Component {
   render() {
-    console.log(this.props.options)
     let options = this.props.options.map((opt, index) => {
       return (
         <div>
@@ -15,7 +14,6 @@ class RadioSelector extends React.Component {
         </div>
       )
     })
-    console.log(options)
     return (
       <div id="RadioSelector">
         {options}
