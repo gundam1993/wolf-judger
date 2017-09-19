@@ -1,9 +1,21 @@
-#ModalContainer {
+#Modal {
   position: absolute;
-  top: 30%;
-  bottom: 30%;
-  left: 5%;
-  right: 5%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  z-index: 1000;
+}
+#ModalContainer {
+  // position: absolute;
+  // top: 30%;
+  // bottom: 30%;
+  // left: 5%;
+  // right: 5%;
   background-color: #fff;
   border-radius: 1rem;
 }
@@ -59,7 +71,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4)
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
 }
 
 #ModalHint {
