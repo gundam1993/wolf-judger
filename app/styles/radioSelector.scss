@@ -9,11 +9,15 @@
     width: 25%;
     input {
       visibility: hidden;
+      height: 0;
+      width: 0;
+      display: block;
     }
     img {
       width: 100%;
       vertical-align: bottom;
       display: block;
+      border: 3px solid #FFF;
     }
     input:checked+label {
       img {
