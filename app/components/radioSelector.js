@@ -8,7 +8,7 @@ class RadioSelector extends React.Component {
     let options = this.props.options.map((opt, index) => {
       return (
         <div>
-          <input type="radio" id={`opt${index}`} name="RadioSelector" value={index} />
+          <input type="radio" id={`opt${index}`} name="RadioSelector" value={index} onClick={this.props.onChoose}/>
           <label htmlFor={`opt${index}`}>
             <img src={opt.src} alt=""/>
           </label>  
@@ -26,10 +26,12 @@ class RadioSelector extends React.Component {
 
 RadioSelector.propTypes = {
   options: React.PropTypes.array.isRequired,
+  onChoose: React.PropTypes.func.isRequired,
 }
 
 RadioSelector.defaultProps = {
-  options: []
+  options: [],
+  onChoose: () => {},
 }
 
 export default RadioSelector
