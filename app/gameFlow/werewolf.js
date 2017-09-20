@@ -13,10 +13,10 @@ export const wereWolfGotPartner = (store, actions, res) => {
   console.log(res)
   if (res.wereWolf.length) {
     FlowHelper.judgeSay(store, actions, `除了您以外，目前身份是狼人的玩家有：${res.wereWolf.join('和')}。`)
-    delayEmitter(wereWolfGotResult, [store, actions], 1000)
+    FlowHelper.delayEmitter(wereWolfGotResult, [store, actions], 1000)
   } else {
     FlowHelper.judgeSay(store, actions, '除您以外目前场上没有狼人，您可以查看一张遗弃身份。')
-    delayEmitter(wereWolfChooseDrop, [store, actions], 1000)
+    FlowHelper.delayEmitter(wereWolfChooseDrop, [store, actions], 1000)
   }
 }
 
@@ -32,17 +32,10 @@ export const wereWolfChosedDropResult = (store, actions, res) => {
   if (res && res.role) {
     FlowHelper.judgeSay(store, actions, `您所选择的遗弃身份是：${res.role}`)
   }
-  delayEmitter(phaseEnd, [store, actions, {phase: 'wereWolf'}], 1000)
+  FlowHelper.delayEmitter(phaseEnd, [store, actions, {phase: 'wereWolf'}], 1000)
 }
 
 // 狼人获得同伴信息后，阶段结束
 const wereWolfGotResult = (store, actions) => {
   store.dispatch({type: 'SUBMIT_SOCKET_EVENT', event: 'wereWolfGotResult'})
 }
-
-// 延迟调用函数
-const delayEmitter =  (func, args, time) => {
-  setTimeout(() => {
-      func(...args)
-    }, time)
-  }

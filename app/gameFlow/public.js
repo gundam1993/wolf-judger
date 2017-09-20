@@ -1,10 +1,12 @@
 import { wereWolfStart } from './werewolf'
 import { seerStart } from './seer'
+import { minionStart } from './minion'
 import * as FlowHelper from './flowHelper'
 
 const RoleEntrance = {
   wereWolf: wereWolfStart,
-  seer: seerStart
+  seer: seerStart,
+  minion: minionStart,
 }
 
 // 游戏开始，显示身份信息
@@ -47,8 +49,8 @@ export const phaseEnd = (store, actions, res) => {
 }
 
 // 延迟调用函数
-const delayEmitter =  (func, args, time) => {
+export const delayEmitter =  (func, args, time) => {
   setTimeout(() => {
-      func(...args)
-    }, time)
-  }
+    func(...args)
+  }, time)
+}
