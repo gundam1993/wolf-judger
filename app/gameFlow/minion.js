@@ -11,7 +11,9 @@ export const minionStart = (store, actions) => {
 // 爪牙获得狼人信息,显示后结束阶段
 export const minionGetWerewolf = (store, actions, res) => {
   console.log(res)
-  let info = res.wereWolf.length ? `目前身份是狼人的玩家有：${res.wereWolf.join('和')}。` : '目前场上没有狼人'
-  FlowHelper.judgeSay(store, actions, info)
-  FlowHelper.delayEmitter(phaseEnd, [store, actions, {phase: 'minion'}], 1000)
+  if (res.wereWolf) {
+    let info = res.wereWolf.length ? `目前身份是狼人的玩家有：${res.wereWolf.join('和')}。` : '目前场上没有狼人'
+    FlowHelper.judgeSay(store, actions, info)
+    FlowHelper.delayEmitter(phaseEnd, [store, actions, {phase: 'minion'}], 1000)
+  }
 }
