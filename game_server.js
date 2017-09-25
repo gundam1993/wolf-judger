@@ -21,11 +21,11 @@ var rooms = {
     wereWolfEnd: false,
     roles: {
       wereWolf: 2,
-      villager: 1,
+      villager: 2,
       // seer: 1,
       // doppelganger: 1,
-      minion: 3,
-      // mason: 2
+      // minion: 3,
+      mason: 2
       // robber: 1,
     },
     dropRole: [],

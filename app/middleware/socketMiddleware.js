@@ -1,7 +1,8 @@
 import actions from '../actions'
 import * as publicFlow from '../gameFlow/public'
 import * as wereWolfFlow from '../gameFlow/werewolf'  
-import * as minionFlow from '../gameFlow/minion'  
+import * as minionFlow from '../gameFlow/minion' 
+import * as masonFlow from '../gameFlow/mason'  
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -51,6 +52,12 @@ function createSocketMiddleware(socket) {
       socket.on('minionGetWerewolfResult', (res) => {
         minionFlow.minionGetWerewolf(store, actions, res)
       })
+      socket.on('masonGetOtherMasonResult', (res) => {
+        masonFlow.masonGetOtherMason(store, actions, res)
+      })
+      socket.on('masonEnd', (res) => {
+        masonFlow.masonGotResult(store, actions, res)
+      })
       socket.on('phaseEnd', (res) => {
         publicFlow.phaseEnd(store, actions, res)
       })
@@ -74,6 +81,12 @@ function createSocketMiddleware(socket) {
         break
       case 'MINION_GET_WEREWOLF' :
         socket.emit('minionGetWerewolf')
+        break
+      case 'MASON_GET_OTHER_MASON' :
+        socket.emit('masonGetOtherMason')
+        break
+      case 'MASON_GOT_RESULT' :
+        socket.emit('masonGotResult')
         break
       case 'SUBMIT_SOCKET_EVENT' :
         if (action.payload) {
