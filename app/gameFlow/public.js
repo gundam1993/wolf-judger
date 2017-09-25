@@ -1,12 +1,14 @@
 import { wereWolfStart } from './werewolf'
 import { seerStart } from './seer'
 import { minionStart } from './minion'
+import { masonStart } from './mason'
 import * as FlowHelper from './flowHelper'
 
 const RoleEntrance = {
   wereWolf: wereWolfStart,
   seer: seerStart,
   minion: minionStart,
+  mason: masonStart,
 }
 
 // 游戏开始，显示身份信息
