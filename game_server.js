@@ -21,11 +21,11 @@ var rooms = {
     wereWolfEnd: false,
     roles: {
       wereWolf: 2,
-      villager: 2,
+      villager: 3,
       // seer: 1,
       // doppelganger: 1,
       // minion: 3,
-      mason: 2
+      insomniac: 1
       // robber: 1,
     },
     dropRole: [],
@@ -235,9 +235,9 @@ function handleNextGamePhase(socket) {
 }
 
 function getNextGamePhase(room) {
-  let nowMoveRole = room.roleQueue.shift()
-  console.log(nowMoveRole)
   if (room.roleQueue.length > 0) {
+    let nowMoveRole = room.roleQueue.shift()
+    console.log(`nowMoveRole: ${nowMoveRole}`)
     if (!room.roles[nowMoveRole]) {
       console.log("dont't have this role in game")
       return getNextGamePhase(room)
