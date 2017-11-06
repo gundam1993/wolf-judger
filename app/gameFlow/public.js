@@ -2,6 +2,7 @@ import { wereWolfStart } from './werewolf'
 import { seerStart } from './seer'
 import { minionStart } from './minion'
 import { masonStart } from './mason'
+import { insomniacStart } from './insomniac'
 import * as FlowHelper from './flowHelper'
 
 const RoleEntrance = {
@@ -9,6 +10,7 @@ const RoleEntrance = {
   seer: seerStart,
   minion: minionStart,
   mason: masonStart,
+  insomniac: insomniacStart,
 }
 
 // 游戏开始，显示身份信息

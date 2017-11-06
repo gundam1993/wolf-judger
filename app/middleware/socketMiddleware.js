@@ -2,7 +2,9 @@ import actions from '../actions'
 import * as publicFlow from '../gameFlow/public'
 import * as wereWolfFlow from '../gameFlow/werewolf'  
 import * as minionFlow from '../gameFlow/minion' 
-import * as masonFlow from '../gameFlow/mason'  
+import * as masonFlow from '../gameFlow/mason'
+import * as insomniacFlow from '../gameFlow/insomniac'
+
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -58,6 +60,9 @@ function createSocketMiddleware(socket) {
       socket.on('masonEnd', (res) => {
         masonFlow.masonGotResult(store, actions, res)
       })
+      socket.on('insomniacLastRoleResult', (res) => {
+        insomniacFlow.insomniacGotLastRole(store, actions, res)
+      })
       socket.on('phaseEnd', (res) => {
         publicFlow.phaseEnd(store, actions, res)
       })
@@ -87,6 +92,9 @@ function createSocketMiddleware(socket) {
         break
       case 'MASON_GOT_RESULT' :
         socket.emit('masonGotResult')
+        break
+      case 'INSOMNIAC_GET_LAST_ROLE' :
+        socket.emit('insomniacGetLastRole')
         break
       case 'SUBMIT_SOCKET_EVENT' :
         if (action.payload) {
