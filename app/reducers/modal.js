@@ -3,6 +3,7 @@ let init = {
     chosenItem: [],
     chosenLimit: 0,
     socketEvent: '',
+    optionsSrc: [{src: "/img/ques.png", content: ""}, {src: "/img/ques.png", content: ""}, {src: "/img/ques.png", content: ""}],
   }
   
   const modal = (state = init, action) => {
@@ -39,6 +40,9 @@ let init = {
         return newState
       case 'UPDATE_SOCKET_EVENT' :
         newState = Object.assign({}, state, {socketEvent: action.socketEvent})
+        return newState
+      case 'UPDATE_OPTIONS_SRC' :
+        newState = Object.assign({}, state, {optionsSrc: action.optionsSrc})
         return newState
       default :
         return state

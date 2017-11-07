@@ -6,6 +6,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const CLEAN_CHOSEN = 'CLEAN_CHOSEN'
 export const UPDATE_CHOSEN_LIMIT = 'UPDATE_CHOSEN_LIMIT'
 export const UPDATE_SOCKET_EVENT = 'UPDATE_SOCKET_EVENT'
+export const UPDATE_OPTIONS_SRC = 'UPDATE_OPTIONS_SRC'
 
 export function displayModal () {
   return { type: DISPLAY_MODAL }
@@ -33,4 +34,8 @@ export function updateChosenLimit (limit) {
 
 export function updateSocketEvent (event) {
   return { type: UPDATE_SOCKET_EVENT, socketEvent: event }
+}
+
+export function updateOptionsSrc (options) {
+  return { type: UPDATE_OPTIONS_SRC, optionsSrc: options}
 }

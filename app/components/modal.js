@@ -9,8 +9,7 @@ class Modal extends React.Component {
     this.props.onModalButtonClick(this.props.chosenItem, this.props.chosenLimit, this.props.socketEvent)
   }
   render() {
-    let src = [{src: "/img/ques.png"}, {src: "/img/ques.png"}, {src: "/img/ques.png"}]
-    let radio = this.props.chosenLimit === 1 ? <RadioSelector options={src} onChoose={this.props.onRadioChoose} /> : ''
+    let radio = this.props.chosenLimit === 1 ? <RadioSelector options={this.props.optionsSrc} onChoose={this.props.onRadioChoose} /> : ''
     if (this.props.display) {
       return (
         <div id="Modal">
@@ -33,6 +32,7 @@ class Modal extends React.Component {
 Modal.propTypes = {
   display: React.PropTypes.bool.isRequired,
   chosenDrop: React.PropTypes.array.isRequired,
+  optionsSrc: React.PropTypes.array.isRequired,
   onRadioChoose: React.PropTypes.func.isRequired,
   chosenLimit: React.PropTypes.number.isRequired,
   socketEvent: React.PropTypes.string.isRequired,
