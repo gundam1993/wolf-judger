@@ -38,17 +38,17 @@ const nextGamePhase = (store, actions) => {
 
 // 新游戏阶段开始，显示睁眼信息
 export const newGamePhaseStart = (store, actions, res) => {
+  FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
   if (store.getState().player.lastRole === res.phase) {
-    FlowHelper.judgeSay(store, actions, `${res.phase}请睁眼`)
     delayEmitter(RoleEntrance[res.phase], [store, actions], 1000)
   }
 }
 
 // 阶段结束，显示闭眼信息，通知服务器开始新阶段
 export const phaseEnd = (store, actions, res) => {
-  if (store.getState().player.lastRole === res.phase) {
+  // if (store.getState().player.lastRole === res.phase) {
     FlowHelper.judgeSay(store, actions, `${res.phase}请闭眼`)
-  }
+  // }
   delayEmitter(nextGamePhase, [store, actions], 1000)  
 }
 
