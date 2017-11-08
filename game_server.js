@@ -22,10 +22,10 @@ var rooms = {
     roles: {
       wereWolf: 2,
       villager: 3,
-      // seer: 1,
+      seer: 1,
       // doppelganger: 1,
       // minion: 3,
-      insomniac: 1
+      // insomniac: 1,
       // robber: 1,
     },
     dropRole: [],
@@ -75,6 +75,14 @@ function handleNewPlayer(socket, rooms) {
     let room =message.room
     let username = message.username
     let currentRoom = rooms[room]
+    if (!room) {
+      socket.emit('joinFail', {res: '对不起，该房间不存在'})
+      return
+    }
+    if (!username) {
+      socket.emit('joinFail', {res: '对不起，请输入有效的用户名'})
+      return
+    }
     if (currentRoom.playerNumber < currentRoom.playerLimit) {
       for (let i = 0; i < currentRoom.namesUsed.length; i++) {
         if (username === currentRoom.namesUsed[i]) {
