@@ -1,5 +1,5 @@
 export const UPDATE_USERNAME = 'UPDATE_USERNAME'
-export const UPDATE_USERID = 'UPDATE_USERID'
+export const UPDATE_USER_ID = 'UPDATE_USER_ID'
 export const PLAYER_READY = 'PLAYER_READY'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
 export const UPDATE_LAST_ROLE = 'UPDATE_LAST_ROLE'
@@ -10,7 +10,7 @@ export function updateUsername (username) {
 }
 //更新用户Id
 export function updateUserId (id) {
-  return {type: UPDATE_USERID, id: id}
+  return {type: UPDATE_USER_ID, id: id}
 }
 //用户准备
 export function playerReady() {
