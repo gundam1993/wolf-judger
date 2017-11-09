@@ -9,6 +9,9 @@ let init = {
 const player = (state = init, action) => {
   let newState
   switch (action.type) {
+    case 'UPDATE_USER_ID' :
+      newState = Object.assign({}, state, {id: action.id})
+      return newState
     case 'UPDATE_USERNAME' :
       newState = Object.assign({}, state, {username: action.username})
       return newState
