@@ -7,9 +7,10 @@ class RadioSelector extends React.Component {
     let options = this.props.options.map((opt, index) => {
       return (
         <div>
-          <input type="radio" id={`opt${index}`} name="RadioSelector" value={index} onClick={this.props.onChoose}/>
+          <input type="radio" id={`opt${index}`} name="RadioSelector" value={opt.value || index} onClick={this.props.onChoose}/>
           <label htmlFor={`opt${index}`}>
             <img src={opt.src} alt=""/>
+            <p>{opt.content}</p>
           </label>  
         </div>
       )

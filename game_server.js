@@ -62,9 +62,13 @@ exports.listen = function (server) {
     socket.on('troubleMakerNotExchange', TroubleMaker.notExchangeIdentity)
     socket.on('robberNotChange', Robber.notChangeIdentity)
     socket.on('robberChosedPlayer', Robber.changeIdentity)
+    socket.on('seerChooseTargetType', Seer.chooseTargetType)
     socket.on('seerChosedPlayer', Seer.checkPlayerIdentity)
     socket.on('seerChosedDrop', Seer.checkDropIdentity)
     socket.on('doppelgangerChosedPlayer', Doppelganger.getNewIdentity)
+    socket.on('error', (err) => {
+      console.log(err)
+    })
   })
 }
 

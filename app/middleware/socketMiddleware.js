@@ -4,7 +4,7 @@ import * as wereWolfFlow from '../gameFlow/werewolf'
 import * as minionFlow from '../gameFlow/minion' 
 import * as masonFlow from '../gameFlow/mason'
 import * as insomniacFlow from '../gameFlow/insomniac'
-
+import * as seerFlow from '../gameFlow/seer'
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -14,6 +14,9 @@ function createSocketMiddleware(socket) {
       eventFlag = true
       socket.on('joinFail', () => {
         console.log('join fail')
+      })
+      socket.on('error', (error) => {
+        console.log(error)
       })
       socket.on('joinSuccess', (res) => {
         console.log(res)
@@ -63,6 +66,15 @@ function createSocketMiddleware(socket) {
       socket.on('insomniacLastRoleResult', (res) => {
         insomniacFlow.insomniacGotLastRole(store, actions, res)
       })
+      socket.on('seerChoseTargetType', (res) => {
+        seerFlow.seerStartToChoose(store, actions, res)
+      })
+      socket.on('seerChoosePlayerResult', (res) => {
+        seerFlow.seerChoosePlayerResult(store, actions, res)
+      })
+      socket.on('seerChooseDropResult', (res) => {
+        seerFlow.seerChooseDropResult(store, actions, res)
+      })
       socket.on('phaseEnd', (res) => {
         publicFlow.phaseEnd(store, actions, res)
       })
@@ -98,9 +110,9 @@ function createSocketMiddleware(socket) {
         break
       case 'SUBMIT_SOCKET_EVENT' :
         if (action.payload) {
-          socket.emit(action.event, action.payload)
+          socket.emit(action.socketEvent, action.payload)
         } else {
-          socket.emit(action.event)
+          socket.emit(action.socketEvent)
         }
         break
     }
