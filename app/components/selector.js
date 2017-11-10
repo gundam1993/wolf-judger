@@ -1,16 +1,16 @@
-let style = require('../styles/checkboxSelector.scss')
+let style = require('../styles/selector.scss')
 
 import React from 'react';
 
-class CheckboxSelector extends React.Component {
-  checkboxHandler = (e) => {
+class Selector extends React.Component {
+  clickHandler = (e) => {
     this.props.onChoose(this.props.chosenItem, this.props.chosenLimit, e)
   }
   render() {
     let options = this.props.options.map((opt, index) => {
       return (
         <div>
-          <input type="checkbox" id={`opt${index}`} name="RadioSelector" value={opt.value || index} onClick={this.checkboxHandler}/>
+          <input type={this.props.chosenLimit > 1 ? "checkbox" : "radio"} id={`opt${index}`} name="Selector" value={opt.value || index} onClick={this.clickHandler}/>
           <label htmlFor={`opt${index}`}>
             <img src={opt.src} alt=""/>
             <p>{opt.content}</p>
@@ -19,25 +19,25 @@ class CheckboxSelector extends React.Component {
       )
     })
     return (
-      <div id="CheckboxSelector">
+      <div id="SelectorBlock">
         {options}
       </div>
     )
   }
 }
 
-CheckboxSelector.propTypes = {
+Selector.propTypes = {
   options: React.PropTypes.array.isRequired,
   onChoose: React.PropTypes.func.isRequired,
   chosenItem: React.PropTypes.array.isRequired,
   chosenLimit: React.PropTypes.number.isRequired,
 }
 
-CheckboxSelector.defaultProps = {
+Selector.defaultProps = {
   options: [],
   onChoose: () => {},
   chosenItem: [],
   chosenLimit: 0,
 }
 
-export default CheckboxSelector
+export default Selector

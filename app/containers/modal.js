@@ -15,11 +15,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    onRadioChoose: (e) => {
-      dispatch(actions.cleanChosen())
-      dispatch(actions.chooseItem(e.target.value))
-    },
-    onCheckboxChoose: (chosenItem, chosenLimit, e) => {
+    onSelectorChoose: (chosenItem, chosenLimit, e) => {
+      if (chosenLimit === 1) {
+        dispatch(actions.cleanChosen())
+        dispatch(actions.chooseItem(e.target.value))
+        return 
+      }
       if (e.target.checked) {
         if (chosenItem.length < chosenLimit) {
           dispatch(actions.chooseItem(e.target.value))
@@ -45,7 +46,6 @@ const mapDispatchToProps = (dispatch, state) => {
       })
       dispatch(actions.hideModal())
       dispatch(actions.cleanChosen())
-      
     }
   }
 }
