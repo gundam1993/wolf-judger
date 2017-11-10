@@ -22,6 +22,11 @@ export const wereWolfGotPartner = (store, actions, res) => {
 
 // 狼人选择遗弃身份
 const wereWolfChooseDrop = (store, actions) => {
+  store.dispatch(actions.updateOptionsSrc([
+    {src: "/img/ques.png", content: ""}, 
+    {src: "/img/ques.png", content: ""}, 
+    {src: "/img/ques.png", content: ""},
+  ]))
   store.dispatch(actions.updateChosenLimit(1))
   store.dispatch(actions.updateSocketEvent('wereWolfChosedDrop'))
   store.dispatch(actions.displayModal())
@@ -37,5 +42,5 @@ export const wereWolfChosedDropResult = (store, actions, res) => {
 
 // 狼人获得同伴信息后，阶段结束
 const wereWolfGotResult = (store, actions) => {
-  store.dispatch({type: 'SUBMIT_SOCKET_EVENT', event: 'wereWolfGotResult'})
+  store.dispatch({type: 'SUBMIT_SOCKET_EVENT', socketEvent: 'wereWolfGotResult'})
 }

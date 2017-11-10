@@ -24,7 +24,7 @@ let init = {
         }
         newState = Object.assign({}, state, {chosenItem: chosenItem})
         return newState
-      case 'removeItem' :
+      case 'REMOVE_ITEM' :
         chosenItem = [].concat(state.chosenItem)
         dropIndex = chosenItem.indexOf(action.index)
         if (dropIndex !== -1) {

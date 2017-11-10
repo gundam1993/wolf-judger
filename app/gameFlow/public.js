@@ -52,6 +52,17 @@ export const phaseEnd = (store, actions, res) => {
   delayEmitter(nextGamePhase, [store, actions], 1000)  
 }
 
+// 连接中断
+export const connectLost = (store, actions) => {
+  // console.log(res)
+  // store.dispatch(actions.updateRole(res.role))
+  // store.dispatch(actions.updateLastRole(res.lastRole))
+  // FlowHelper.systemHint(store, actions, '游戏开始')
+  // FlowHelper.systemHint(store, actions, `您的身份是${res.role}`)
+  // FlowHelper.judgeSay(store, actions, '天黑请闭眼。')
+  // FlowHelper.delayEmitter(closeEye, [store, actions], 1000)
+}
+
 // 延迟调用函数
 export const delayEmitter =  (func, args, time) => {
   setTimeout(() => {
