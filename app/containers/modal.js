@@ -39,12 +39,12 @@ const mapDispatchToProps = (dispatch, state) => {
         console.log(`请选择${chosenLimit}项`)
         return
       }
+      dispatch(actions.hideModal())      
       dispatch({ 
         type: 'SUBMIT_SOCKET_EVENT', 
         socketEvent: socketEvent,
         payload: chosenItem,
       })
-      dispatch(actions.hideModal())
       dispatch(actions.cleanChosen())
     }
   }
