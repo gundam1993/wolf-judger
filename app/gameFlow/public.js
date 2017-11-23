@@ -3,13 +3,15 @@ import { seerStart } from './seer'
 import { minionStart } from './minion'
 import { masonStart } from './mason'
 import { insomniacStart } from './insomniac'
+import { robberStart } from './robber'
 import * as FlowHelper from './flowHelper'
 
 const RoleEntrance = {
   wereWolf: wereWolfStart,
-  seer: seerStart,
   minion: minionStart,
   mason: masonStart,
+  seer: seerStart,
+  robber: robberStart,
   insomniac: insomniacStart,
 }
 

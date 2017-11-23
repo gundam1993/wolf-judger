@@ -5,6 +5,7 @@ import * as minionFlow from '../gameFlow/minion'
 import * as masonFlow from '../gameFlow/mason'
 import * as insomniacFlow from '../gameFlow/insomniac'
 import * as seerFlow from '../gameFlow/seer'
+import * as robberFLow from '../gameFlow/robber'
 
 function createSocketMiddleware(socket) {
   var eventFlag = false
@@ -75,6 +76,9 @@ function createSocketMiddleware(socket) {
       socket.on('seerChooseDropResult', (res) => {
         seerFlow.seerChooseDropResult(store, actions, res)
       })
+      socket.on('robberChangeRoleResult', (res) => {
+        robberFLow.robberChangeRoleResult(store, actions, res)
+      })
       socket.on('phaseEnd', (res) => {
         publicFlow.phaseEnd(store, actions, res)
       })
@@ -110,6 +114,16 @@ function createSocketMiddleware(socket) {
         break
       case 'SUBMIT_SOCKET_EVENT' :
         if (action.payload) {
+          if (action.socketEvent === 'isRobberChangeRole') {
+            if (action.payload[0] === '0') {
+              socket.emit('robberNotChange')
+            } else {
+              robberFLow.robberExchangeIdentity(store, actions)
+              console.log(123)
+              return next(action)
+            }
+            break
+          }
           socket.emit(action.socketEvent, action.payload)
         } else {
           socket.emit(action.socketEvent)
